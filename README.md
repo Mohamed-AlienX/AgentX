@@ -1,226 +1,366 @@
 <p align="center">
-  <img src="docs/images/hero.png" alt="AgentX — AI penetration testing agent" width="860">
+  <img src="docs/images/banner.svg" alt="AgentX banner" width="100%">
+</p>
+
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white">
+  <img alt="Skills" src="https://img.shields.io/badge/skills-153-22d3ee">
+  <img alt="MCP" src="https://img.shields.io/badge/MCP-Browser%20%2B%20Burp-a78bfa">
+  <img alt="Use" src="https://img.shields.io/badge/use-authorized%20targets%20only-ef4444">
 </p>
 
 # AgentX
 
-**An AI penetration-testing agent. Use it as a set of playbooks inside the agent you already use, or run it standalone with your own API key or a local model.**
+**An AI-powered CLI agent for bug bounty hunting and penetration testing.**
 
-`Python 3.11+` · `153 skills` · `MITRE ATT&CK mapped` · `Local findings database` · `Markdown / HTML / JSON reports`
+AgentX builds multi-step hunt plans, runs vulnerability playbooks and your local tools, stores every finding, and exports professional reports as Markdown, HTML, or JSON.
 
-> For **authorized targets only**. Always verify AI-generated results manually before submitting.
+> ⚠️ For **authorized targets only**. Always verify results manually before submitting.
 
 ---
 
-## What is AgentX, and how does it work?
+## Table of Contents
 
-AgentX turns a target into a structured security assessment. It does not just chat: it discovers attack surface, builds a plan, runs proven playbooks, verifies what it finds, stores every result, and exports a report.
+1. [How it works](#how-it-works)
+2. [Features](#features)
+3. [Installation](#installation)
+4. [Ways to use AgentX](#ways-to-use-agentx)
+   - [A. Install skills into your LLM agent (no API key)](#a-install-skills-into-your-llm-agent-no-api-key)
+   - [B. Run AgentX as a standalone agent (API key)](#b-run-agentx-as-a-standalone-agent-api-key)
+   - [C. Use the TUI](#c-use-the-tui)
+5. [MCP: Browser and Burp Suite](#mcp-browser-and-burp-suite)
+6. [Commands reference](#commands-reference)
+7. [Skills, tools and reports](#skills-tools-and-reports)
+8. [Troubleshooting](#troubleshooting)
+9. [Disclaimer](#disclaimer)
+
+---
+
+## How it works
+
+AgentX has two independent halves. You can use either one on its own, or both together.
+
+| Part | Folder | What it is |
+|------|--------|------------|
+| **Skills** | `skills/` | 153 Markdown playbooks (`SKILL.md`) covering recon, hunting, validation and reporting. |
+| **Runtime** | `agentx/` | The agent itself: orchestrator, planner, executor, memory, findings database, MITRE mapping, MCP client and reporting. |
 
 <p align="center">
-  <img src="docs/images/workflow.png" alt="Recon to report pipeline" width="860">
+  <img src="docs/images/architecture.svg" alt="AgentX architecture" width="90%">
 </p>
 
-| Stage | What happens | Examples |
-|-------|--------------|----------|
-| **1. Recon** | Map subdomains, live hosts, endpoints, technologies, and leaked secrets. | `web2-recon`, `offensive-osint`, `hunt-source-leak` |
-| **2. Plan** | Rank what to test and produce an ordered, reviewable hunt plan. | `attack-planner`, `threat-modeler`, `bug-bounty` |
-| **3. Hunt** | Run vulnerability-specific playbooks and local tools. | `hunt-xss`, `hunt-sqli`, `hunt-idor`, `hunt-ssrf`, ... |
-| **4. Validate** | Confirm impact, discard false positives, check evidence hygiene. | `poc-validator`, `triage-validation`, `fix-verifier` |
-| **5. Report** | Save findings and export a client- or bounty-ready report. | `report-writing`, `bounty-reporter`, `redteam-report-template` |
-
-You can use the whole loop, or just the skills you need.
+**The loop:** you give a target and a request → the orchestrator builds a plan → each step runs a skill, a local tool, or an MCP tool → results are observed, validated and stored → you export a report.
 
 ---
 
-## Install
+## Features
+
+- **Multi-step hunt planning** from a plain-English request.
+- **153 skill playbooks**: recon, XSS, SQLi, SSRF, IDOR, RCE, auth bypass, JWT, OAuth, GraphQL, race conditions, cloud misconfig, CI/CD, and more.
+- **Works with any LLM**: OpenAI, Anthropic, Ollama (free, local), LM Studio, or any OpenAI-compatible API.
+- **Works without an API key** by installing the skills into the agent you already use.
+- **MCP tool access**: drives a real browser (Playwright) and Burp Suite.
+- **Permission gate** for every state-changing action (`ask` / `auto` / `yolo`).
+- **Findings database** with severity, endpoint, impact, reproduction steps and evidence.
+- **MITRE ATT&CK mapping** on skills, findings, plans and reports.
+- **Full-screen TUI** with a live status panel and findings table.
+- **Session handoff** (`/handoff`) to continue work in a fresh context.
+- **Reports** in Markdown, HTML or JSON.
+
+---
+
+## Installation
+
+**Requirements**
+
+- Python **3.11+** and **pip**
+- An AI provider (**only for Option B/C**): OpenAI, Anthropic, Ollama, or any OpenAI-compatible API
+- *Optional:* **Git** and **Go** (to auto-install external tools), **Node.js ≥ 20** (for the browser MCP)
+
+**Install**
 
 ```powershell
 cd C:\Users\KTS\Documents\agent\AgentX
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1        # Windows PowerShell — Linux/macOS: source .venv/bin/activate
-pip install -e .
-agentx --version                    # AgentX v0.1.0
+
+.\.venv\Scripts\Activate.ps1        # Windows PowerShell
+ source .venv/bin/activate         # Linux / macOS
+ .venv\Scripts\activate.bat        # Windows CMD
+
+pip install -e .                    # installs AgentX + all dependencies
+agentx --version                    # should print "AgentX v0.1.0"
+agentx config --init                # creates config/default.yaml
+agentx skills                       # lists the 153 bundled skills
 ```
 
-If PowerShell blocks activation, run once:
-`Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned`
+> If PowerShell blocks the activation script, run once:
+> `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned`
+
+**Health check**
+
+```powershell
+agentx --version; agentx config --show; agentx skills; agentx tools --check
+```
 
 ---
 
-## Pick your mode
+## Ways to use AgentX
 
-| | Mode 1 — Skills on your agent | Mode 2 — Standalone agent | Mode 3 — TUI |
+<p align="center">
+  <img src="docs/images/modes.svg" alt="Three ways to use AgentX" width="90%">
+</p>
+
+| | A. Host agent | B. Standalone CLI | C. TUI |
 |---|---|---|---|
-| **Who thinks** | Claude Code / OpenCode / Codex / Gemini / Copilot / Cursor | AgentX itself | AgentX itself, in a full-screen UI |
-| **API key needed** | **No** — your existing agent is the LLM | Yes (cloud), or none with Ollama | Yes (cloud), or none with Ollama |
-| **Get started** | `agentx install-skills` | `agentx config --init` + enable a provider | `agentx tui --target example.com` |
+| **Who is the LLM** | Your existing agent | AgentX via API / Ollama | AgentX via API / Ollama |
+| **API key** | Not needed | Required (or Ollama) | Required (or Ollama) |
+| **Installs** | `SKILL.md` playbooks | nothing, just run `agentx` | nothing, just run `agentx tui` |
+| **Best for** | Reusing Claude Code, OpenCode, etc. | Scripted / terminal workflows | Interactive hunting with live view |
 
-### Mode 1 — Install the skills into Claude Code, OpenCode, and friends (no API key)
+### A. Install skills into your LLM agent (no API key)
 
-AgentX skills are plain `SKILL.md` playbooks in the open [Agent Skills](https://agentskills.io) format. Your host agent does the reasoning, so **no AgentX key and no extra process** are needed.
+Skills are plain `SKILL.md` files in the open [Agent Skills](https://agentskills.io) format, so any agent that supports it can use them directly. AgentX just copies them into place.
 
 ```powershell
-agentx install-skills --list        # show detected agents and paths
-agentx install-skills --dry-run     # preview the copy
+agentx install-skills --list        # show known locations and which were detected
+agentx install-skills --dry-run     # preview what would be created / updated
 agentx install-skills               # install into every agent detected on this machine
 ```
 
-Known destinations (user scope):
+Standalone script (no `agentx` entry point needed):
+
+```powershell
+python scripts\install_to_agents.py --list
+python scripts\install_to_agents.py --all
+```
+
+**Supported agents (user scope)**
 
 | Key | Agent | Path |
 |-----|-------|------|
-| `universal` | Codex, Gemini CLI, Copilot, Cursor, OpenCode | `~/.agents/skills` |
+| `universal` | Any agent on the standard | `~/.agents/skills` |
 | `claude` | Claude Code | `~/.claude/skills` |
 | `opencode` | OpenCode | `~/.config/opencode/skills` |
 | `gemini` | Gemini CLI | `~/.gemini/skills` |
 | `copilot` | GitHub Copilot CLI | `~/.copilot/skills` |
 | `cursor` | Cursor | `~/.cursor/skills` |
 
-Useful flags: `--target claude` (repeatable, or a custom path), `--all`, `--project` for repo-scoped copies, `--only hunt-xss,hunt-ssrf` for a subset, and `--keep` to avoid overwriting existing skills. Copies are idempotent and nothing is ever deleted; installing back into the source `skills/` folder is refused.
+**Useful flags**
 
-Afterwards, restart the agent and check its skills list (`/skills` in Claude Code and OpenCode) — it will now route to `hunt-xss`, `sast-sqli`, `osint-methodology`, and the rest.
+| Flag | Effect |
+|------|--------|
+| `--target claude` | Install to one agent (repeatable), or pass a custom path |
+| `--only hunt-xss,hunt-ssrf` | Install a subset of skills |
+| `--project` | Also install project-scoped copies (`.claude/skills`, `.agents/skills`, …) so they can be committed with a repo |
+| `--keep` | Leave existing skill folders untouched |
+| `--dry-run` | Preview only |
 
-> No `agentx` entry point? Run `python scripts\install_to_agents.py --all` instead.
+Installs are idempotent copies. Nothing is ever deleted.
 
-### Mode 2 — Run AgentX standalone with an API token (or local Ollama)
+**After installing:** restart your agent and check its skills list (`/skills` in Claude Code and OpenCode, `/skills list` in Gemini CLI, Customize → Skills in Cursor). The agent now routes to `hunt-xss`, `sast-sqli`, `osint-methodology` and the rest, with no key and no extra process.
 
-Here AgentX is the LLM. Enable **one** provider in `config/default.yaml` (all are disabled by default), then set `orchestrator_model` and `skill_model` to a model that provider actually serves.
+### B. Run AgentX as a standalone agent (API key)
 
-| Provider | `type` | `base_url` | Key variable |
-|----------|--------|------------|--------------|
-| OpenAI | `openai` | `https://api.openai.com/v1` | `OPENAI_API_KEY` |
-| Anthropic | `anthropic` | `https://api.anthropic.com` | `ANTHROPIC_API_KEY` |
-| Custom endpoint / IP + token | `custom` | your OpenAI-compatible URL, e.g. `http://192.168.1.50:8000/v1` | any `${ENV_VAR}` |
-| Ollama (local, no key) | `ollama` | `http://localhost:11434` | *(none)* |
-| LM Studio (local, no key) | `lmstudio` | `http://localhost:1234/v1` | *(none)* |
+**1. Enable one provider** in `config/default.yaml`. All providers are disabled by default.
 
-Example — a custom endpoint with a token:
+```powershell
+setx OPENAI_API_KEY "sk-..."        # then reopen the terminal
+```
 
 ```yaml
 ai_providers:
-  - name: "my-endpoint"
-    type: "custom"                       # OpenAI-compatible API
-    api_key: "${MY_API_TOKEN}"
-    base_url: "http://192.168.1.50:8000/v1"
-    model: "my-model"
+  - name: "openai"      # type: openai | anthropic | ollama | lmstudio | custom
+    type: "openai"
+    api_key: "${OPENAI_API_KEY}"
+    base_url: "https://api.openai.com/v1"
+    model: "gpt-4o"
     enabled: true
-
-orchestrator_model: "my-model"
-skill_model: "my-model"
 ```
+
+| Provider | `base_url` | Example model | Key variable |
+|----------|-----------|---------------|--------------|
+| OpenAI | `https://api.openai.com/v1` | `gpt-4o` | `OPENAI_API_KEY` |
+| Anthropic | `https://api.anthropic.com` | `claude-3-5-sonnet-20241022` | `ANTHROPIC_API_KEY` |
+| Ollama | `http://localhost:11434` | `llama3.1:8b` | *(none, free)* |
+| Custom | your OpenAI-compatible URL | your model | your key |
+
+**2. Set model routing.** Names must match an enabled provider's `model`.
+
+```yaml
+orchestrator_model: "gpt-4o"        # strong model for planning
+skill_model: "gpt-4o-mini"          # fast model for execution
+local_model: "llama3.1:8b"          # local tasks
+```
+
+**3. Verify:** `agentx config --show` (enabled provider count must be greater than 0).
+
+**4. Run**
 
 ```powershell
-setx MY_API_TOKEN "your-token"          # then reopen the terminal
-agentx config --show                    # enabled provider count must be > 0
-agentx                                  # interactive chat
-agentx scan example.com --request "focus on IDOR in the API"
+agentx                                   # interactive chat
+agentx chat --target example.com --auto  # chat with a target, auto mode
+agentx recon example.com --stages subdomains,http_probe,urls,fingerprint
+agentx scan  example.com --request "focus on IDOR in the API"
+agentx report --format markdown --output report.md
 ```
 
-With Ollama, just set `type: "ollama"`, `enabled: true`, and leave `api_key` empty. Keys written as `${VAR}` are expanded from the environment — never commit real tokens.
+**Example session**
 
-### Mode 3 — Full-screen TUI
+<p align="center">
+  <img src="docs/images/terminal.svg" alt="AgentX chat session" width="85%">
+</p>
+
+```text
+agentx: /target example.com
+✔ Target set: example.com
+agentx: check the site for XSS and IDOR
+1. [web2-recon] collect subdomains and endpoints
+2. [hunt-xss] test for XSS
+3. [hunt-idor] test for unauthorized access
+agentx: /go          → runs the plan and records findings
+agentx: /findings    → table of findings
+agentx: /report      → saves data/reports/report_xxx.md
+agentx: /exit
+```
+
+### C. Use the TUI
 
 ```powershell
 agentx tui --target example.com
+agentx tui --target example.com --auto
 ```
 
-Same commands as chat, with a live status panel and a findings table.
+The TUI has the same slash commands in a full-screen layout, with a live status panel and a findings table.
 
 | Key | Action |
 |-----|--------|
 | `F1` | Help |
-| `F2` | Findings table |
-| `F3` | Skill browser |
-| `Ctrl+L` | Clear log |
+| `F2` | Findings |
+| `F3` | Skills |
+| `Ctrl+L` | Clear |
 | `Ctrl+Q` | Quit |
+
+> 📸 Add your own screenshot here: save it as `docs/images/tui.png` and reference it with
+> `![AgentX TUI](docs/images/tui.png)`
 
 ---
 
-## MCP tools: browser + Burp
+## MCP: Browser and Burp Suite
 
-<p align="center">
-  <img src="docs/images/mcp.png" alt="Agent connected to browser and Burp through MCP" width="860">
-</p>
-
-With [MCP](https://modelcontextprotocol.io) enabled, AgentX stops being only a text advisor: it **opens pages itself** and **sends raw requests through Burp**, then reads the results in a plan → act → observe loop. Both servers are off by default.
-
-**1. Browser** — Playwright MCP (needs Node.js 20+; downloads on first run via `npx`):
+AgentX can act like a real agent and **drive tools itself** through the [Model Context Protocol](https://modelcontextprotocol.io). When it needs to see a page it opens a browser, and it sends raw requests through Burp Suite. Both are disabled by default.
 
 ```yaml
 mcp_servers:
-  - name: "browser"
+  - name: "browser"          # Playwright MCP - needs Node.js >= 20
     transport: "stdio"
     command: "npx"
     args: ["-y", "@playwright/mcp@latest", "--headless"]
     enabled: true
-```
 
-Prefer driving your **real Chrome** with its existing logins and extensions? Point the browser MCP at a Chrome-connected bridge such as `browse` instead of headless Playwright.
-
-**2. Burp** — install PortSwigger's **MCP Server** BApp: *Extensions → BApp Store → MCP Server → open its tab → Start server*. It exposes SSE at `http://127.0.0.1:9876`:
-
-```yaml
-  - name: "burp"
+  - name: "burp"             # PortSwigger "MCP Server" BApp in Burp Suite
     transport: "sse"
     url: "http://127.0.0.1:9876"
     enabled: true
 ```
 
-**3. Permission gate** — with `permission_mode: "ask"` (default), every state-changing call (click, type, send request) asks for approval; reads run automatically.
+### Browser (Playwright)
 
-| `/mode` | Behaviour |
-|---------|-----------|
-| `ask` | Approve state-changing tools; auto-run reads (default) |
-| `auto` | Never prompt — scripted runs |
-| `yolo` | Never prompt and skip review of state-changing tools (dangerous) |
+1. Install **Node.js ≥ 20**.
+2. Set `enabled: true` for the `browser` server in `config/default.yaml`.
+3. Start AgentX. The first run downloads the Playwright MCP via `npx`.
 
-Check connections with `/mcp`; pre-approve trusted tools with `auto_approve: true` or `mcp_auto_approve: ["browser.navigate"]`; cap loop length with `max_agent_steps`.
+### Burp Suite
 
-**What this unlocks:** live page snapshots and DOM inspection, authenticated flows using your browser session, raw HTTP replay and proxy-history review in Burp, and faster proof of impact — all with an approval prompt before anything changes state.
+1. In Burp: **Extensions → BApp Store → install "MCP Server"**.
+2. Open the extension's tab and enable **SSE** on `127.0.0.1:9876` (click start).
+3. Set `enabled: true` for the `burp` server in `config/default.yaml`.
+
+### What you get
+
+When MCP servers are connected, normal chat turns become a **plan → act → observe loop**: the model picks a tool, runs it, reads the result, and continues until it has an answer.
+
+- `browser.*` tools show live pages and snapshots.
+- `burp.*` tools send requests and inspect proxy history.
+- Check everything connected with `/mcp`.
+- Limit tool-call rounds per turn with `max_agent_steps`.
+
+### Permission gate
+
+By default (`permission_mode: "ask"`) every state-changing call (sending a request, clicking, typing) asks for your approval. Change it at runtime with `/mode`.
+
+| Mode | Behaviour |
+|------|-----------|
+| `ask` | Prompts for state-changing tools, auto-runs reads *(default)* |
+| `auto` | Never prompts. For scripted runs |
+| `yolo` | Never prompts and runs state-changing tools without review. Use with care |
+
+Pre-approve tools in config with `auto_approve: true` on a server, or `mcp_auto_approve: ["browser.navigate"]`.
 
 ---
 
-## What's inside
+## Commands reference
 
-- **153 skills** — recon, hunting, cloud, AD, mobile, web3, reporting, and process playbooks, auto-discovered from `skills/<name>/SKILL.md`.
-- **MITRE ATT&CK** — 140/153 skills mapped to 77 techniques; see [`ATTACK_COVERAGE.md`](ATTACK_COVERAGE.md) and [`mappings/attack-navigator-layer.json`](mappings/attack-navigator-layer.json). Process-only skills are intentionally unmapped.
-- **Quality gates** — `agentx-skill-qa all` validates, lints, de-collides, and indexes the skill set; drift fails the check.
-- **Findings database** — SQLite at `data/agentx.db`; every finding keeps severity, endpoint, impact, steps, and evidence.
-- **Reports** — Markdown, HTML, or JSON via `agentx report --format markdown --output report.md`.
-- **Handoff** — `/handoff` prints a context-safe summary (masked secrets, findings by severity, attack chains, next steps).
-- **Escalation tools** — `agentx tools --check` / `--install <name>` for `subfinder`, `httpx`, `nuclei`, `ffuf`, `sqlmap`, and more.
+| Command | Purpose | Key options |
+|---------|---------|-------------|
+| `agentx` / `chat` | Interactive chat | `--target/-t`, `--auto` |
+| `agentx tui` | Full-screen terminal UI | `--target/-t`, `--auto` |
+| `agentx recon` | Recon pipeline | `--stages/-s` |
+| `agentx scan` | Recon + plan + hunt | `--request/-r`, `--auto/--no-auto` |
+| `agentx report` | Export findings | `--format/-f`, `--output/-o`, `--session/-s` |
+| `agentx skills` | List / inspect skills | `list`, `info <name>` |
+| `agentx attack` | MITRE ATT&CK coverage / lookup | `[TECHNIQUE]`, `--skill`, `--tactic`, `--search` |
+| `agentx install-skills` | Install skills into a host agent | `--list`, `--target`, `--all`, `--project`, `--only`, `--dry-run`, `--force/--keep` |
+| `agentx tools` | Check / install tools | `--check`, `--missing`, `--install`, `--install-all` |
+| `agentx config` | Show / init config | `--show`, `--init` |
+| `agentx sessions` | List past sessions | |
+
+**In-chat slash commands**
+
+`/help` `/target <url|domain>` `/status` `/skills [filter]` `/plan <request>` `/go` `/findings [severity]` `/validate` `/report [format]` `/recon [stages]` `/mcp` `/mode ask|auto|yolo` `/auto on|off` `/sessions` `/handoff` `/clear` `/exit`
+
+`/handoff` prints a Markdown handoff report (findings by severity, captured credentials with secrets masked, attack chains, next steps) so you can continue in a fresh context.
 
 ---
 
-## Quick reference
+## Skills, tools and reports
 
-```powershell
-agentx                              # interactive chat (default)
-agentx tui --target example.com     # full-screen TUI
-agentx recon example.com            # discovery only
-agentx scan example.com -r "focus on IDOR"
-agentx report -f markdown -o report.md
-agentx skills                       # list skills; "info hunt-xss" for detail
-agentx attack T1190                 # MITRE ATT&CK lookup
-agentx install-skills --list        # push skills into a host agent
-agentx tools --check                # external tool status
-agentx config --show                # active configuration
-agentx sessions                     # past sessions
+- **Skills:** Markdown playbooks in `skills/<name>/SKILL.md`, discovered automatically. Core set:
+  - Recon: `web2-recon`, `offensive-osint`
+  - Hunting: `hunt-xss`, `hunt-sqli`, `hunt-ssrf`, `hunt-idor`, `hunt-rce`, `hunt-auth-bypass`, `hunt-jwt-crypto`, `hunt-mfa-bypass`, `hunt-session`, `hunt-oauth`, `hunt-graphql`, `hunt-api-misconfig`, `hunt-websocket`, `hunt-business-logic`, `hunt-race-condition`, `hunt-cloud-misconfig`, `hunt-cicd`, `hunt-source-leak`, `hunt-spa-api`, `hunt-shadow-api`
+  - Process: `triage-validation`, `evidence-hygiene`, `bb-methodology`, `bug-bounty`, `security-arsenal`
+  - Add your own by creating `skills/my-skill/SKILL.md`.
+- **Tools:** optional open-source helpers (`subfinder`, `httpx`, `nuclei`, `ffuf`, `katana`, `gau`, `dalfox`, `sqlmap`, …). Auto-install needs Go; otherwise install manually and add to `PATH`. Connect your own scripts with `local_tools` in the config.
+- **Reports:** every finding stores title, severity, endpoint, description, impact, reproduction steps and evidence, saved to `data/reports/`.
+- **MITRE ATT&CK:** 140 of 153 skills carry a reviewed `mitre_attack:` mapping (process-only skills are intentionally empty). `agentx attack` shows coverage; findings inherit the mapping in chat, plans and reports. Artifacts: `mappings/attack-navigator-layer.json` and `ATTACK_COVERAGE.md`.
+- **Skill QA:** validate, lint, de-collide and index skills with `agentx-skill-qa all` (or `python -m agentx.skills.qa all`).
+
+### Project layout
+
+```text
+agentx/    cli, config, ai/, core/ (orchestrator, planner, executor, memory, session),
+           tui/, skills/, tools/, recon/, reporting/, integrations/
+config/    default.yaml          skills/   playbooks + index.json
+data/      agentx.db, reports/   scripts/  copy_skills.py, install_to_agents.py   tests/
 ```
 
-In-chat commands: `/help` `/target` `/status` `/skills` `/plan` `/go` `/findings` `/validate` `/report` `/recon` `/mcp` `/mode` `/auto` `/sessions` `/handoff` `/clear` `/exit`
+---
+
+## Troubleshooting
 
 | Problem | Fix |
 |---------|-----|
 | `agentx: command not found` | Activate the venv, or use `python -m agentx` |
-| `No AI provider configured` | Set `enabled: true` for one provider; re-run `agentx config --show` |
-| `401` / `AuthenticationError` | Check the `${ENV_VAR}` name, reopen the terminal |
-| Model silent / wrong answers | Make `orchestrator_model` match the enabled provider's `model` |
-| MCP tools not listed | Set `enabled: true`, restart, check `/mcp` (Burp server must be started) |
-| Skills missing in Claude Code | Restart the agent; re-run `agentx install-skills --force` |
+| `No AI provider configured` | Set `enabled: true` for one provider |
+| `401` / `AuthenticationError` | Check the key variable, then reopen the terminal |
+| Model does not respond | Make `orchestrator_model` match the provider's `model` |
+| `subfinder not installed` | `agentx tools --install subfinder` |
+| `running scripts is disabled` | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
+| No skills show up | Run `agentx skills`, then `agentx install-skills` to push them into your agent |
+| Browser MCP does not start | Check `node --version` is 20 or higher |
+| Burp MCP not connecting | Make sure the BApp's SSE server is started on `127.0.0.1:9876` |
 
 ---
 
 ## Disclaimer
 
-Use AgentX only on systems you have **explicit written permission** to test. You are responsible for how it is used, and every AI-generated finding must be verified by a human before action or submission.
+Use AgentX only on systems you have **explicit written permission** to test. You are solely responsible for any misuse, and every AI-generated result must be manually verified.
