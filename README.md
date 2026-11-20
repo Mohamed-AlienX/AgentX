@@ -229,7 +229,7 @@ The TUI has the same slash commands in a full-screen layout, with a live status 
 | `Ctrl+Q` | Quit |
 
 
-> `![AgentX TUI](docs/images/Annotation 2026-11-20 153739.png)`
+![AgentX TUI](docs/images/Annotation 2026-11-20 153739.png)
 
 ---
 
