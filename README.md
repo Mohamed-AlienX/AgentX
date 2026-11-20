@@ -210,18 +210,6 @@ agentx report --format markdown --output report.md
   <img src="docs/images/terminal.svg" alt="AgentX chat session" width="85%">
 </p>
 
-```text
-agentx: /target example.com
-✔ Target set: example.com
-agentx: check the site for XSS and IDOR
-1. [web2-recon] collect subdomains and endpoints
-2. [hunt-xss] test for XSS
-3. [hunt-idor] test for unauthorized access
-agentx: /go          → runs the plan and records findings
-agentx: /findings    → table of findings
-agentx: /report      → saves data/reports/report_xxx.md
-agentx: /exit
-```
 
 ### C. Use the TUI
 
@@ -240,7 +228,7 @@ The TUI has the same slash commands in a full-screen layout, with a live status 
 | `Ctrl+L` | Clear |
 | `Ctrl+Q` | Quit |
 
-> 📸 Add your own screenshot here: save it as `docs/images/tui.png` and reference it with
+
 > `![AgentX TUI](docs/images/tui.png)`
 
 ---
