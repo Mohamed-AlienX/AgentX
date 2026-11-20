@@ -1,0 +1,2124 @@
+{
+  "generated_at": "2026-11-13T12:03:47+00:00",
+  "schema_version": 1,
+  "total_skills": 153,
+  "skills": [
+    {
+      "name": "ad-attacker",
+      "description": "Active Directory attacks: Kerberoasting, AS-REP roasting, DCSync, GPO abuse. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/ad-attacker",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1087.002",
+        "T1558",
+        "T1550",
+        "T1021.002",
+        "T1210",
+        "T1078"
+      ]
+    },
+    {
+      "name": "ai-recon",
+      "description": "Map the AI and LLM attack surface of a target before any active testing: locate chatbot widgets, copilot panes, model-backed search and summarisation endpoints, agent tool and function-calling surfaces, RAG document upload paths, MCP servers, and the system prompts or model names leaked in client bundles. Passive fingerprinting only. Use when scope includes an AI feature or you need to know which hosts expose a model before red-teaming it. Do not use for port or service scanning - use recon-advisor.",
+      "category": null,
+      "path": "skills/ai-recon",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1595",
+        "T1592",
+        "T1590"
+      ]
+    },
+    {
+      "name": "api-security",
+      "description": "API security testing: REST, GraphQL, OAuth/OIDC, JWT attacks, OWASP API Top 10. Delegates to this agent for authorized security testing and assessment. Use when testing a REST or GraphQL API surface directly, including authentication, object-level authorization and versioning. Do not use for a single web-page bug class - use the matching hunt-<class> skill; for GraphQL resolver IDOR use hunt-graphql.",
+      "category": null,
+      "path": "skills/api-security",
+      "body_lines": 27,
+      "mitre_attack": [
+        "T1190",
+        "T1078",
+        "T1550.001"
+      ]
+    },
+    {
+      "name": "apk-redteam-pipeline",
+      "description": "Android APK red-team pipeline: pull the package from Play Store, apkpure or apkmirror, decompile with jadx and apktool, grep smali and assets for API keys, JWTs, Firebase config and internal URLs, extract pinned certificates, enumerate exported activities and receivers, then drive Frida on ART for runtime hooks and intent-injection probes. Use when scope names an Android app, a Play Store developer page, or an .apk/.xapk URL appears in recon. Do not use for iOS targets - use ios-redteam-pipeline instead.",
+      "category": null,
+      "path": "skills/apk-redteam-pipeline",
+      "body_lines": 401,
+      "sources": "authorized-engagement",
+      "mitre_attack": [
+        "T1552",
+        "T1592",
+        "T1528"
+      ],
+      "report_count": 1
+    },
+    {
+      "name": "attack-planner",
+      "description": "Attack strategy: engagement planning, objective mapping, resource allocation. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/attack-planner",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1595",
+        "T1210"
+      ]
+    },
+    {
+      "name": "bb-local-toolkit",
+      "description": "Locate the local offensive tooling this machine already has: where the jhaddix and SecLists wordlists, trufflehog, ffuf, dalfox, ghauri and cloned repositories are installed. Companion to the bug-bounty orchestrator for the case where a hunt needs a real binary or wordlist path before it can run. Use when a hunt needs a local tool and you do not know where it lives. Do not use for the hunting methodology itself - use bug-bounty.",
+      "category": null,
+      "path": "skills/bb-local-toolkit",
+      "body_lines": 22,
+      "sources": "community, operator_experience",
+      "mitre_attack": []
+    },
+    {
+      "name": "bb-methodology",
+      "description": "Use at the START of any bug bounty hunting session, when switching targets, or when feeling lost about what to do next. Master orchestrator that combines the 5-phase non-linear hunting workflow with the critical thinking framework (developer psychology, anomaly detection, What-If experiments). Routes to all other skills based on current hunting phase. Also use when asking \"what should I do next\" or \"where am I in the process.\"",
+      "category": null,
+      "path": "skills/bb-methodology",
+      "body_lines": 508,
+      "sources": "community, public_research",
+      "mitre_attack": [
+        "T1595",
+        "T1190"
+      ]
+    },
+    {
+      "name": "bizlogic-hunter",
+      "description": "Business logic flaw detection: workflow manipulation, race conditions, authorization bypass. Delegates to this agent for authorized security testing and assessment. Use when a flow moves value between users and you need to test price, coupon, balance or workflow abuse. Do not use for access-control or IDOR checks - use hunt-idor; for money-path race windows use hunt-race-condition.",
+      "category": null,
+      "path": "skills/bizlogic-hunter",
+      "body_lines": 27,
+      "mitre_attack": [
+        "T1190",
+        "T1565"
+      ]
+    },
+    {
+      "name": "bug-bounty",
+      "description": "Bug bounty methodology: recon to exploitation, responsible disclosure, report writing. Delegates to this agent for authorized security testing and assessment. Do not use for the local-tooling inventory - use bb-local-toolkit; for the submit/no-submit decision use triage-validation.",
+      "category": null,
+      "path": "skills/bug-bounty",
+      "body_lines": 27,
+      "mitre_attack": [
+        "T1595",
+        "T1190",
+        "T1592"
+      ]
+    },
+    {
+      "name": "bugcrowd-reporting",
+      "description": "Bugcrowd-specific reporting tactics complementing report-writing: VRT category search-and-fallback strategy when no exact match exists, manual severity override when VRT defaults underrate impact, severity-request paragraph as first body section, OOS-clause rebuttal templates (rate limiting on auth-flow endpoints, debug-info framing, user-enumeration with sensitive PII, theoretical-issue counter), chained-finding cross-reference patterns, target selection for QA-vs-prod programs, researcher-side hygiene (Bugcrowdninja email alias, account state restoration, friendly-tester posture). Use when filing a Bugcrowd submission, when VRT default seems wrong, when triager closes as OOS or downgrades severity, when chaining linked submissions, or when scope distinguishes production from QA. Pairs with report-writing and triage-validation. Do not use for the report body or CVSS scoring - use report-writing; for the submit/no-submit decision use triage-validation.",
+      "category": null,
+      "path": "skills/bugcrowd-reporting",
+      "body_lines": 318,
+      "sources": "bugcrowd, community",
+      "mitre_attack": []
+    },
+    {
+      "name": "c2-operator",
+      "description": "Delegates to this agent when the user asks about command-and-control framework operations, Sliver/Mythic/Havoc/Cobalt Strike configuration, listener and beacon tuning, malleable C2 profiles, sleep and jitter strategy, redirector and CDN fronting infrastructure, or operating an established foothold during authorized red team engagements.",
+      "category": "post-exploitation",
+      "path": "skills/c2-operator",
+      "body_lines": 351,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1071",
+        "T1090",
+        "T1572",
+        "T1105"
+      ]
+    },
+    {
+      "name": "cloud-iam-deep",
+      "description": "Cloud IAM red-team attack chain across AWS, Azure, GCP — focused on EXTERNAL exploitation paths and post-credential-discovery privilege analysis. Covers IAM enumeration (aws iam, az role, gcloud iam), STS/AssumeRole chaining, Azure Managed Identity abuse (via SSRF/leak), GCP service account JSON abuse, IMDSv1/v2 attacks via SSRF, K8s ServiceAccount token privilege analysis once held, role-trust-policy confused- deputy, cross-account assume-role enumeration, IAM privilege escalation patterns (24+ AWS, 8+ Azure, 6+ GCP), and AWS Cognito Identity Pool unauthenticated-role attack chain (GetId → GetCredentialsForIdentity → IAM role abuse). Built for the case where recon yields a credential and you need to know what it grants. Use when an AWS key / Azure secret / GCP service account JSON / K8s SA token surfaces from a code repo, JS bundle, APK, breach corpus, or SSRF chain. Do not use for public storage or serverless misconfiguration - use cloud-security; for Kubernetes or container escape use hunt-k8s.",
+      "category": null,
+      "path": "skills/cloud-iam-deep",
+      "body_lines": 131,
+      "sources": "aws-iam-docs, azure-rbac-docs, gcp-iam-docs, hackingthe.cloud, pacu, peirates, prowler, rhinosecuritylabs_research, hackerone_public",
+      "mitre_attack": [
+        "T1078.004",
+        "T1098",
+        "T1552"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "code-auditor",
+      "description": "Source code review: vulnerability discovery, secure code analysis. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/code-auditor",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1190",
+        "T1552",
+        "T1505.003"
+      ]
+    },
+    {
+      "name": "container-breakout",
+      "description": "Container escape: Docker, Kubernetes, pod security, namespace bypass. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/container-breakout",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1611",
+        "T1610",
+        "T1552.007",
+        "T1210"
+      ]
+    },
+    {
+      "name": "credential-tester",
+      "description": "Delegates to this agent when the user asks about password attacks, credential testing, hash cracking, brute force methodology, default credential checks, password spraying, or needs help with tools like hydra, john, hashcat, medusa, or CrackMapExec for authorized penetration testing engagements.",
+      "category": "hunting",
+      "path": "skills/credential-tester",
+      "body_lines": 340,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1110",
+        "T1003",
+        "T1552"
+      ]
+    },
+    {
+      "name": "crypto-analyzer",
+      "description": "Delegates to this agent when the user wants to analyze cryptographic usage — weak algorithms or modes, key and IV/nonce management, TLS/certificate configuration, randomness quality, password hashing, or JWT/JWE/token issues. Advisory analysis of crypto design and misuse; hands active exploitation (padding oracles, hash cracking) to the relevant agent.",
+      "category": "hunting",
+      "path": "skills/crypto-analyzer",
+      "body_lines": 66,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1552",
+        "T1550.001",
+        "T1600"
+      ]
+    },
+    {
+      "name": "ctf-solver",
+      "description": "CTF challenge solving: web, pwn, rev, crypto, forensics, stego. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/ctf-solver",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1190",
+        "T1059",
+        "T1068"
+      ]
+    },
+    {
+      "name": "data-exfiltrator",
+      "description": "Delegates to this agent when the user wants to test exfiltration and DLP/egress controls during an authorized engagement — DNS tunneling, HTTPS/cloud-storage exfil, ICMP, protocol abuse, and staging — using synthetic/canary data to validate detection. Every technique ships with the egress detection it exercises.",
+      "category": "post-exploitation",
+      "path": "skills/data-exfiltrator",
+      "body_lines": 71,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1048",
+        "T1041",
+        "T1071.004",
+        "T1567"
+      ]
+    },
+    {
+      "name": "database-attacker",
+      "description": "Database attacks: SQL injection, NoSQL injection, privilege escalation. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/database-attacker",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1190",
+        "T1005"
+      ]
+    },
+    {
+      "name": "detection-engineer",
+      "description": "Detection engineering: SIEM rules, alert tuning, blue team analytics. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/detection-engineer",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": []
+    },
+    {
+      "name": "engagement-planner",
+      "description": "Delegates to this agent when the user needs to plan a penetration test, define attack methodology, scope an engagement, map techniques to MITRE ATT&CK, or create a rules of engagement template.",
+      "category": "methodology",
+      "path": "skills/engagement-planner",
+      "body_lines": 62,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1595",
+        "T1591"
+      ]
+    },
+    {
+      "name": "enterprise-vpn-attack",
+      "description": "External SSL VPN / remote-access appliance attack matrix — Cisco ASA/AnyConnect, Fortinet FortiGate/FortiOS, Citrix NetScaler/ADC, Palo Alto GlobalProtect, Pulse Secure / Ivanti Connect Secure, SonicWall, F5 Big-IP. Covers version fingerprinting, CVE matrix (2018-2026), AAA backend identification, default credentials, configuration-disclosure paths, pre-auth RCE/SSRF/path-traversal exploits where applicable. Built from authorized-engagement Cisco ASA testing plus 2024-2026 enterprise VPN CVE landscape. Use whenever the target's perimeter exposes any SSL VPN appliance or remote-access gateway — these are the most common initial-access points in 2024-2026 actor TTPs. Do not use for generic application bugs on the same host - use web-hunter; for VMware management planes use vmware-vcenter-attack.",
+      "category": null,
+      "path": "skills/enterprise-vpn-attack",
+      "body_lines": 350,
+      "sources": "authorized-engagement, public-advisories, cisa-kev",
+      "mitre_attack": [
+        "T1133",
+        "T1190"
+      ],
+      "report_count": 1
+    },
+    {
+      "name": "evasion-specialist",
+      "description": "Delegates to this agent when the user wants to test defensive evasion during an authorized red team or EDR-validation engagement — AV/EDR evasion, AMSI and ETW bypass, payload obfuscation, in-memory execution, and unhooking. Every technique ships with the detection it exercises. For artifact generation use payload-crafter; for C2 tuning use c2-operator.",
+      "category": "post-exploitation",
+      "path": "skills/evasion-specialist",
+      "body_lines": 73,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1027",
+        "T1562.001",
+        "T1620",
+        "T1055"
+      ]
+    },
+    {
+      "name": "evidence-hygiene",
+      "description": "Evidence-capture and PoC-redaction discipline for bug-bounty submissions: cookie redaction protocol (which fields to mask, Preview annotation / Burp panel hiding / DevTools workflow), PII black-bar discipline (what to mask in other-user data — names, emails, phones, faces — vs what is safe to leave — usernames, trace IDs, request bodies), HAR file sanitization (jq filters for Cookie/Set-Cookie/Authorization headers), Burp Repeater/Intruder screenshot hygiene (hide request body, show only Results table for rate-limit attacks), Chrome DevTools Console PoC patterns (credentials include so cookies are not echoed, labeled console.log), screenshot capture order, filename conventions, post-submission rotation hygiene. Use BEFORE any PoC screenshot, BEFORE attaching a HAR, or whenever preparing evidence with session cookies or other-user PII. Pairs with bugcrowd-reporting and report-writing.",
+      "category": null,
+      "path": "skills/evidence-hygiene",
+      "body_lines": 371,
+      "sources": "community, operator_experience",
+      "mitre_attack": []
+    },
+    {
+      "name": "exploit-chainer",
+      "description": "Exploit chaining: multi-step attack paths, vulnerability correlation. Turns several confirmed findings into one ordered, approval-gated chain (for example IDOR -> auth bypass -> ATO) and states the impact of the composed path. Use when individual bugs are confirmed and you need to know whether they combine into something bigger. Do not use to learn how a single exploit technique works - use exploit-guide instead.",
+      "category": null,
+      "path": "skills/exploit-chainer",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1210",
+        "T1068",
+        "T1548"
+      ]
+    },
+    {
+      "name": "exploit-guide",
+      "description": "Exploit development guidance: buffer overflows, ROP chains, shellcode. Explains the technique, the prerequisite conditions and the tooling for writing a working exploit against a confirmed memory-corruption or logic bug. Use when you need to understand or build a single exploit primitive. Do not use to combine several findings into an attack path - use exploit-chainer instead.",
+      "category": null,
+      "path": "skills/exploit-guide",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1190",
+        "T1068"
+      ]
+    },
+    {
+      "name": "fix-verifier",
+      "description": "Delegates to this agent when the user wants to retest a vulnerability after a fix has been deployed, prove that a remediation actually closed the issue, verify a patch before closing a finding or a bug bounty report, check whether a fix broke working functionality, or confirm that a security regression has not reintroduced a previously closed vulnerability during authorized testing.",
+      "category": "validation",
+      "path": "skills/fix-verifier",
+      "body_lines": 160,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": []
+    },
+    {
+      "name": "hunt-access-control",
+      "description": "Hunt for broken access control — IDOR/BOLA, horizontal & vertical privilege escalation, missing function-level authz, forced browsing. Built from personal BAC + PrivEsc + IDOR notes. Use when testing multi-user apps, object references (ids), role-gated features, or admin endpoints.",
+      "category": null,
+      "path": "skills/hunt-access-control",
+      "body_lines": 62,
+      "mitre_attack": [
+        "T1078",
+        "T1530"
+      ]
+    },
+    {
+      "name": "hunt-api-misconfig",
+      "description": "Hunt API security misconfiguration — mass assignment, prototype pollution, HTTP verb tampering. Mass assignment: send {is_admin:true, role:admin, verified:true} on profile/account/reset endpoints — server blindly applies. JWT signature/crypto forging (alg:none, key confusion, kid/jku) is owned by hunt-jwt-crypto; this skill covers only non-crypto JWT handling. Prototype pollution: __proto__ injection in JSON merge / Object.assign / lodash _.merge → polluted prototype reaches sink (RCE in Node, XSS in browser). HTTP verb: GET-bypass-CSRF, X-HTTP-Method-Override, TRACE enabled. Detection: API responses with extra fields, JWTs in headers (decode at jwt.io). CORS misconfiguration (reflect-any-origin, null origin, subdomain-regex bypass, postMessage) is owned by hunt-cors. Use when hunting API misconfigs, mass-assignment, prototype pollution (JWT crypto → hunt-jwt-crypto).",
+      "category": null,
+      "path": "skills/hunt-api-misconfig",
+      "body_lines": 262,
+      "sources": "hackerone_public, owasp_api_top10_2023, public_research",
+      "mitre_attack": [
+        "T1190",
+        "T1078"
+      ],
+      "report_count": 0
+    },
+    {
+      "name": "hunt-aspnet",
+      "description": "Hunt ASP.NET-specific surface — ViewState deserialization (signed-only vs encrypted), machineKey recovery, dual-parser MAC-bypass anti-pattern, request-validator bypass, trace.axd/elmah.axd disclosure, load-balanced ViewState cross-node failures, SafeControl enumeration via reflection, customErrors mode=Off stack-trace leaks, classic Webforms .aspx/.asmx/.svc surface. Built for ASP.NET Webforms + WCF + SharePoint farms. Use when the stack is ASP.NET Webforms, MVC, WCF or a SharePoint farm. Do not use for Java or PHP stacks - use hunt-laravel or web-hunter.",
+      "category": null,
+      "path": "skills/hunt-aspnet",
+      "body_lines": 271,
+      "sources": "github, authorized-engagement",
+      "mitre_attack": [
+        "T1190",
+        "T1505.003",
+        "T1059"
+      ],
+      "report_count": 1
+    },
+    {
+      "name": "hunt-ato",
+      "description": "Hunt account takeover as a taxonomy of nine paths plus the chains between them: password-reset flaws (host-header token redirect, predictable token, Referer leak, no expiry or reuse), email change without re-auth, OAuth account-link CSRF, MFA bypass, session fixation, JWT forgery, password change without step-up, social-recovery brute force, and SSO subdomain takeover at redirect_uri. Use when hunting ATO chains or chaining primitives toward Critical. Do not use for a standalone MFA-code bypass test - use hunt-mfa-bypass, then chain the result here.",
+      "category": null,
+      "path": "skills/hunt-ato",
+      "body_lines": 134,
+      "sources": "hackerone_public, public_research",
+      "mitre_attack": [
+        "T1078",
+        "T1556",
+        "T1539",
+        "T1528"
+      ],
+      "report_count": 7
+    },
+    {
+      "name": "hunt-auth-bypass",
+      "description": "Hunting skill for auth bypass vulnerabilities. Built from 12 public bug bounty reports across SAML XSW / parser-differential (GitHub Enterprise CVE-2025-25291/25292), SAML signature stripping (Uber, Rocket.Chat, CVE-2025-47949), SAML domain-enforcement bypass via control characters, cross-IdP assertion reuse (Slack), WordPress XMLRPC bypassing SSO (Uber), JWT alg-confusion HS256/RS256 (Jitsi), JWT signature-validation skip (Linktree, Newspack), and token-audience confusion (Argo CD CVE-2023-22482). Covers JWT only inside SSO/SAML/token-trust chains. Use when hunting auth bypass — see the Legacy-Protocol Matrix for branded-UI vs legacy-endpoint patterns. Do not use for standalone JWT signature forgery (use hunt-jwt-crypto) or SAML assertion-layer parsing (use hunt-saml).",
+      "category": null,
+      "path": "skills/hunt-auth-bypass",
+      "body_lines": 443,
+      "sources": "github, hackerone_public, github_security_lab, projectdiscovery_research",
+      "mitre_attack": [
+        "T1078",
+        "T1556",
+        "T1550"
+      ],
+      "report_count": 12
+    },
+    {
+      "name": "hunt-auth-session",
+      "description": "Hunt for auth & session flaws — password reset abuse (token leaks, host header injection, OTP brute), MFA/2FA bypass (cross-account OTP, OAuth path, force browse), broken session management (fixation, invalidation gaps), rate-limit bypass, JWT attacks (alg confusion, kid/jku/jwk injection, weak secrets). Use on login/reset/MFA/session/OAuth/JWT surfaces.",
+      "category": null,
+      "path": "skills/hunt-auth-session",
+      "body_lines": 94,
+      "mitre_attack": [
+        "T1078",
+        "T1539",
+        "T1110",
+        "T1556"
+      ]
+    },
+    {
+      "name": "hunt-brute-force",
+      "description": "Hunt Missing/Weak Rate Limiting — login brute force, OTP/2FA brute force (10^6 keyspace), password-reset-token brute, credential stuffing, username/email enumeration via error-string / status-code / timing differences, weak password policy, missing CAPTCHA (CAPTCHA token replay / single-use / concurrency-window bypass specifics → hunt-captcha-bypass), IP-based rate-limit bypass via X-Forwarded-For and friends, ReDoS. Distinguishes hard lockout vs soft IP-throttle vs CAPTCHA-injection vs silent shadow-throttling (avoids false-negative 'no rate limit' conclusions). Medium to Critical depending on what the brute reaches (OTP→ATO = Critical). Use when a login, OTP or reset endpoint needs rate-limit and enumeration testing. Do not use for CAPTCHA-specific bypass mechanics - use hunt-captcha-bypass; for a full takeover chain use hunt-ato.",
+      "category": null,
+      "path": "skills/hunt-brute-force",
+      "body_lines": 291,
+      "sources": "public_research",
+      "mitre_attack": [
+        "T1110",
+        "T1078"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-business-logic",
+      "description": "Hunting skill for business logic vulnerabilities. Built from 12 public bug bounty reports. Covers coupon-race-stacking (Instacart, Stripe, Reverb), negative-quantity-in-cart price tampering (Upserve, Eternal/Zomato), decimal/fraction price-field overflow (Shipt), client-side checkout amount trust on PayPal redirect (WordPress.org), price-per-unit mass-assignment (Krisp), and archived-price swap / cart-TOCTOU (Stripe). Use when hunting business logic — heavy emphasis on financial-impact-demonstrated cases.",
+      "category": null,
+      "path": "skills/hunt-business-logic",
+      "body_lines": 231,
+      "sources": "hackerone_public, github",
+      "mitre_attack": [
+        "T1190",
+        "T1565"
+      ],
+      "report_count": 25
+    },
+    {
+      "name": "hunt-cache-poison",
+      "description": "Hunting skill for cache poison vulnerabilities. Built from 10 public bug bounty reports including X-Forwarded-Host poisoning, X-HTTP-Method-Override / GCS cache, reflected→stored XSS via cache, classic Omer-Gil Web Cache Deception, Cloudflare Cache Deception Armor bypass, session-token cache deception, Akamai hop-by-hop smuggling → server-side edge poisoning, and Kettle's 2024 path-normalization WCD against Cloudflare/Fastly/GCP. Host/X-Forwarded-Host injection that reaches app logic (reset-link poisoning, routing SSRF, OAuth issuer) is owned by hunt-host-header; this skill owns the case where the poisoned response is CACHED and served to other users. Use when hunting cache poisoning, Web Cache Deception, CDN-fronted apps. Do not use when the injected Host header only reaches app logic and is never cached - use hunt-host-header instead.",
+      "category": null,
+      "path": "skills/hunt-cache-poison",
+      "body_lines": 332,
+      "sources": "github, hackerone_public, portswigger_research, omergil_research, youstin_research",
+      "mitre_attack": [
+        "T1190",
+        "T1189"
+      ],
+      "report_count": 8
+    },
+    {
+      "name": "hunt-captcha-bypass",
+      "description": "Hunt CAPTCHA Bypass — 6 distinct patterns: (1) CAPTCHA field simply omitted from the request (server-side validation absent), (2) CAPTCHA token replayed from a solved challenge (no single-use enforcement), (3) CAPTCHA response accepted on a different endpoint than it was solved on (no binding to action/session), (4) static or predictable CAPTCHA values accepted (e.g. '0', 'null', empty string), (5) audio/accessibility CAPTCHA trivially solvable programmatically, (6) CAPTCHA only enforced after N failures (first N requests bypass it). Detection: intercept a successful form submission, remove the CAPTCHA field entirely, replay — if it still succeeds, server-side validation is absent. Medium severity standalone; High when it removes the only rate-limit gate protecting a login, registration, or payment endpoint. Use when a CAPTCHA gates a login, registration or payment endpoint. Do not use for the wider rate-limit or credential-stuffing picture - use hunt-brute-force.",
+      "category": null,
+      "path": "skills/hunt-captcha-bypass",
+      "body_lines": 86,
+      "sources": "public_research, operator_experience",
+      "mitre_attack": [
+        "T1110",
+        "T1078"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-cicd",
+      "description": "Hunt CI/CD pipeline vulnerabilities — GitHub Actions workflow injection (pull_request_target Pwnrequest + ${{ }}-into-shell), self-hosted runner poisoning, OIDC trust-policy abuse, Jenkins script-console RCE and CVE-2024-23897 file read, GitLab CI runner-token registration, Terraform state file leakage, artifact/log secret leakage, pipeline env-var disclosure. Use when target has a public GitHub/GitLab org, exposed CI dashboards (Jenkins/TeamCity/Drone/Argo), or build artifacts/images are reachable.",
+      "category": null,
+      "path": "skills/hunt-cicd",
+      "body_lines": 261,
+      "sources": "hackerone_public, github_security_lab, cve_database, portswigger_research",
+      "mitre_attack": [
+        "T1195.002",
+        "T1552"
+      ],
+      "report_count": 18
+    },
+    {
+      "name": "hunt-clickjacking",
+      "description": "Hunt Clickjacking — missing X-Frame-Options / CSP frame-ancestors lets an attacker embed the target page in an invisible iframe and trick victims into clicking buttons they cannot see (UI redressing). Targets: login flows, money transfers, account settings, OAuth confirmation pages. Confirm by fetching the page, then PROVE it frames in a real browser and a sensitive state-changing action survives the cross-site context (SameSite cookies / framebusting JS can defeat it) — header-absence alone is not a finding. Use when a sensitive state-changing action can be framed by a third-party page. Do not use for CSRF that needs no victim click - use hunt-csrf; for DOM-based UI redress use hunt-dom.",
+      "category": null,
+      "path": "skills/hunt-clickjacking",
+      "body_lines": 60,
+      "sources": "hackerone_public, public_research",
+      "mitre_attack": [
+        "T1189",
+        "T1190"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-client-side",
+      "description": "Hunt for client-side vulnerabilities — XSS (all contexts + filter bypasses), CSP bypass, CSRF, CORS misconfig, DOM-based attacks incl. clobbering. Built from personal notes. Use when input reflects into pages, CSP blocks payloads, state-changing endpoints lack tokens, or cross-origin data flows exist.",
+      "category": null,
+      "path": "skills/hunt-client-side",
+      "body_lines": 96,
+      "mitre_attack": [
+        "T1189",
+        "T1190",
+        "T1059.007",
+        "T1539"
+      ]
+    },
+    {
+      "name": "hunt-cloud-misconfig",
+      "description": "Hunt cloud / infrastructure misconfigurations. AWS: public S3 buckets (s3:GetObject anonymous), permissive bucket policies (PutObjectAcl public-write), exposed CloudFront origin, public Lambda function URL, public RDS snapshot, IAM credentials in JS bundles, AWS metadata accessible via SSRF. GCP: public GCS buckets, exposed Cloud Run services, leaked service account JSON. Azure: public blob containers, exposed Function App. (Kubernetes/Docker exposure is owned by hunt-k8s; CI/CD pipeline attacks by hunt-cicd; post-credential IAM escalation by cloud-iam-deep.) Detection: targeted dorking, certificate transparency, JS bundle secret extraction, port scan for known service ports. Validate: actual data read / write / RCE. Use when hunting cloud-native storage and compute misconfig (S3/GCS/Blob, IMDS-via-SSRF, serverless, public managed services).",
+      "category": null,
+      "path": "skills/hunt-cloud-misconfig",
+      "body_lines": 189,
+      "sources": "hackerone_public, public_research",
+      "mitre_attack": [
+        "T1530",
+        "T1552",
+        "T1078.004"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-csrf",
+      "description": "Hunting skill for csrf vulnerabilities. Built from 15 public bug bounty reports including modern variants — SameSite=Lax sibling-subdomain bypass (Argo CD CVE-2024-22424), GraphQL mutations-via-GET (GitLab $3,370), framework-wide CSRF middleware disabled (Stripe Dashboard $5,000), path-traversal CSRF-token bypass (GitHub Enterprise CVE-2022-23732 $10k), Origin-omission bypass (TikTok $2,500), OAuth-state null-byte (Streamlabs), WebSocket CSRF / CSWSH (Coda), default-SameSite email-change → ATO (YoYo Games $400), social-account-link CSRF (HackerOne), JSON-CSRF via text/plain on email-change (TikTok $500). Use when hunting modern CSRF — heavy emphasis on chain-to- ATO patterns. Do not use for clickjacking - use hunt-clickjacking; for WebSocket handshake CSRF use hunt-websocket.",
+      "category": null,
+      "path": "skills/hunt-csrf",
+      "body_lines": 368,
+      "sources": "github, hackerone_public, bugcrowd_public, github_security_advisories",
+      "mitre_attack": [
+        "T1190",
+        "T1078"
+      ],
+      "report_count": 18
+    },
+    {
+      "name": "hunt-deserialization",
+      "description": "Hunt Insecure Deserialization — Java gadget chains (ysoserial), PHP object injection (phpggc), Python pickle RCE, .NET BinaryFormatter, Ruby Marshal.load, JNDI/Log4Shell. RCE via deserialization is almost always Critical. Use when target runs Java, PHP serialization, Python pickle, .NET, or Ruby on Rails. Do not use for template injection - use hunt-ssti; for upload-driven object injection use hunt-file-upload.",
+      "category": null,
+      "path": "skills/hunt-deserialization",
+      "body_lines": 172,
+      "sources": "hackerone_public",
+      "mitre_attack": [
+        "T1190",
+        "T1059"
+      ],
+      "report_count": 22
+    },
+    {
+      "name": "hunt-dispatch",
+      "description": "Skill-set loader for /hunt orchestrator. Fingerprints the target, picks the right platform attack skills, and loads the Red Team or WAPT skill set. Use when /hunt has just received a mode answer (redteam or wapt + blackbox|greybox) and needs to load the appropriate skills and print the taxonomy. Not for direct user invocation.",
+      "category": null,
+      "path": "skills/hunt-dispatch",
+      "body_lines": 370,
+      "sources": "community",
+      "mitre_attack": [],
+      "report_count": 0
+    },
+    {
+      "name": "hunt-dom",
+      "description": "Hunt client-side DOM vulnerabilities — DOM Clobbering (overwrite JS globals via HTML injection), PostMessage hijacking (missing origin check), Service Worker abuse (intercept requests from same-origin script), CSS Injection/Exfiltration (attribute selectors → token char-by-char via OOB), client-side template injection, dangerouslySetInnerHTML. Grounded in named public research: Gareth Heyes / PortSwigger DOM-clobbering + DOM-Invader, Michał Bentkowski DOMPurify clobbering bypasses, jQuery htmlPrefilter XSS (CVE-2020-11022 / CVE-2020-11023), d0nut CSS-exfil research. Use when hunting DOM-XSS, client-side auth bypass, or token exfiltration without server-side interaction. Do not use for server-reflected XSS - use hunt-xss; for markup injection without script execution use hunt-html-injection.",
+      "category": null,
+      "path": "skills/hunt-dom",
+      "body_lines": 273,
+      "sources": "portswigger_research, hackerone_public, github_security_advisories",
+      "mitre_attack": [
+        "T1059.007",
+        "T1189"
+      ],
+      "report_count": 14
+    },
+    {
+      "name": "hunt-exceptional-conditions",
+      "description": "Hunt mishandling of exceptional conditions — feed an endpoint malformed/unexpected input (wrong type, broken JSON, oversized field, null byte) and make it fail OPEN or leak internals: a verbose stack-trace / framework error page that discloses ORM internals, server file paths, library versions, or a language traceback. Use on any input-accepting endpoint (JSON APIs, forms, query params). Medium-High when the leak exposes internal structure that arms a deeper attack. Use when an endpoint accepts structured input and you want to see whether malformed data fails open or leaks internals. Do not use for crafted injection payloads - use the matching hunt-<class> skill.",
+      "category": null,
+      "path": "skills/hunt-exceptional-conditions",
+      "body_lines": 61,
+      "sources": "hackerone_public",
+      "mitre_attack": [
+        "T1190",
+        "T1592"
+      ],
+      "report_count": 0
+    },
+    {
+      "name": "hunt-file-upload",
+      "description": "Hunt file upload bugs — RCE via webshell, XSS via SVG/HTML, SSRF via XXE in DOCX, path traversal via filename. Bypass tables (10 techniques): double extension (shell.php.jpg if server checks last ext only), magic bytes spoofing (PNG header on PHP), null byte (shell.php\\0.jpg), case (PHP, .Php, .pHP), .htaccess upload to enable execution, SVG with <script>, HTML/SVG XSS, DOCX with embedded XXE, ZIP slip (../../../etc/passwd in archive), polyglot files. Detection: any /upload, /avatar, /profile-picture, /attachment, /import endpoint. Test: upload PHP/JSP/ASPX shells, request via direct URL, check response. Validate: actual code execution (whoami output) for RCE; reflected XSS in profile-photo URL. Use when testing file upload features, avatar/attachment endpoints, import/export functions, XML/DOCX/ZIP processors. Real paid examples. Do not use for path traversal outside an upload flow - use hunt-lfi.",
+      "category": null,
+      "path": "skills/hunt-file-upload",
+      "body_lines": 152,
+      "sources": "hackerone_public, cve_database, owasp, public_research",
+      "mitre_attack": [
+        "T1505.003",
+        "T1190",
+        "T1059"
+      ],
+      "report_count": 5
+    },
+    {
+      "name": "hunt-fintech-graphql",
+      "description": "Hunt fintech-specific GraphQL vulnerabilities: money-movement mutations (transfers, redemptions, withdrawals, card top-ups), ledger/balance/portfolio query IDOR, decimal-precision and rounding abuse, idempotency-key bypass enabling double-spend, KYC/PII field-level authorization gaps, and admin-override mutations reachable via mass assignment. Distinct from hunt-graphql, which owns generic GraphQL discovery and IDOR/mutation methodology — this skill owns the delta introduced when a GraphQL layer sits in front of a ledger, wallet, payments, banking, brokerage, or lending backend, where a resolver bug moves real money instead of just leaking data. Use when hunting a fintech, banking, payments, wallet, neobank, brokerage, or lending target that exposes a GraphQL API, or when a schema/response includes balance, transfer, ledger, redeem, quote, KYC, or account-linking fields. Do not use for generic GraphQL discovery or IDOR - use hunt-graphql; this skill only covers ledger and money-movement semantics.",
+      "category": null,
+      "path": "skills/hunt-fintech-graphql",
+      "body_lines": 239,
+      "sources": "owasp_api_top10_2023, public_research",
+      "mitre_attack": [
+        "T1190",
+        "T1078",
+        "T1565"
+      ],
+      "report_count": 0
+    },
+    {
+      "name": "hunt-forgot-password",
+      "description": "Hunt Forgot Password / Account Recovery Authentication Flaws — 5 distinct patterns: (1) username enumeration via different responses for valid vs invalid email, (2) reset token exposed directly in the API response body, (3) reset token not invalidated after use (replay), (4) password reset link works from a different IP/browser (no binding), (5) no rate limit on the reset request endpoint. These are the standalone recovery-flow broken- auth primitives — distinct from reset-email host-header poisoning (hunt-host-header) and the full ATO chain (hunt-ato owns password-reset as an ATO path; prove the primitive here, chain it there). Detection: trace the full forgot-password flow from request to token to use; check response diffs between valid/invalid emails; test token replay after consumption. Use when tracing a reset or account-recovery flow end to end. Do not use for the full takeover chain - use hunt-ato; for Host-header reset poisoning use hunt- host-header.",
+      "category": null,
+      "path": "skills/hunt-forgot-password",
+      "body_lines": 64,
+      "sources": "hackerone_public, public_research",
+      "mitre_attack": [
+        "T1078",
+        "T1110",
+        "T1556"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-graphql",
+      "description": "Hunting skill for graphql vulnerabilities. Built from 12 public bug bounty reports across IDOR via node() / GID, mutation IDOR including AI/LLM features, cross-tenant IDOR, SSRF via argument, batching-DoS, query-cost-bypass, SQLi via argument, broken-object-level-authz, auth-bypass via unscoped mutations, and PII exposure from missing field-level authz. Use when hunting graphql on any target. Do not use for REST API misconfig or generic SQLi (see hunt-api-misconfig, hunt-sqli).",
+      "category": null,
+      "path": "skills/hunt-graphql",
+      "body_lines": 362,
+      "sources": "hackerone_public, github, gitlab_security",
+      "mitre_attack": [
+        "T1190",
+        "T1530"
+      ],
+      "report_count": 26
+    },
+    {
+      "name": "hunt-grpc",
+      "description": "Hunt gRPC vulnerabilities — server reflection enabled (enumerate all services/methods), missing authentication / metadata-stripping on internal endpoints, plaintext gRPC over HTTP/2, internal endpoint disclosure, proto file leakage, gRPC-Web/grpc-gateway transcoding injection, and HTTP/2 Rapid Reset DoS (CVE-2023-44487). Use when target exposes port 50051 / 443 / 8443 / 9090 with HTTP/2, when grpcurl/grpcui detects reflection, when an Envoy or grpc-gateway proxy is fronting a microservice, or when recon reveals a microservice architecture. Do not use for REST or GraphQL APIs - use api-security or hunt-graphql.",
+      "category": null,
+      "path": "skills/hunt-grpc",
+      "body_lines": 267,
+      "sources": "hackerone_public, grpc_security_research, cert_cc_advisory",
+      "mitre_attack": [
+        "T1190",
+        "T1046"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-host-header",
+      "description": "Hunt Host Header Injection — password reset poisoning → ATO, web cache poisoning via unkeyed Host/X-Forwarded-Host, routing-based SSRF (Host picks upstream → cloud metadata/internal services), path-override SSRF/ACL-bypass (X-Original-URL/X-Rewrite- URL), OAuth redirect_uri/issuer poisoning, and absolute-URL link poisoning in emails. High to Critical when it reaches ATO or mass cache poisoning. Built on public Host-header research (PortSwigger 'Practical web cache poisoning' + James Kettle, and the classic password-reset-poisoning class). Use on any forgot-password flow, CDN/reverse-proxy-fronted app, OAuth/OIDC endpoint, or absolute-URL-in-email feature. Do not use when the goal is a cached response served to other users - use hunt-cache-poison instead.",
+      "category": null,
+      "path": "skills/hunt-host-header",
+      "body_lines": 259,
+      "sources": "portswigger_research, hackerone_public",
+      "mitre_attack": [
+        "T1190",
+        "T1189"
+      ],
+      "report_count": 16
+    },
+    {
+      "name": "hunt-html-injection",
+      "description": "Hunt HTML Injection — user-supplied input is rendered as raw HTML in the response without sanitisation, allowing an attacker to inject arbitrary HTML tags (but not necessarily JavaScript). Lower severity than XSS but enables phishing, UI manipulation, and credential harvesting via injected forms. Use when testing text-display surfaces (search results, profile fields, comments, error messages, feedback forms). For markup that executes JavaScript, escalate to hunt-xss. Do not use once JavaScript execution is possible - use hunt-xss.",
+      "category": null,
+      "path": "skills/hunt-html-injection",
+      "body_lines": 56,
+      "sources": "hackerone_public, public_research",
+      "mitre_attack": [
+        "T1189",
+        "T1190"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-http-smuggling",
+      "description": "Hunt HTTP request smuggling (CL.TE, TE.CL, H2.CL, H2.TE). Cause: front-end proxy and back-end server disagree on where one request ends and the next begins (Content-Length vs Transfer-Encoding header parsing inconsistency). CL.TE: front-end uses CL, back uses TE → smuggle by sending TE: chunked but with body that fits CL count. TE.CL: opposite. H2.CL: HTTP/2 downgrade, smuggle CL into HTTP/1.1 back-end. Detection tools: Burp HTTP Request Smuggler extension, smuggler.py, h2csmuggler. Confirm: time-delay technique (smuggled GET with 30s timeout) — if front-end returns slow on next victim request, smuggling works. Validate: cache poisoning chain (smuggle request that gets cached for victim), credential theft (smuggle X-Forwarded-For override that captures next user's cookies), bypass auth (smuggled internal-path request). Use when hunting a CDN+origin stack or a load-balancer/WAF bypass. Do not use for cache deception or poisoning without a parsing desync - use hunt-cache-poison.",
+      "category": null,
+      "path": "skills/hunt-http-smuggling",
+      "body_lines": 81,
+      "sources": "hackerone_public, cve_database, portswigger_research, public_research",
+      "mitre_attack": [
+        "T1190",
+        "T1090"
+      ],
+      "report_count": 12
+    },
+    {
+      "name": "hunt-idor",
+      "description": "Hunt Insecure Direct Object References (IDOR/BOLA) — sequential and UUID identifiers, nested-object and batch endpoints, cross-tenant access, and write-side object swaps. Use when an endpoint takes a user-controlled object id. Do not use for SQL injection, SSRF, or generic RCE (see hunt-sqli, hunt-ssrf, hunt-rce).",
+      "category": null,
+      "path": "skills/hunt-idor",
+      "body_lines": 383,
+      "sources": "github, hackerone_public",
+      "mitre_attack": [
+        "T1530",
+        "T1078"
+      ],
+      "report_count": 39
+    },
+    {
+      "name": "hunt-injection",
+      "description": "Hunt for server-side input injection — SQLi, NoSQLi, Command Injection, SSTI, XPath, LDAP, CRLF. Built from personal notes for all seven types with DBMS-specific payloads, WAF bypass ladders, and tool commands (sqlmap/ghauri/nosqli/commix/tplmap). Use when any parameter reaches a database, shell, template engine, XML query, LDAP filter, or HTTP response headers.",
+      "category": null,
+      "path": "skills/hunt-injection",
+      "body_lines": 125,
+      "mitre_attack": [
+        "T1190",
+        "T1059"
+      ]
+    },
+    {
+      "name": "hunt-jwt-crypto",
+      "description": "Hunt JWT cryptographic failures — alg:none signature-stripping and RS256→HS256 key-confusion that let an attacker forge a token for any identity (e.g. an admin) without knowing a secret. Use when the app authenticates with a JSON Web Token (an `eyJ...` Bearer token in the Authorization header, a cookie, or a login response). This skill OWNS JWT signature/crypto forgery (alg:none, key confusion, kid/jku header injection); hunt-ato covers JWT as one ATO path, hunt-auth-bypass covers SSO/SAML token trust, hunt-api-misconfig covers non-crypto JWT handling. Critical when a forged token grants access to another user's data or an admin-only endpoint. Do not use for SSO/SAML trust chains or non-crypto JWT handling (see hunt-auth-bypass, hunt-api-misconfig).",
+      "category": null,
+      "path": "skills/hunt-jwt-crypto",
+      "body_lines": 171,
+      "sources": "hackerone_public",
+      "mitre_attack": [
+        "T1550.001",
+        "T1078",
+        "T1556"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-k8s",
+      "description": "Hunt Kubernetes & Docker — API anonymous access, kubelet 10250 exec (SPDY/WebSocket, NOT plain POST) and the simpler /run primitive, etcd 2379 unauth, dashboard skip-login, RBAC misconfig, secret/SA-token abuse, docker.sock host escape, runc/container-escape (Leaky Vessels CVE-2024-21626), API-server-mediated nodes/proxy RCE, EphemeralContainers node-shell, bound/projected SA-token audience+expiry abuse, admission-controller bypass, Helm/Tiller remnants. Use when target runs containerized infra, exposes K8s ports (6443/10250/10255/2379/8443), or cloud metadata reveals K8s service accounts. Do not use for cloud IAM privilege escalation - use cloud-iam-deep; for generic container escape technique use container-breakout.",
+      "category": null,
+      "path": "skills/hunt-k8s",
+      "body_lines": 287,
+      "sources": "hackerone_public, cve_database, kubernetes_security_research, portswigger_research",
+      "mitre_attack": [
+        "T1611",
+        "T1610",
+        "T1552.007"
+      ],
+      "report_count": 13
+    },
+    {
+      "name": "hunt-laravel",
+      "description": "Hunt Laravel specific vulnerabilities — Debug mode leakage (APP_DEBUG=true exposes full stack trace + env vars), Laravel Telescope/Horizon dashboard unauthorized access, Ignition RCE (CVE-2021-3129), Signed URL manipulation, Queue Worker abuse, mass assignment via Eloquent, deserialization via cookies, .env file exposure. Use when target runs Laravel (PHP) — detected via X-Powered-By, Laravel session cookies, or /storage/ paths. Do not use for other PHP frameworks - use web-hunter; for generic PHP file inclusion use hunt-lfi.",
+      "category": null,
+      "path": "skills/hunt-laravel",
+      "body_lines": 205,
+      "sources": "hackerone_public, cve_database",
+      "mitre_attack": [
+        "T1190",
+        "T1505.003",
+        "T1059"
+      ],
+      "report_count": 14
+    },
+    {
+      "name": "hunt-ldap",
+      "description": "Hunt LDAP Injection and XPath Injection — authentication bypass, blind char-by-char attribute exfiltration, AD user/group enumeration, XML-store XPath bypass. Covers the LDAP special-character set (* ( ) \\\\ NUL /), search-filter-context vs DN-injection, parenthesis-balancing, AND/OR filter logic, and {SSHA}/{CRYPT} userPassword exfil on non-AD directories. Use when target uses LDAP/AD authentication, corporate SSO with a directory backend, an address-book/people-search API, or XML-based data stores queried with XPath. Do not use for Active Directory attack paths - use ad-attacker; for NoSQL injection use hunt-nosqli.",
+      "category": null,
+      "path": "skills/hunt-ldap",
+      "body_lines": 301,
+      "sources": "hackerone_public, owasp, portswigger",
+      "mitre_attack": [
+        "T1190",
+        "T1087.002"
+      ],
+      "report_count": 0
+    },
+    {
+      "name": "hunt-lfi",
+      "description": "Hunt Local File Inclusion (LFI), Remote File Inclusion (RFI), and Path Traversal — /etc/passwd read, log poisoning → RCE, PHP filter-chain RCE (no upload needed), php:// / data:// / zip:// / phar:// wrappers, RFI via allow_url_include, directory traversal read/write/delete. Covers OOB/blind LFI confirmation and false-positive discipline. Use when hunting file-include or path-traversal bugs on any target. Do not use for upload validation bypass - use hunt-file-upload instead.",
+      "category": null,
+      "path": "skills/hunt-lfi",
+      "body_lines": 282,
+      "sources": "hackerone_public, synacktiv_research, portswigger_research",
+      "mitre_attack": [
+        "T1190",
+        "T1083",
+        "T1005"
+      ],
+      "report_count": 24
+    },
+    {
+      "name": "hunt-llm-ai",
+      "description": "Hunt LLM/AI feature bugs — prompt injection, indirect injection, exfiltration via tool- use/markdown, ASCII smuggling, agentic AI security. Patterns: direct injection ('ignore previous instructions'), indirect injection via documents/web pages/email the model reads, ASCII smuggling (Unicode Tags block U+E0000-U+E007F, invisible to humans, decoded by the model), tool-use exfiltration (model has fetch/browse tool, attacker injects OOB URL, model exfils chat history/secrets), system-prompt extraction, IDOR-via-AI (cross- tenant data). Targets: chatbots, RAG, summarizers, agentic copilots, MCP tools. Detection: any LLM-backed endpoint, doc upload triggering AI processing, autonomous agent with tools. Validate: OOB/Collaborator callback for exfil, verbatim-reproducible system-prompt leak (run twice), verifiable cross-tenant leak or RCE. Use when hunting AI features, chatbots, RAG, agentic systems, MCP. Do not use for vector-store poisoning or cross-tenant retrieval - use hunt-rag-vector.",
+      "category": null,
+      "path": "skills/hunt-llm-ai",
+      "body_lines": 239,
+      "sources": "owasp_genai_2025_2026, portswigger_research, embracethered_research, hackerone_public",
+      "mitre_attack": [
+        "T1190",
+        "T1565",
+        "T1041"
+      ],
+      "report_count": 0
+    },
+    {
+      "name": "hunt-mfa-bypass",
+      "description": "Hunt MFA / 2FA bypass — 7 distinct patterns. (1) MFA not enforced on sensitive endpoints (password change, email change accept without MFA challenge), (2) MFA-step skip via direct navigation to post-login URL, (3) MFA-token replay (same code accepted twice), (4) brute-force the 6-digit OTP without rate limit (10^6 attempts at server speed), (5) race condition on OTP validation, (6) recovery-code dump via /api/me, (7) backup factor downgrade (SMS factor with no rate limit). Plus the chain: cookie theft + password oracle + no step-up = ATO without MFA challenge. Detection: trace auth flow in Burp, find every state transition, check if MFA is middleware-gated vs per-endpoint, check OTP entropy and rate limit on OTP-validate. Validate: attacker session reaching post-MFA state. Use when hunting auth bypass, MFA flows, chaining primitives toward ATO. Do not use for full account-takeover chaining - use hunt-ato once the MFA step is bypassed.",
+      "category": null,
+      "path": "skills/hunt-mfa-bypass",
+      "body_lines": 128,
+      "sources": "hackerone_public, cve_database, nist_800_63b, public_research",
+      "mitre_attack": [
+        "T1078",
+        "T1110",
+        "T1556.006"
+      ],
+      "report_count": 5
+    },
+    {
+      "name": "hunt-misc",
+      "description": "Hunting skill for misc vulnerabilities. Built from 225 public bug bounty reports. Use when hunting misc on any target. Do not use when a dedicated class skill exists - use the matching hunt-<class> skill first.",
+      "category": null,
+      "path": "skills/hunt-misc",
+      "body_lines": 327,
+      "sources": "github, hackerone_public",
+      "mitre_attack": [
+        "T1190"
+      ],
+      "report_count": 225
+    },
+    {
+      "name": "hunt-nextjs",
+      "description": "Hunt Next.js specific vulnerabilities — Server Actions arbitrary function execution, Middleware auth bypass via static asset paths, ISR cache poisoning, Image Optimization SSRF (/_next/image), RSC payload leakage, getServerSideProps injection, source map exposure, debug endpoint leakage. Use when target runs Next.js 13/14/15 or any React SSR framework. Do not use for other Node frameworks - use hunt-nodejs; for generic React XSS use hunt-xss.",
+      "category": null,
+      "path": "skills/hunt-nextjs",
+      "body_lines": 249,
+      "sources": "cve_database (CVE-2024-34351 / GHSA-fr5h-rqp8-mj6g), Next.js advisories",
+      "mitre_attack": [
+        "T1190",
+        "T1059.007"
+      ],
+      "report_count": 0
+    },
+    {
+      "name": "hunt-nodejs",
+      "description": "Hunt Node.js specific vulnerabilities — Prototype Pollution → RCE chains (lodash/merge/assign), Express trust proxy misconfiguration, child_process/eval injection, template engine SSTI (EJS/Pug/Handlebars), path traversal in file servers, require() injection, environment variable exfil via /proc/self/environ. Use when target runs Node.js/Express/Fastify/NestJS/Koa. Do not use for Next.js-specific server actions - use hunt-nextjs; for prototype pollution reaching a browser sink use hunt-dom.",
+      "category": null,
+      "path": "skills/hunt-nodejs",
+      "body_lines": 213,
+      "sources": "hackerone_public, snyk_research, portswigger_research",
+      "mitre_attack": [
+        "T1190",
+        "T1059",
+        "T1055"
+      ],
+      "report_count": 24
+    },
+    {
+      "name": "hunt-nosqli",
+      "description": "Hunt NoSQL injection: MongoDB operator injection through $where, $regex, $gt, $ne and $or in JSON bodies and query strings, Mongoose query-object confusion, CouchDB view and temp-view abuse, and Redis command injection. Covers authentication bypass with a $ne password predicate and dumping collections once injected. Use when the stack is MongoDB, Mongoose, CouchDB or Redis, or when an error string names one of them. Do not use for classic SQL injection - use hunt-sqli instead.",
+      "category": null,
+      "path": "skills/hunt-nosqli",
+      "body_lines": 160,
+      "sources": "hackerone_public",
+      "mitre_attack": [
+        "T1190",
+        "T1078"
+      ],
+      "report_count": 14
+    },
+    {
+      "name": "hunt-ntlm-info",
+      "description": "Hunt NTLM/Negotiate information disclosure on internet-reachable IIS/SharePoint/Exchange. Anonymous NTLM Type-2 challenge capture leaks NetBIOS domain, internal DNS forest, computer name, AD timestamp via AV_PAIRS structure. Default Windows-installer hostnames (WIN-XXXXXXXXXXX pattern) signal lazy provisioning. Use when target advertises `WWW-Authenticate: NTLM` or `Negotiate` headers anonymously. Do not use for credential relay or coercion - use ad-attacker; this skill only covers anonymous information disclosure.",
+      "category": null,
+      "path": "skills/hunt-ntlm-info",
+      "body_lines": 264,
+      "sources": "github, authorized-engagement",
+      "mitre_attack": [
+        "T1592",
+        "T1087.002",
+        "T1046"
+      ],
+      "report_count": 1
+    },
+    {
+      "name": "hunt-oauth",
+      "description": "Hunt OAuth 2.0 / OIDC flaws — redirect_uri bypass, missing state (CSRF), authorization-code interception, scope escalation, implicit-flow token leakage, and account-linking takeover. Use when the target delegates login to an OAuth or OIDC provider. Do not use for SAML or JWT forgery (see hunt-saml, hunt-jwt-crypto).",
+      "category": null,
+      "path": "skills/hunt-oauth",
+      "body_lines": 408,
+      "sources": "github, hackerone_public, salt_labs, descope, detectify_labs, harel_research",
+      "mitre_attack": [
+        "T1078",
+        "T1550",
+        "T1528"
+      ],
+      "report_count": 22
+    },
+    {
+      "name": "hunt-open-redirect",
+      "description": "Hunt Open Redirect — all types including low-impact, chained to OAuth token theft → ATO, phishing chains. URL parameter manipulation, JavaScript redirect, meta refresh, header injection. Use when hunting redirect bugs or building ATO chains. Do not use for SSRF - use hunt-ssrf; for OAuth redirect_uri abuse use hunt-oauth.",
+      "category": null,
+      "path": "skills/hunt-open-redirect",
+      "body_lines": 173,
+      "sources": "hackerone_public",
+      "mitre_attack": [
+        "T1189",
+        "T1566.002"
+      ],
+      "report_count": 28
+    },
+    {
+      "name": "hunt-race-condition",
+      "description": "Hunting skill for race condition vulnerabilities. Built from 12 public bug bounty reports including modern HTTP/2 single-packet attack cases (James Kettle DEF CON 2023 \"Smashing the State Machine\"; RyotaK / Flatt Security 10,000-request first-sequence-sync expansion 2024). Covers coupon double-redemption, gift-card double-spend, MFA-OTP-validate race, account-create race, faucet/crypto token double-mint, email-activation race, vote/upvote inflation, password-reset token race, rate-limit bypass via concurrent requests. Use when hunting race conditions, TOCTOU bugs, MFA-bypass-via-timing.",
+      "category": null,
+      "path": "skills/hunt-race-condition",
+      "body_lines": 479,
+      "sources": "github, hackerone_public, portswigger_research, flatt_security",
+      "mitre_attack": [
+        "T1190"
+      ],
+      "report_count": 10
+    },
+    {
+      "name": "hunt-rag-vector",
+      "description": "Hunt vector-store / embedding-layer weaknesses in RAG pipelines (OWASP LLM08 Vector and Embedding Weaknesses) — persistent corpus poisoning that survives across sessions and users, cross-tenant vector-database IDOR (unauthenticated or unscoped queries against Pinecone/Weaviate/Chroma/Milvus/Qdrant/pgvector), source-text/metadata leakage in similarity-search results, and retrieval-hijack via adversarial embedding proximity ('SEO poisoning' for RAG). Targets: any app with a shared knowledge base, document upload feeding a chatbot, or a directly reachable vector-DB port. Validate: a second, clean session/account must inherit a poisoned result, or a cross-tenant artifact must be independently verifiable — confabulation is not a finding, same bar as hunt-llm-ai. Use when target is RAG-backed, exposes a vector-DB port, or lets users upload documents that other users' queries later retrieve. Do not use for one-shot prompt injection - use hunt-llm-ai.",
+      "category": null,
+      "path": "skills/hunt-rag-vector",
+      "body_lines": 161,
+      "sources": "owasp_genai_2025_2026, public_research",
+      "mitre_attack": [
+        "T1190",
+        "T1565",
+        "T1530"
+      ],
+      "report_count": 0
+    },
+    {
+      "name": "hunt-rce",
+      "description": "Hunt remote code execution — command injection, template injection, unsafe deserialization, file-upload webshells, and dependency CVEs that reach an execution sink. Use when input reaches a shell, template engine, deserializer, or file processor. Do not use for SQL injection or XSS payloads (see hunt-sqli, hunt-xss).",
+      "category": null,
+      "path": "skills/hunt-rce",
+      "body_lines": 488,
+      "sources": "github, hackerone_public",
+      "mitre_attack": [
+        "T1190",
+        "T1059",
+        "T1505.003"
+      ],
+      "report_count": 87
+    },
+    {
+      "name": "hunt-saml",
+      "description": "Hunt SAML / SSO attacks. Patterns: XML Signature Wrapping (XSW) — modify Assertion while keeping Signature valid by relocating signed element, comment injection in NameID (admin@target.com<!--evil-->@attacker.com → some parsers see admin@target.com), signature stripping (remove Signature element entirely, server should reject but doesn't), key confusion (signed by attacker's IdP, accepted by SP), audience-restriction not validated, replay attack (same Assertion accepted twice within validity window). Tools: SAML Raider Burp extension, samlmagic, manual XML manipulation. Detection: any /saml endpoint, /Shibboleth.sso, /sso/saml/, Microsoft ADFS endpoints. Validate: account takeover via altered NameID, admin role injection via altered AttributeStatement. Use when hunting SSO flows, when SAML AssertionConsumerService is reachable, when chaining IdP-trust to SP-impersonation. Do not use for OAuth or OIDC flows - use hunt-oauth; for the wider auth-bypass taxonomy use hunt-auth-bypass.",
+      "category": null,
+      "path": "skills/hunt-saml",
+      "body_lines": 106,
+      "sources": "cve_database, oasis_saml_spec, academic_research, public_research",
+      "mitre_attack": [
+        "T1556",
+        "T1078",
+        "T1550"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-session",
+      "description": "Hunt Session Management vulnerabilities — session fixation (no regeneration on login), insufficient invalidation on logout / password-change / email-change, predictable or low-entropy session IDs, JWT-as-session with no exp/revocation, refresh-token rotation/reuse-detection gaps, OAuth/SSO session linkage, device-bound-session (DBSC) downgrade, and cookie attribute issues (Secure/HttpOnly/SameSite/__Host-). Validate with TWO real sessions (attacker A + victim B), body-diff every 200, and OOB confirmation for theft chains. Medium to Critical (fixation→admin hijack, no-invalidation→persistent ATO).",
+      "category": null,
+      "path": "skills/hunt-session",
+      "body_lines": 292,
+      "sources": "hackerone_public, portswigger_research, owasp_wstg",
+      "mitre_attack": [
+        "T1539",
+        "T1550",
+        "T1078"
+      ],
+      "report_count": 18
+    },
+    {
+      "name": "hunt-shadow-api",
+      "description": "Hunt shadow / zombie / undocumented API surface (OWASP API9 Improper Inventory Management) — enumerate the full API version history (v1/v2/beta/legacy paths, header-and subdomain-based versioning), pull and diff every reachable OpenAPI/Swagger spec (including ones only findable via the Wayback Machine), and behaviorally diff old vs. current versions for auth/rate-limit/validation regressions rather than just response-shape differences. Distinct from hunt-api-misconfig, which owns exploitation once you have a spec or endpoint (mass assignment, JWT, OData, Swagger-chain attacks); distinct from hunt-subdomain, which owns host-level discovery. This skill owns the version-inventory and behavioral-diff workflow itself. Use when the target has versioned API paths, multiple specs, a changelog referencing deprecated endpoints, or a mobile app whose hardcoded backend calls look older than the current web app's.",
+      "category": null,
+      "path": "skills/hunt-shadow-api",
+      "body_lines": 147,
+      "sources": "owasp_api_top10_2023, portswigger_research, public_research",
+      "mitre_attack": [
+        "T1595",
+        "T1190"
+      ],
+      "report_count": 0
+    },
+    {
+      "name": "hunt-sharepoint",
+      "description": "Hunt Microsoft SharePoint Server (2013/2016/2019/Subscription Edition) on-prem farms — anonymous endpoint enumeration, version disclosure, legacy SOAP login bypass (Authentication.asmx), ToolShell precondition chain (CVE-2025-53770), SafeControl reflection enumeration via Picker.aspx, NTLM Type-2 AD topology disclosure, custom-branding module discovery, EoL farm permanent-CVE-window exploitation, FormDigest anonymous issuance, file-extension blocklist NOT-an-oracle pattern, custom-zone Forms auth bridging on-prem AD. Use when target has SharePoint headers (SPRequestGuid, X-MS- InvokeApp, X-SharePointHealthScore, MicrosoftSharePointTeamServices) or paths (/_layouts/15/, /_vti_bin/, /_api/, /_catalogs/). Do not use for other Microsoft cloud services - use m365-entra-attack; for generic ASP.NET bugs use hunt-aspnet.",
+      "category": null,
+      "path": "skills/hunt-sharepoint",
+      "body_lines": 431,
+      "sources": "github, authorized-engagement",
+      "mitre_attack": [
+        "T1190",
+        "T1505.003"
+      ],
+      "report_count": 1
+    },
+    {
+      "name": "hunt-source-leak",
+      "description": "Hunt source code and build artifact leakage — JavaScript source maps (.js.map) reconstructing TypeScript/ES6 source, Swagger/OpenAPI JSON endpoint discovery, .env/.git exposure, webpack chunks with hardcoded secrets, robots.txt/security.txt recon, build-info files, asset-manifest.json API route discovery, .DS_Store file listing. Use at the START of every recon session — these findings often unlock the entire attack surface.",
+      "category": null,
+      "path": "skills/hunt-source-leak",
+      "body_lines": 295,
+      "sources": "hackerone_public, offensive_research",
+      "mitre_attack": [
+        "T1592",
+        "T1552"
+      ],
+      "report_count": 7
+    },
+    {
+      "name": "hunt-spa-api",
+      "description": "Discover a single-page-app's hidden backend API from its public JS bundle, then test that API for broken access control / missing authentication. One of the highest-yield web plays in modern recon — SPAs ship their entire backend route map to the browser, and the API behind them is frequently missing the auth middleware the login page implies. Built from an authorized engagement where this play found an unauthenticated financial API that an ASM scan reporting hundreds of \"Criticals\" completely missed. Use whenever a target serves a JS-heavy SPA (React/Vue/Angular/Next), an \"app\"/\"console\"/\"dashboard\"/\"portal\" subdomain, or any `*api*` host shows up in recon. Leaked build artifacts (source maps / .env / .git / asset-manifest) are owned by hunt-source-leak; API version-inventory and behavioral diffing by hunt-shadow-api; this skill owns mapping a live SPA's backend routes from its JS bundle and testing them for broken access control / missing auth.",
+      "category": null,
+      "path": "skills/hunt-spa-api",
+      "body_lines": 117,
+      "sources": "authorized-engagement",
+      "mitre_attack": [
+        "T1595",
+        "T1190"
+      ],
+      "report_count": 1
+    },
+    {
+      "name": "hunt-sqli",
+      "description": "Hunt SQL injection: error-based, UNION, boolean and time-based blind, stacked queries, second-order injection, and injection inside ORM raw fragments or GraphQL resolvers. Covers sqlmap usage, WAF and filter bypass, and proving impact with a real data read rather than a reflected error. Built from public reports including Django CVE-2024-42005, Sequelize GHSA-wrh9-cjv3-2hpw and second-order SOQL injection. Use when a parameter, header, cookie or JSON field reaches a SQL query. Do not use for MongoDB, CouchDB or Redis operator injection - use hunt-nosqli instead.",
+      "category": null,
+      "path": "skills/hunt-sqli",
+      "body_lines": 416,
+      "sources": "github, hackerone_public, github_security_advisories, snyk_research, sonarsource_research",
+      "mitre_attack": [
+        "T1190"
+      ],
+      "report_count": 29
+    },
+    {
+      "name": "hunt-ssrf",
+      "description": "Hunting skill for ssrf vulnerabilities. Built from 15 public bug bounty reports including AWS metadata SSRF (HackerOne $25k Analytics PDF, Shopify Exchange $25k, Capital One 106M-record breach, Dropbox/HelloSign $4,913), GCP metadata SSRF (Snapchat $4k), Azure IMDS SSRF (Azure DevOps $15k chain, ChatGPT Custom Actions MSRC), DNS rebinding SSRF (Concrete CMS, GitLab UrlBlocker), gopher-protocol-to-Redis-RCE (Yahoo Mail $15k), link-preview SSRF (Reddit Matrix $6k), and headless-browser PDF-generator SSRF chains. Use when hunting SSRF on any target — OOB Collaborator confirmation mandatory for blind cases.",
+      "category": null,
+      "path": "skills/hunt-ssrf",
+      "body_lines": 508,
+      "sources": "github, hackerone_public, portswigger_research, binarysecurity_research",
+      "mitre_attack": [
+        "T1190",
+        "T1552"
+      ],
+      "report_count": 34
+    },
+    {
+      "name": "hunt-ssrf-xxe",
+      "description": "Hunt for SSRF and XXE — internal network reach, cloud metadata theft, blind OOB confirmation, gopher/phar-style protocol abuse, file-read via XXE, error-based exfil. Built from personal notes. Use when apps fetch URLs, parse XML, accept file uploads with XML formats, or sit behind proxies/CDNs.",
+      "category": null,
+      "path": "skills/hunt-ssrf-xxe",
+      "body_lines": 68,
+      "mitre_attack": [
+        "T1190",
+        "T1552"
+      ]
+    },
+    {
+      "name": "hunt-ssti",
+      "description": "Hunt server-side template injection (SSTI) across Jinja2 (Flask/Django), Twig (Symfony), Freemarker (Java), ERB (Rails), Spring, Velocity, Mako, Thymeleaf, Smarty. Detection probes use double-curly and dollar-curly math expressions evaluated server-side. Once an engine is fingerprinted, escalate to RCE via the engine-specific class-walker, callback-registrar, or Execute-utility patterns documented in disclosed reports. Detection patterns: error messages reveal engine, blank or numeric eval reveals expression mode. Targets: email templates, PDF/report generators, CMS preview features, error pages with user input. Use when hunting RCE via template rendering, when content shows engine fingerprints, when finding endpoints that compose strings with user input before render. Do not use for client-side DOM XSS - use hunt-xss; for unsafe deserialization use hunt-deserialization.",
+      "category": null,
+      "path": "skills/hunt-ssti",
+      "body_lines": 111,
+      "sources": "hackerone_public, cve_database, public_research",
+      "mitre_attack": [
+        "T1190",
+        "T1059"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-subdomain",
+      "description": "Hunting skill for subdomain takeover vulnerabilities. Includes modern provider fingerprints — Microsoft Azure DevOps `cloudapp.azure.com` regional-pool re-issue (1-click OAuth ATO via wildcard `reply_to`, Binary Security), Zendesk help-desk takeover → email interception → password reset chain (0xprial writeup), Vercel `cname.vercel-dns.com` deleted-project takeover, plus general Fastly CDN service re-attach and S3 dangling-bucket cookie-scope techniques. Use when hunting subdomain takeover — emphasis on ATO-chain primitives (OAuth `redirect_uri`, cookie-domain, email DNS). Do not use for DNS or TLS misconfiguration - use hunt-tls-network; for certificate-transparency recon use osint-collector.",
+      "category": null,
+      "path": "skills/hunt-subdomain",
+      "body_lines": 329,
+      "sources": "github, hackerone_public, binarysecurity_research, can-i-take-over-xyz_research",
+      "mitre_attack": [
+        "T1583.001",
+        "T1190"
+      ],
+      "report_count": 3
+    },
+    {
+      "name": "hunt-tls-network",
+      "description": "Hunt TLS/SSL and DNS misconfigurations — missing HSTS (downgrade attack), weak cipher suites, expired/invalid certificates, mTLS bypass, missing SPF/DKIM/DMARC (email spoofing), DNS Zone Transfer (AXFR), dangling CNAME subdomain takeover, CAA records. Most of these are Info/Low on their own — this skill is opinionated about which findings actually pay (spoofable DMARC with delivered-to-inbox proof, AXFR returning internal hosts, dangling-CNAME takeover) versus which get rejected as best-practice noise (missing CAA, missing HSTS with no MitM position). Use during recon to find infrastructure weaknesses, and to TRIAGE them honestly before reporting. Do not use for subdomain takeover - use hunt-subdomain; this skill only covers TLS, DNS and email-authentication posture.",
+      "category": null,
+      "path": "skills/hunt-tls-network",
+      "body_lines": 349,
+      "sources": "portswigger_research, ssl_labs_research, hstspreload_org",
+      "mitre_attack": [
+        "T1592",
+        "T1590",
+        "T1600"
+      ],
+      "report_count": 6
+    },
+    {
+      "name": "hunt-websocket",
+      "description": "Hunt WebSocket vulnerabilities — Cross-Site WebSocket Hijacking (CSWSH), missing/weak Origin validation on the WS handshake, no per-message authentication, message tampering, socket.io namespace/room authorization bypass, and handshake-layer Upgrade smuggling. Use when target has WebSocket endpoints (ws:// or wss://), socket.io / SignalR / Phoenix Channels, real-time features, chat, live dashboards, notifications, or trading platforms.",
+      "category": null,
+      "path": "skills/hunt-websocket",
+      "body_lines": 279,
+      "sources": "hackerone_public, portswigger_research, cve",
+      "mitre_attack": [
+        "T1190",
+        "T1539"
+      ],
+      "report_count": 11
+    },
+    {
+      "name": "hunt-xss",
+      "description": "Hunting skill for xss vulnerabilities. Built from 174 public bug bounty reports. Use when hunting xss on any target. For markup injection that reflects raw HTML but does NOT execute JavaScript (no `<script>`/event-handler execution), see hunt-html-injection — escalate here once script execution is possible.",
+      "category": null,
+      "path": "skills/hunt-xss",
+      "body_lines": 444,
+      "sources": "github, hackerone_public",
+      "mitre_attack": [
+        "T1059.007",
+        "T1189",
+        "T1539"
+      ],
+      "report_count": 174
+    },
+    {
+      "name": "hunt-xxe",
+      "description": "Hunting skill for xxe vulnerabilities. Built from 10 public bug bounty reports including SVG-upload XXE, Office-doc (PPTX/DOCX) XXE, SOAP XXE, SAML AssertionConsumer XXE, blind OOB XXE via DTD callback, parameter-entity XXE, XXE-to-LFI, XXE-to-SSRF, and XXE-to-RCE chains (Adobe Commerce CosmicSting CVE-2024-34102). Use when hunting XXE on any target — emphasis on OOB-Or-It-Didn't-Happen Gate for blind cases. Do not use for SSRF without an XML parser - use hunt-ssrf.",
+      "category": null,
+      "path": "skills/hunt-xxe",
+      "body_lines": 416,
+      "sources": "github, hackerone_public, assetnote_research, splunk_security",
+      "mitre_attack": [
+        "T1190",
+        "T1005",
+        "T1083"
+      ],
+      "report_count": 10
+    },
+    {
+      "name": "ios-redteam-pipeline",
+      "description": "iOS IPA red-team pipeline: obtain the build from an App Store listing, TestFlight or an enterprise/ad-hoc sideload, analyse the Mach-O with class-dump, otool and Hopper or Ghidra, pull secrets from Info.plist, entitlements and the Keychain, test App Transport Security and certificate pinning with frida-ios-dump, objection or SSL Kill Switch 2, and probe URL-scheme and Universal Link hijack plus exported services. Use when scope names an iOS app, a TestFlight link or an MDM distribution profile. Do not use for Android targets - use apk-redteam-pipeline instead.",
+      "category": null,
+      "path": "skills/ios-redteam-pipeline",
+      "body_lines": 281,
+      "sources": "public_research, frida_docs, objection_docs, owasp_mastg",
+      "mitre_attack": [
+        "T1552",
+        "T1592",
+        "T1528"
+      ],
+      "report_count": 0
+    },
+    {
+      "name": "lateral-movement",
+      "description": "Lateral movement: pass-the-hash, remote execution, pivot planning. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/lateral-movement",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1210",
+        "T1021",
+        "T1550",
+        "T1570"
+      ]
+    },
+    {
+      "name": "llm-redteam",
+      "description": "LLM/AI red teaming: prompt injection, jailbreaking, model attacks. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/llm-redteam",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1190",
+        "T1552"
+      ]
+    },
+    {
+      "name": "m365-entra-attack",
+      "description": "Microsoft 365 / Entra ID red-team attack chain — current 2026 reality. AADSTS code reference, user enumeration vectors (with hardening status), Smart Lockout math, Conditional Access bypass options, ROPC + SAML SSO browser flow, Burp/Playwright templates. Built from authorized red-team work where ROPC spray surfaced pre-existing lockouts and CA-blocked credentials, plus real-time external attacker activity correlation. Use for any M365/Entra credential attack, password spray, user enumeration, CA-bypass exploration, or active-attacker-detection scenario. Do not use for Okta tenants - use okta-attack; for on-premises Active Directory use ad-attacker.",
+      "category": null,
+      "path": "skills/m365-entra-attack",
+      "body_lines": 378,
+      "sources": "authorized-engagement, microsoft-docs, AADInternals",
+      "mitre_attack": [
+        "T1078",
+        "T1110",
+        "T1556"
+      ],
+      "report_count": 1
+    },
+    {
+      "name": "malware-analyst",
+      "description": "Malware analysis: static/dynamic analysis, YARA rules, reverse engineering. Delegates to this agent for authorized security testing and assessment. Use when you have a sample to analyse statically or in a sandbox. Do not use for live host triage - use mid-engagement-ir-detection.",
+      "category": null,
+      "path": "skills/malware-analyst",
+      "body_lines": 27,
+      "mitre_attack": [
+        "T1027",
+        "T1140",
+        "T1055"
+      ]
+    },
+    {
+      "name": "meme-coin-audit",
+      "description": "Meme coin and token security audit — rug pull detection (honeypot, hidden mint, fee manipulation, LP lock bypass), Solana SPL token analysis (freeze authority, mint authority, metadata mutability), Token-2022 extension risks (transfer hooks, permanent delegate), DEX liquidity pool attacks (sandwich amplification, LP drain, bonding curve exploits), pump.fun/Raydium/Jupiter integration risks, and real exploit examples from 2024-2025. Use for any token audit, rug pull assessment, meme coin security review, or pre-investment due diligence. Do not use for Solidity protocol logic audits - use web3-audit.",
+      "category": null,
+      "path": "skills/meme-coin-audit",
+      "body_lines": 353,
+      "sources": "public_research",
+      "mitre_attack": [
+        "T1190",
+        "T1565"
+      ]
+    },
+    {
+      "name": "mid-engagement-ir-detection",
+      "description": "Methodology for detecting client SOC patches, attacker activity, and security-state changes that occur DURING a red-team engagement — and converting those observations into deliverable findings. Built from authorized red-team work where the client patched a confirmed SQLi within 30 minutes of detection AND an external attacker locked multiple new accounts during a single test session. Use when (a) running ANY active engagement against a monitored target, (b) a previously-confirmed finding stops reproducing, (c) baseline timing shifts unexpectedly, or (d) you notice response patterns changing during testing. Do not use to analyse a malware sample - use malware-analyst; this skill covers engagement-time detection changes.",
+      "category": null,
+      "path": "skills/mid-engagement-ir-detection",
+      "body_lines": 347,
+      "sources": "authorized-engagement",
+      "mitre_attack": [],
+      "report_count": 1
+    },
+    {
+      "name": "mobile-pentester",
+      "description": "Mobile application security testing methodology across both platforms: scope the app and its backend API, intercept traffic through a proxy with a custom CA, defeat certificate pinning and root or jailbreak detection, test authentication and session handling, and map what the app stores on the device against OWASP MASVS. Use when a mobile app is in scope and you need the overall test plan rather than one code-level pass. Do not use for deep Android static analysis - use svc-mobile-android; for acquisition and runtime hooking use apk-redteam-pipeline or ios-redteam-pipeline. testing, Android pentesting, iOS pentesting, APK analysis, IPA analysis, mobile API testing, certificate pinning bypass, or mobile reverse engineering",
+      "category": "infrastructure",
+      "path": "skills/mobile-pentester",
+      "body_lines": 344,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1190",
+        "T1552"
+      ]
+    },
+    {
+      "name": "network-attacker",
+      "description": "Layer 2/3 attacks: LLMNR/NBT-NS poisoning, ARP spoofing, NTLM relay, pivoting. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/network-attacker",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1557",
+        "T1040",
+        "T1210",
+        "T1090"
+      ]
+    },
+    {
+      "name": "offensive-osint",
+      "description": "Operational arsenal for authorized external red-team and bug-bounty recon. Concrete probes, wordlists, regexes, dorks, curl one-liners for: subdomain enum, GraphQL/Swagger/REST discovery, identity fabric (Entra/Okta/ADFS/Google/SAML/M365 deep — Teams/SharePoint/OneDrive), cloud bucket enum (S3/GCS/Azure), CDN/WAF bypass, origin discovery, vendor fingerprinting (Citrix/F5/Pulse/Fortinet/PaloAlto/Cisco/VMware), CI/CD exposure, 48-pattern secret-scan catalog (AWS/GCP/GitHub/Stripe/Slack/Anthropic/OpenAI/Atlassian/DataDog/npm/PyPI), Postman workspaces, breach correlation (HudsonRock/HIBP/DeHashed/IntelX), TLS/JA3 audit, certificate transparency, JS endpoint extraction, package registry leaks, mobile/APK recon, sat imagery, sector-specific recon (healthcare DICOM, finance SWIFT, ICS/SCADA Modbus/BACnet). Detail content in 15 modular reference files, loaded on demand. Use for any authorized recon: scoping, asset discovery, attack-path mapping, secret triage, severity scoring.",
+      "category": null,
+      "path": "skills/offensive-osint",
+      "body_lines": 265,
+      "sources": "hackerone_public, community, public_research",
+      "version": "3.0.0",
+      "mitre_attack": [
+        "T1589",
+        "T1591",
+        "T1590",
+        "T1592",
+        "T1593",
+        "T1596",
+        "T1597",
+        "T1595"
+      ],
+      "triggers": [
+        "external recon",
+        "external red team",
+        "red team external",
+        "attack surface management",
+        "ASM",
+        "bug bounty recon",
+        "bug bounty",
+        "reconnaissance",
+        "footprinting",
+        "asset discovery",
+        "swagger discovery",
+        "openapi discovery",
+        "graphql introspection",
+        "graphql discovery",
+        "subdomain enumeration",
+        "subdomain takeover",
+        "cloud bucket enumeration",
+        "bucket enum",
+        "S3 enum",
+        "GCS enum",
+        "Azure blob enum",
+        "identity fabric",
+        "SSO discovery",
+        "IdP fingerprinting",
+        "tenant fingerprinting",
+        "okta enum",
+        "entra enum",
+        "azure AD enum",
+        "ADFS enum",
+        "SAML metadata",
+        "mobile recon",
+        "APK analysis",
+        "mobile attack surface",
+        "secret scanning",
+        "secret leak",
+        "leaked credential",
+        "github dorking",
+        "google dorking",
+        "bing dorking",
+        "DDG dorking",
+        "postman workspace",
+        "stack exchange OSINT",
+        "breach lookup",
+        "have I been pwned",
+        "HudsonRock cavalier",
+        "infostealer",
+        "dehashed",
+        "intelx",
+        "shodan recon",
+        "censys recon",
+        "certificate transparency",
+        "crt.sh",
+        "JARM",
+        "favicon mmh3",
+        "JS endpoint extraction",
+        "sourcemap leak",
+        "copy paste probes",
+        "curl one-liner",
+        "email security analysis",
+        "SPF DMARC DKIM",
+        "origin discovery",
+        "CDN bypass",
+        "WAF bypass",
+        "vendor product fingerprints",
+        "Citrix Netscaler",
+        "F5 BIG-IP",
+        "Pulse Secure",
+        "FortiGate",
+        "PaloAlto GlobalProtect",
+        "Cisco AnyConnect",
+        "VMware vCenter",
+        "cloud native fingerprint",
+        "Lambda function URL",
+        "Cloud Run",
+        "kubernetes exposure",
+        "kubelet",
+        "etcd",
+        "CI CD exposure",
+        "Jenkins recon",
+        "GitLab self-hosted",
+        "GitHub Actions secrets",
+        "documentation leak",
+        "Notion public",
+        "Confluence anonymous",
+        "Trello board",
+        "WHOIS RDAP",
+        "DNS record catalog",
+        "Wayback CDX",
+        "LinkedIn enumeration",
+        "job posting tech stack",
+        "Slack workspace discovery",
+        "Discord server discovery",
+        "npm token leak",
+        "PyPI token leak",
+        "Docker Hub leak",
+        "sat imagery physical recon",
+        "TLS deep audit",
+        "JA3 JA4",
+        "reverse DNS sweep",
+        "IPv6 enumeration",
+        "CVE prioritization",
+        "EPSS scoring",
+        "CISA KEV",
+        "vulnerability prioritization",
+        "tooling install",
+        "sector specific recon",
+        "healthcare DICOM",
+        "finance SWIFT",
+        "ICS SCADA",
+        "Modbus",
+        "BACnet",
+        "post discovery workflow",
+        "JWT triage",
+        "AWS key triage",
+        "GraphQL field suggestion",
+        "Anthropic API key",
+        "OpenAI API key",
+        "Microsoft 365 deep",
+        "Teams federation",
+        "SharePoint enum",
+        "OneDrive enum",
+        "hackerone reference",
+        "h1 hacktivity",
+        "disclosed reports",
+        "community bug reports",
+        "prior disclosures",
+        "bug bounty reference"
+      ]
+    },
+    {
+      "name": "okta-attack",
+      "description": "Okta-as-IdP red-team attack chain — tenant discovery, user enumeration (multiple vectors), authentication flow analysis (factors enumeration, push-notification fatigue, SMS bypass), password spray with lockout discipline, Okta-specific phishing primitives (kits, FastPass abuse, OIDC redirect_uri tampering), MFA enumeration, post-compromise admin API surface. Many enterprise orgs use Okta instead of (or alongside) Entra ID. Distinct endpoints, distinct rate-limiting, distinct factor flows. Use when recon shows `<tenant>.okta.com`, `<tenant>.okta-emea.com`, `<tenant>.oktapreview.com`, or autodiscover-style records pointing at Okta IdP. Do not use for Microsoft 365 or Entra tenants - use m365-entra-attack.",
+      "category": null,
+      "path": "skills/okta-attack",
+      "body_lines": 391,
+      "sources": "public-okta-docs, idp-redteam-knowledge, disclosed-incidents",
+      "mitre_attack": [
+        "T1078",
+        "T1110",
+        "T1556"
+      ],
+      "report_count": 8
+    },
+    {
+      "name": "opp-pentest",
+      "description": "Orchestration index for a full penetration test. Coordinates recon, executor deployment, finding aggregation and reporting for an authorized engagement. Use when starting a new multi-phase pentest and you need the end-to-end attack index. Do not use for a single-class web bug - use the matching hunt-<class> skill instead.",
+      "category": "methodology",
+      "path": "skills/opp-pentest",
+      "body_lines": 102,
+      "mitre_attack": [
+        "T1595",
+        "T1190"
+      ]
+    },
+    {
+      "name": "opsec-anonymizer",
+      "description": "Delegates to this agent when the user asks about operator-side identity hygiene, source IP separation, traffic anonymization for authorized red team work, Tor and proxy chains, burner infrastructure provisioning, attribution avoidance, or pre-engagement opsec posture before tools are run against scope.",
+      "category": "methodology",
+      "path": "skills/opsec-anonymizer",
+      "body_lines": 315,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1090",
+        "T1583",
+        "T1585"
+      ]
+    },
+    {
+      "name": "osint-collector",
+      "description": "Open source intelligence: username enumeration, metadata extraction, Google dorking. Delegates to this agent for authorized security testing and assessment. Use when you need passive external intelligence on a person, domain or organisation. Do not use for active port or service scanning - use recon-advisor; for the full recon programme use osint-methodology.",
+      "category": null,
+      "path": "skills/osint-collector",
+      "body_lines": 27,
+      "mitre_attack": [
+        "T1589",
+        "T1593",
+        "T1596"
+      ]
+    },
+    {
+      "name": "osint-methodology",
+      "description": "Full external reconnaissance methodology in five stages: seed discovery, asset expansion, enrichment, exposure analysis and reporting. Covers asset-graph discipline, confidence upgrades, identity-fabric mapping across Entra, Okta, ADFS, Google and SAML, JavaScript and mobile attack surface, cloud exposure, breach correlation, detectability-aware probing, WAF and origin discovery, and cryptocurrency or media attribution. Use when planning a complete recon programme against an authorized target. Do not use for hands-on scanning - use recon-advisor; for a single asset-profile request use osint-collector.",
+      "category": null,
+      "path": "skills/osint-methodology",
+      "body_lines": 23,
+      "sources": "community, public_research",
+      "version": 2.3,
+      "mitre_attack": [
+        "T1589",
+        "T1591",
+        "T1590",
+        "T1592",
+        "T1593",
+        "T1596"
+      ],
+      "triggers": [
+        "external recon",
+        "external red team",
+        "red team external",
+        "attack surface management",
+        "attack surface mapping",
+        "ASM",
+        "perimeter recon",
+        "target reconnaissance",
+        "bug bounty recon",
+        "asset discovery",
+        "footprint",
+        "attack path",
+        "identity fabric",
+        "SSO discovery",
+        "IdP fingerprinting",
+        "tenant fingerprinting",
+        "M365 enumeration",
+        "Microsoft 365 recon",
+        "API discovery",
+        "GraphQL introspection",
+        "mobile recon",
+        "APK analysis",
+        "cloud bucket enumeration",
+        "bucket enum",
+        "breach correlation",
+        "secret leak hunt",
+        "origin discovery",
+        "CDN bypass",
+        "WAF bypass",
+        "vulnerability prioritization",
+        "CVE prioritization",
+        "EPSS",
+        "CISA KEV",
+        "phishing infrastructure",
+        "pretext development",
+        "bug bounty submission",
+        "responsible disclosure",
+        "client report",
+        "exec summary",
+        "risk translation",
+        "confidence upgrade",
+        "time budget",
+        "engagement profile",
+        "asset triage",
+        "detection-aware probing",
+        "back-off strategy",
+        "persona rotation",
+        "OSINT methodology",
+        "open source intelligence",
+        "target profiling",
+        "data correlation",
+        "OSINT workflow",
+        "intelligence collection",
+        "OSINT campaign",
+        "recon methodology",
+        "threat actor investigation",
+        "attribution"
+      ]
+    },
+    {
+      "name": "password-auditor",
+      "description": "Delegates to this agent when the user wants to audit password posture — policy review against NIST 800-63B, password-storage/hashing review, breach-exposure checks, and lockout-safe password-spray planning. Advisory and planning only; hands active cracking and live spraying to credential-tester.",
+      "category": "validation",
+      "path": "skills/password-auditor",
+      "body_lines": 64,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1110",
+        "T1552"
+      ]
+    },
+    {
+      "name": "payload-crafter",
+      "description": "Payload generation: msfvenom, shellcode, encoding, custom payloads. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/payload-crafter",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1587.001",
+        "T1027",
+        "T1059",
+        "T1105"
+      ]
+    },
+    {
+      "name": "persistence-planner",
+      "description": "Delegates to this agent when the user wants to plan and document persistence during an authorized red team engagement — host persistence (Windows/Linux), Active Directory persistence (golden/silver tickets, DCShadow, AdminSDHolder, GPO), and cloud persistence — with mandatory cleanup tracking and detection guidance for each mechanism.",
+      "category": "post-exploitation",
+      "path": "skills/persistence-planner",
+      "body_lines": 71,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1136",
+        "T1547",
+        "T1053",
+        "T1543",
+        "T1098",
+        "T1505"
+      ]
+    },
+    {
+      "name": "phishing-operator",
+      "description": "Delegates to this agent when the user asks about setting up phishing infrastructure, configuring Evilginx3 or GoPhish, adversary-in-the-middle credential capture, MFA token relay, domain lookalike detection with dnstwist, or building phishing landing pages for authorized red team engagements.",
+      "category": "infrastructure",
+      "path": "skills/phishing-operator",
+      "body_lines": 510,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1566",
+        "T1566.002",
+        "T1583.001",
+        "T1585.001",
+        "T1557"
+      ]
+    },
+    {
+      "name": "poc-validator",
+      "description": "Delegates to this agent when the user wants to validate a vulnerability finding with a safe Proof of Concept, eliminate false positives from scan results, automatically generate and execute PoC scripts for confirmed vulnerabilities, or verify that a reported bug is real before including it in a pentest report.",
+      "category": "validation",
+      "path": "skills/poc-validator",
+      "body_lines": 243,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1190",
+        "T1595.002"
+      ]
+    },
+    {
+      "name": "privesc-advisor",
+      "description": "Privilege escalation: Linux/Windows/local enumeration, kernel exploits, misconfigs. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/privesc-advisor",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1068",
+        "T1548",
+        "T1078"
+      ]
+    },
+    {
+      "name": "recon",
+      "description": "External recon playbook for a web target — subdomain enumeration, live-host probing, tech fingerprinting, and a first pass at content discovery. Use when the user gives you a root domain or apex and wants attack surface mapping. Do not use for port scanning - use recon-advisor; for OSINT-only work use osint-collector.",
+      "category": null,
+      "path": "skills/recon",
+      "body_lines": 86,
+      "mitre_attack": [
+        "T1595",
+        "T1595.001",
+        "T1590",
+        "T1592"
+      ]
+    },
+    {
+      "name": "recon-advisor",
+      "description": "Active network reconnaissance: nmap and naabu port scanning, service and version detection, OS fingerprinting, banner grabbing, and turning raw scan output into a ranked list of reachable services to attack. Use when you need open ports, live hosts or a service inventory on an authorized range. Do not use for passive OSINT or AI-feature mapping - use osint-collector or ai-recon.",
+      "category": null,
+      "path": "skills/recon-advisor",
+      "body_lines": 27,
+      "mitre_attack": [
+        "T1595",
+        "T1595.001",
+        "T1046",
+        "T1592"
+      ]
+    },
+    {
+      "name": "recon-scope-triage",
+      "description": "Triage ASM/recon output for ownership before testing — separate the target's real assets from namespace-collision noise. Automated recon keyword-matches on the brand name, so for any target whose name is a common/dictionary word, the output is dominated by assets belonging to UNRELATED same-named companies (repos, cloud buckets, mobile apps, breach corpora, typosquats). Built from an authorized engagement where an ASM report's \"Criticals\" were overwhelmingly false positives and the combo/repos/mobile/bucket lists were polluted with unrelated same-named orgs. Use at the START of any engagement, immediately on receiving any ASM/recon/OSINT dataset, BEFORE testing anything. Use when an ASM or recon dataset arrives and assets must be proven to belong to the target. Do not use for the recon itself - use osint-collector or recon-advisor.",
+      "category": null,
+      "path": "skills/recon-scope-triage",
+      "body_lines": 83,
+      "sources": "authorized-engagement",
+      "mitre_attack": [
+        "T1591",
+        "T1593",
+        "T1596"
+      ],
+      "report_count": 1
+    },
+    {
+      "name": "redteam-mindset",
+      "description": "Red-team operator discipline — the mindset corrections that separate offensive testing from defensive WAPT. Built from authorized red-team work where conservative defaults caused multiple findings to be missed and one to be incorrectly retracted. Use at the START of any red-team engagement and again whenever feeling stuck or considering \"stopping\" on a defended target. The single most important skill to load when scope is \"external red team\" not \"bug bounty / WAPT\". Use at the start of an external red-team engagement and whenever you are about to stop on a defended target. Do not use for a technique or playbook - use the matching hunt-<class> skill.",
+      "category": null,
+      "path": "skills/redteam-mindset",
+      "body_lines": 395,
+      "sources": "authorized-engagement",
+      "mitre_attack": [],
+      "report_count": 1
+    },
+    {
+      "name": "redteam-report-template",
+      "description": "Client-facing red-team deliverable format — codifies the Subject / Observations / Description / Impact / Recommendation / PoC structure used for external red-team engagements (not bug-bounty platform reports). Different audience, different tone, different cadence. Built from an authorized engagement deliverable where 14 findings were packaged into a 52KB MD + 2.2MB DOCX with 16 embedded screenshots. Use when the engagement is \"external red team for an enterprise client\" (not H1/Bugcrowd/Intigriti), when generating the final report, when the client has specified a custom report format, or when packaging findings into DOCX/PDF. Do not use for bug bounty submissions - use report-writing; this skill produces the client-facing deliverable.",
+      "category": null,
+      "path": "skills/redteam-report-template",
+      "body_lines": 341,
+      "sources": "authorized-engagement-deliverable, enterprise-redteam-report-conventions",
+      "mitre_attack": [],
+      "report_count": 1
+    },
+    {
+      "name": "report-generator",
+      "description": "Delegates to this agent when the user needs to write a penetration test report, compile findings into a document, create an executive summary, format technical findings, or produce any security assessment documentation.",
+      "category": "reporting",
+      "path": "skills/report-generator",
+      "body_lines": 139,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": []
+    },
+    {
+      "name": "report-writing",
+      "description": "Write the bug bounty report itself: title formula, impact-first summary, numbered reproduction steps, PoC and evidence section, remediation advice, the CVSS 3.1 vector string, and the tone rules that keep a triager reading. Produces the submission text for HackerOne, Bugcrowd, Intigriti or Immunefi. Use when a bug is already confirmed and you need the written artifact. Do not use to decide whether it is worth submitting - use triage-validation first.",
+      "category": null,
+      "path": "skills/report-writing",
+      "body_lines": 133,
+      "sources": "community, operator_experience",
+      "mitre_attack": []
+    },
+    {
+      "name": "reverse-engineer",
+      "description": "Delegates to this agent when the user asks about static reverse engineering, working with Ghidra, Radare2, IDA, JadX, decompiling Android APKs, analyzing firmware with Binwalk, reading disassembly, or understanding the structure of a binary without running it.",
+      "category": "post-exploitation",
+      "path": "skills/reverse-engineer",
+      "body_lines": 292,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1027",
+        "T1140"
+      ]
+    },
+    {
+      "name": "sast-analysis",
+      "description": "Map a codebase's architecture before security review: tech stack, frameworks, entry points, data flows and trust boundaries. Writes sast/architecture.md, which every other sast-<class> detection skill reads. Use when starting a static security assessment of a repository or when sast/architecture.md is missing. Do not use to find a specific vulnerability class - use the matching sast-<class> skill.",
+      "category": null,
+      "path": "skills/sast-analysis",
+      "body_lines": 82,
+      "mitre_attack": [
+        "T1190"
+      ]
+    },
+    {
+      "name": "sast-businesslogic",
+      "description": "Find business logic flaws in source: price and quantity tampering, workflow step skipping, quota and limit violations, coupon and reward abuse, and race windows on money paths. Reviews domain rules against the invariants they are meant to enforce. Use when asked about logic flaws, abuse-of-function or economic manipulation. Do not use for ownership or role checks - use sast-idor or sast-missingauth.",
+      "category": null,
+      "path": "skills/sast-businesslogic",
+      "body_lines": 364,
+      "mitre_attack": [
+        "T1190",
+        "T1565"
+      ]
+    },
+    {
+      "name": "sast-fileupload",
+      "description": "Find insecure file upload handling in source: extension and MIME bypass, missing content-type validation, attacker-controlled stored filename, writes into an executable or web-served directory, and archive extraction without entry validation. Use when asked about unrestricted upload, webshell upload or upload validation bypass. Do not use for traversal outside an upload flow - use sast-pathtraversal.",
+      "category": null,
+      "path": "skills/sast-fileupload",
+      "body_lines": 94,
+      "mitre_attack": [
+        "T1505.003",
+        "T1190"
+      ]
+    },
+    {
+      "name": "sast-graphql",
+      "description": "Find GraphQL weaknesses in source: unsafe operation-document string assembly, unvalidated variables reaching resolvers, missing depth and complexity limits, introspection and batching exposure, and resolver-level authorization gaps. Use when asked about GraphQL injection or unsafe GraphQL document construction. Do not use for REST or ORM query injection - use sast-sqli.",
+      "category": null,
+      "path": "skills/sast-graphql",
+      "body_lines": 355,
+      "mitre_attack": [
+        "T1190",
+        "T1078"
+      ]
+    },
+    {
+      "name": "sast-hardcodedsecrets",
+      "description": "Find hardcoded secrets in publicly shipped code: API keys, bearer tokens, private keys and database passwords inside frontend bundles, mobile binaries and HTML templates. Separates live credentials from placeholders and test fixtures. Use when asked about leaked keys or exposed credentials. Do not use for server-side config review of secrets that never reach a client.",
+      "category": null,
+      "path": "skills/sast-hardcodedsecrets",
+      "body_lines": 396,
+      "mitre_attack": [
+        "T1552",
+        "T1528"
+      ]
+    },
+    {
+      "name": "sast-idor",
+      "description": "Find IDOR in source: a user-supplied identifier such as order_id, account_id or a UUID reaching a data lookup with no ownership or tenant check. Traces each identifier from the request handler down to the query. Use when asked about object-level authorization bypass. Do not use for missing function-level role checks - use sast-missingauth.",
+      "category": null,
+      "path": "skills/sast-idor",
+      "body_lines": 459,
+      "mitre_attack": [
+        "T1078",
+        "T1530"
+      ]
+    },
+    {
+      "name": "sast-jwt",
+      "description": "Find JWT weaknesses in source: algorithm confusion, skipped signature verification, weak HMAC secrets, kid and jku header injection, missing exp/aud/iss claim validation, and absent rotation or revocation. Use when asked about token forgery or JWT-based authentication bypass. Do not use for SAML assertions or plain session cookies.",
+      "category": null,
+      "path": "skills/sast-jwt",
+      "body_lines": 474,
+      "mitre_attack": [
+        "T1550.001",
+        "T1528"
+      ]
+    },
+    {
+      "name": "sast-missingauth",
+      "description": "Find missing authentication and broken function-level authorization in source: routes reachable without a session, admin-only handlers with no role gate, and middleware applied inconsistently across routers. Use when asked about unauthenticated access or vertical privilege escalation. Do not use for per-object ownership checks - use sast-idor.",
+      "category": null,
+      "path": "skills/sast-missingauth",
+      "body_lines": 118,
+      "mitre_attack": [
+        "T1078",
+        "T1190"
+      ]
+    },
+    {
+      "name": "sast-pathtraversal",
+      "description": "Find path traversal in source: file read, write, download and include sinks fed by request data, missing normalization, and no base-directory confinement. Use when asked about directory traversal or arbitrary file disclosure. Do not use for upload validation bypass - use sast-fileupload.",
+      "category": null,
+      "path": "skills/sast-pathtraversal",
+      "body_lines": 115,
+      "mitre_attack": [
+        "T1083",
+        "T1190",
+        "T1005"
+      ]
+    },
+    {
+      "name": "sast-rce",
+      "description": "Find remote code execution in source: OS command injection through exec, system or shell-enabled subprocess, eval-like sinks, unsafe deserialization with pickle, ObjectInputStream or PHP unserialize, and dynamic require or import. Use when asked about command injection or deserialization RCE. Do not use for template injection - use sast-ssti.",
+      "category": null,
+      "path": "skills/sast-rce",
+      "body_lines": 100,
+      "mitre_attack": [
+        "T1190",
+        "T1059"
+      ]
+    },
+    {
+      "name": "sast-report",
+      "description": "Consolidate every sast/*-results.md file into one severity-ranked report at sast/final-report.md, deduplicating entries and ranking by confidentiality and integrity impact. Use after the detection skills have run, when asked to summarize findings or produce the final security report. Do not use to run detection - use the matching sast-<class> skill first.",
+      "category": null,
+      "path": "skills/sast-report",
+      "body_lines": 201,
+      "mitre_attack": []
+    },
+    {
+      "name": "sast-sqli",
+      "description": "Find SQL injection in source: string concatenation and f-strings building queries, unsafe ORM raw and where fragments, dynamic table or column identifiers, and unparameterized ORDER BY clauses. Use when asked about SQLi or database injection. Do not use for MongoDB or CouchDB operator injection - use hunt-nosqli.",
+      "category": null,
+      "path": "skills/sast-sqli",
+      "body_lines": 98,
+      "mitre_attack": [
+        "T1190",
+        "T1078"
+      ]
+    },
+    {
+      "name": "sast-ssrf",
+      "description": "Find SSRF in source: outbound HTTP, webhook, image-fetch and URL-preview sinks fed by user input, plus missing destination allowlists, redirect following and reachable cloud metadata endpoints. Use when asked about server-side request forgery. Do not use for browser-side open redirects - use hunt-open-redirect.",
+      "category": null,
+      "path": "skills/sast-ssrf",
+      "body_lines": 74,
+      "mitre_attack": [
+        "T1190",
+        "T1090"
+      ]
+    },
+    {
+      "name": "sast-ssti",
+      "description": "Find server-side template injection in source: user input concatenated into Jinja2, Twig, Freemarker, Velocity, ERB, Handlebars or Thymeleaf templates, or passed as the template body instead of a bound variable. Use when asked about template injection. Do not use for client-side DOM XSS - use sast-xss.",
+      "category": null,
+      "path": "skills/sast-ssti",
+      "body_lines": 94,
+      "mitre_attack": [
+        "T1190",
+        "T1059"
+      ]
+    },
+    {
+      "name": "sast-xss",
+      "description": "Find XSS in source: unescaped output into HTML, unsafe innerHTML, dangerouslySetInnerHTML and document.write sinks, missing contextual encoding, and sanitizer bypass in React, Vue or Angular templates. Use when asked about cross-site scripting in code. Do not use for server-side template injection - use sast-ssti.",
+      "category": null,
+      "path": "skills/sast-xss",
+      "body_lines": 163,
+      "mitre_attack": [
+        "T1059.007",
+        "T1189"
+      ]
+    },
+    {
+      "name": "sast-xxe",
+      "description": "Find XXE in source: XML parsers with external entities enabled, missing disallow-doctype-decl, vulnerable SOAP, SAML, DOCX, XLSX and SVG parsing, and blind out-of-band entity expansion. Use when asked about XML external entity injection. Do not use for XML schema or parsing correctness bugs that carry no entity risk.",
+      "category": null,
+      "path": "skills/sast-xxe",
+      "body_lines": 110,
+      "mitre_attack": [
+        "T1190",
+        "T1005"
+      ]
+    },
+    {
+      "name": "security-arsenal",
+      "description": "Security payloads, bypass tables, wordlists, gf pattern names, always-rejected bug list, and conditionally-valid-with-chain table. Use when you need specific payloads for XSS/SSRF/SQLi/XXE/NoSQLi/command injection/SSTI/IDOR/path-traversal/HTTP smuggling/WebSocket/MFA bypass, or bypass techniques. Submittability and the always-rejected / what-NOT-to-submit decision are owned by triage-validation.",
+      "category": null,
+      "path": "skills/security-arsenal",
+      "body_lines": 907,
+      "sources": "community, public_research",
+      "mitre_attack": [
+        "T1190",
+        "T1588.002"
+      ]
+    },
+    {
+      "name": "social-engineer",
+      "description": "Delegates to this agent when the user asks about social engineering, phishing campaigns, pretexting, vishing, physical social engineering, security awareness testing, or human-factor security assessments",
+      "category": "infrastructure",
+      "path": "skills/social-engineer",
+      "body_lines": 335,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1566",
+        "T1598",
+        "T1585"
+      ]
+    },
+    {
+      "name": "supabase",
+      "description": "Supabase / PostgREST Row-Level-Security playbook — pull the anon (or leaked service_role) key out of the frontend JS, map tables from the auto-generated OpenAPI spec, test anonymous RLS READ disclosures (PII/secret leaks), and anonymous RLS WRITE abuse (insert/update/delete — e.g. forging \"certificate\"/verification/entitlement rows the app trusts). Use when the target's frontend talks to *.supabase.co, ships an anon JWT, or you see /rest/v1/, /auth/v1/, /storage/v1/ requests. Do not use for Firebase or custom backends - use api-security; this skill covers Supabase RLS and storage only.",
+      "category": null,
+      "path": "skills/supabase",
+      "body_lines": 239,
+      "mitre_attack": [
+        "T1530",
+        "T1190"
+      ]
+    },
+    {
+      "name": "supply-chain-attack-recon",
+      "description": "External recon for software supply-chain attack surface — package-namespace squatting candidates, dependency-confusion vulnerabilities, GitHub Actions injection openings, container image registry exposure, SBOM mining, internal-package-name leakage, and CI/CD configuration exposure. Reconnaissance and identification ONLY — actual package publishing / typosquat attacks are EXTERNAL-OFFENSIVE and require explicit written sign-off because they can affect the entire npm/PyPI ecosystem. Use when the target has a public GitHub org, when their build artifacts/SBOMs are reachable, when their docker images are on Docker Hub/GHCR, or when you find internal package names in their JS bundles. Do not use for cloud storage exposure - use cloud-security; for CI pipeline exploitation use hunt-cicd.",
+      "category": null,
+      "path": "skills/supply-chain-attack-recon",
+      "body_lines": 117,
+      "sources": "alex-birsan-dependency-confusion, supply-chain-research, github-actions-security, cisa-advisories, mandiant-tag, github-security-blog, snyk-research",
+      "mitre_attack": [
+        "T1195",
+        "T1195.001",
+        "T1195.002",
+        "T1596"
+      ],
+      "report_count": 12
+    },
+    {
+      "name": "supply-chain-auditor",
+      "description": "Delegates to this agent when the user wants to audit software supply chain risk, generate or review an SBOM, hunt for dependency confusion and typosquatting exposure, inspect lockfile and package integrity, review install-time scripts in third-party packages, assess build and artifact provenance, or evaluate the blast radius of a compromised upstream dependency during authorized security work.",
+      "category": "hunting",
+      "path": "skills/supply-chain-auditor",
+      "body_lines": 183,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1195.001",
+        "T1195.002",
+        "T1552"
+      ]
+    },
+    {
+      "name": "svc-database",
+      "description": "Database RCE paths — UDF, xp_cmdshell, COPY TO PROGRAM, Redis key write. Use when a database service is found. Triggers - MySQL 3306, PostgreSQL 5432, MSSQL 1433, Redis 6379, MongoDB 27017. Do not use for SQL injection inside a web application - use hunt-sqli; this skill covers direct database service attack paths.",
+      "category": null,
+      "path": "skills/svc-database",
+      "body_lines": 39,
+      "mitre_attack": [
+        "T1190",
+        "T1059",
+        "T1003"
+      ]
+    },
+    {
+      "name": "svc-mobile-android",
+      "description": "Android APK static analysis on a decompiled app: OWASP Mobile Top 10 review, Retrofit and OkHttp endpoint audit, cleartext and network-security-config checks, smali reading, exported component and intent surface, and authentication flow analysis. Use when you already hold the decompiled Android package and want the code-level findings. Do not use for iOS - use ios-redteam-pipeline; do not use for end-to-end acquisition and Frida runtime work - use apk-redteam-pipeline.",
+      "category": null,
+      "path": "skills/svc-mobile-android",
+      "body_lines": 264,
+      "mitre_attack": [
+        "T1552",
+        "T1592"
+      ]
+    },
+    {
+      "name": "svc-pivoting",
+      "description": "Turn a foothold into a RELIABLE pivot (SOCKS tunnel + persistent shell) so internal volume never rides a fragile stateless RCE. Use the moment you have code-exec on a dual-homed/edge host and need to reach an internal segment. Triggers - dual-homed host, \"not reachable from my box\", internal CIDR behind a foothold, RCE truncates output, need proxychains/nmap through a host, chisel/ligolo. Use when you already hold one foothold and need to reach a second network segment. Do not use for initial access - use the matching hunt-<class> skill.",
+      "category": null,
+      "path": "skills/svc-pivoting",
+      "body_lines": 52,
+      "tags": [
+        "exploitation",
+        "post_exploit"
+      ],
+      "mitre_attack": [
+        "T1090",
+        "T1021",
+        "T1572"
+      ]
+    },
+    {
+      "name": "svc-web-server",
+      "description": "Web SERVER software (not app-layer) attack techniques — server misconfigs, known server CVEs, path traversal, exposed status/config. Use when you fingerprint the web server itself (for app-layer bugs use the web-<class> skills). Triggers - Server header, Apache 2.4.49/2.4.50, nginx alias traversal, IIS, Tomcat, /server-status, .htaccess. Do not use for application-layer bugs - use the matching hunt-<class> skill; this skill covers the server software itself.",
+      "category": null,
+      "path": "skills/svc-web-server",
+      "body_lines": 110,
+      "mitre_attack": [
+        "T1190",
+        "T1083",
+        "T1595.002"
+      ]
+    },
+    {
+      "name": "swarm-orchestrator",
+      "description": "Delegates to this agent when the user wants to coordinate multiple pentest agents as a team, run a full automated red team engagement, orchestrate parallel reconnaissance and exploitation workflows, manage agent-to-agent handoffs, or execute a complete pentest lifecycle from planning through reporting with autonomous agent delegation.",
+      "category": "methodology",
+      "path": "skills/swarm-orchestrator",
+      "body_lines": 345,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1595",
+        "T1210"
+      ]
+    },
+    {
+      "name": "threat-modeler",
+      "description": "Delegates to this agent when the user asks about threat modeling, attack surface analysis, STRIDE, DREAD, attack trees, data flow diagrams, trust boundaries, or security architecture review",
+      "category": "methodology",
+      "path": "skills/threat-modeler",
+      "body_lines": 568,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1591",
+        "T1592"
+      ]
+    },
+    {
+      "name": "traffic-analyzer",
+      "description": "Delegates to this agent when the user wants offline analysis of captured network traffic — dissecting pcaps, extracting credentials and artifacts, reconstructing sessions, identifying protocols and anomalies, and turning a capture into findings. Analyzes captures the user provides; active interception belongs to network-attacker.",
+      "category": "infrastructure",
+      "path": "skills/traffic-analyzer",
+      "body_lines": 67,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1040",
+        "T1557",
+        "T1552"
+      ]
+    },
+    {
+      "name": "triage-validation",
+      "description": "Decide whether a bug is worth submitting at all: the 7-Question Gate, the always-rejected list, the conditionally-valid-only-with-a-chain table, and the false-positive checks that kill weak submissions before they cost reputation. Use before spending time on a write-up, whenever impact is unclear, or when a triager would likely close the ticket as informational. Do not use to draft the write-up - use report-writing once the gates pass.",
+      "category": null,
+      "path": "skills/triage-validation",
+      "body_lines": 413,
+      "sources": "community, operator_experience",
+      "mitre_attack": []
+    },
+    {
+      "name": "vmware-vcenter-attack",
+      "description": "VMware vSphere / vCenter Server external attack matrix — version fingerprinting, the high-impact CVE chain (CVE-2021-21972 vRealize unauth file upload, CVE-2021-21985 vSAN plugin RCE, CVE-2022-22954 Workspace ONE SSTI, CVE-2023-20887 Aria RCE, CVE-2024-37085 ESXi AD bypass, CVE-2023-34048 vCenter DCERPC OOB write APT-exploited), default credentials, SSO configuration disclosure, vmdir LDAP enumeration, ESXi Open SLP RCE history. ONLY for vCenter / Workspace ONE / Aria instances exposed to the internet — internal-network vCenter is out of scope per the external-only boundary. Use when recon shows port 443 with vCenter banner, `/ui` redirect, `/websso/SAML2/Metadata`, or VMware product fingerprints. Do not use for generic SSL VPN appliances - use enterprise-vpn-attack.",
+      "category": null,
+      "path": "skills/vmware-vcenter-attack",
+      "body_lines": 366,
+      "sources": "vmware-security-advisories, public-cve-databases, redteam-knowledge, disclosed-cves, cisa-kev, mandiant-zdi-writeups",
+      "mitre_attack": [
+        "T1190",
+        "T1133"
+      ],
+      "report_count": 10
+    },
+    {
+      "name": "vuln-scanner",
+      "description": "Vulnerability scanning: nuclei templates, nikto, automated vulnerability detection. Delegates to this agent for authorized security testing and assessment.",
+      "category": null,
+      "path": "skills/vuln-scanner",
+      "body_lines": 27,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1595",
+        "T1595.002",
+        "T1046"
+      ]
+    },
+    {
+      "name": "web-hunter",
+      "description": "Web application penetration testing: directory brute forcing, SQL injection, XSS, hidden endpoints, parameter fuzzing. Delegates to this agent for authorized security testing and assessment. Use when manually testing a web application's pages, forms and endpoints. Do not use for a deep single-class playbook - use the matching hunt-<class> skill.",
+      "category": null,
+      "path": "skills/web-hunter",
+      "body_lines": 27,
+      "mitre_attack": [
+        "T1190",
+        "T1595.002",
+        "T1189"
+      ]
+    },
+    {
+      "name": "web2-recon",
+      "description": "Web2 recon pipeline — subdomain enumeration (subfinder, Chaos API, assetfinder), live host discovery (dnsx, httpx), URL crawling (katana, waybackurls, gau), directory fuzzing (ffuf), JS analysis (LinkFinder, SecretFinder), continuous monitoring (new subdomain alerts, JS change detection, GitHub commit watch). Use when starting recon on any web2 target or when asked about asset discovery, subdomain enum, or attack surface mapping.",
+      "category": null,
+      "path": "skills/web2-recon",
+      "body_lines": 693,
+      "sources": "community, public_research",
+      "mitre_attack": [
+        "T1595",
+        "T1595.001",
+        "T1590",
+        "T1592"
+      ]
+    },
+    {
+      "name": "web3-audit",
+      "description": "Smart contract security audit — 10 DeFi bug classes (accounting desync, access control, incomplete path, off-by-one, oracle, ERC4626, reentrancy, flash loan, signature replay, proxy), pre-dive kill signals (TVL < $500K etc), Foundry PoC template, grep patterns for each class, and real Immunefi paid examples. Use for any Solidity/Rust contract audit or when deciding whether a DeFi target is worth hunting. Do not use for token rug-pull or honeypot checks - use meme-coin-audit.",
+      "category": null,
+      "path": "skills/web3-audit",
+      "body_lines": 102,
+      "sources": "public_research, community",
+      "mitre_attack": [
+        "T1190",
+        "T1565"
+      ]
+    },
+    {
+      "name": "webvuln",
+      "description": "Web vulnerability hunting playbook. Use after recon, when you have specific hosts/endpoints to test for IDOR/BAC, injection, auth flaws, SSRF, and known CVEs. Emphasizes real PoC + concrete impact. Do not use when a dedicated hunt-<class> skill exists - use that instead.",
+      "category": null,
+      "path": "skills/webvuln",
+      "body_lines": 77,
+      "mitre_attack": [
+        "T1190",
+        "T1189"
+      ]
+    },
+    {
+      "name": "wireless-pentester",
+      "description": "Delegates to this agent when the user asks about wireless security testing, WiFi pentesting, WPA/WPA2/WPA3 attacks, Bluetooth security, wireless reconnaissance, rogue access points, evil twin attacks, or RF security",
+      "category": "infrastructure",
+      "path": "skills/wireless-pentester",
+      "body_lines": 533,
+      "sources": "pentest-ai-agents/0xSteph (MIT)",
+      "mitre_attack": [
+        "T1557",
+        "T1040"
+      ]
+    }
+  ]
+}

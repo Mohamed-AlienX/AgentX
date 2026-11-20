@@ -1,0 +1,13 @@
+{
+  "_comment": "Skill pairs whose descriptions overlap at or above the collision threshold but are legitimately distinct. Add an entry only after reading both skills; the reason should state the boundary so the negative triggers can encode it. Everything not listed here is treated as an unreviewed collision and fails the gate.",
+  "reviewed_distinct": [
+    {
+      "pair": ["hunt-cache-poison", "hunt-host-header"],
+      "reason": "Different sinks for the same primitive. hunt-host-header owns a Host or X-Forwarded-Host value that reaches application logic (reset-link poisoning, routing SSRF, OAuth issuer) and is never cached. hunt-cache-poison owns the case where the poisoned response is stored by a CDN or reverse proxy and served to other users. Boundary is already encoded as a mutual negative trigger in both descriptions."
+    },
+    {
+      "pair": ["hunt-ato", "hunt-mfa-bypass"],
+      "reason": "Different scope. hunt-mfa-bypass proves a single second-factor bypass primitive (step skip, OTP replay, missing rate limit, factor downgrade). hunt-ato owns the full account-takeover taxonomy and the chaining of that primitive with reset flaws, session fixation and OAuth link CSRF into takeover of a second account. Boundary is already encoded as a mutual negative trigger in both descriptions."
+    }
+  ]
+}

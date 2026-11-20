@@ -1,0 +1,1212 @@
+{
+  "name": "AgentX Skills - MITRE ATT&CK Coverage",
+  "versions": {
+    "attack": "16",
+    "navigator": "4.9",
+    "layer": "4.5"
+  },
+  "domain": "enterprise-attack",
+  "description": "Auto-generated from skills/*/SKILL.md mitre_attack frontmatter via agentx.mitre_navigator. Do not hand-edit.",
+  "filters": {
+    "platforms": [
+      "Linux",
+      "Windows",
+      "macOS",
+      "Cloud"
+    ]
+  },
+  "sorting": 0,
+  "layout": {
+    "layout": "side",
+    "aggregateFunction": "average",
+    "showID": true,
+    "showName": true
+  },
+  "hideDisabled": false,
+  "techniques": [
+    {
+      "techniqueID": "T1003",
+      "tactic": "TA0006",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "OS Credential Dumping \u2014 credential-tester, svc-database",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "credential-tester, svc-database"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1005",
+      "tactic": "TA0009",
+      "score": 5,
+      "color": "#0066cc",
+      "comment": "Data from Local System \u2014 database-attacker, hunt-lfi, hunt-xxe, sast-pathtraversal, sast-xxe",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "database-attacker, hunt-lfi, hunt-xxe, sast-pathtraversal, sast-xxe"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1021",
+      "tactic": "TA0008",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Remote Services \u2014 lateral-movement, svc-pivoting",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "lateral-movement, svc-pivoting"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1021.002",
+      "tactic": "TA0008",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "SMB/Windows Admin Shares \u2014 ad-attacker",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ad-attacker"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1027",
+      "tactic": "TA0005",
+      "score": 4,
+      "color": "#0066cc",
+      "comment": "Obfuscated Files or Information \u2014 evasion-specialist, malware-analyst, payload-crafter, reverse-engineer",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "evasion-specialist, malware-analyst, payload-crafter, reverse-engineer"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1040",
+      "tactic": "TA0006",
+      "score": 3,
+      "color": "#0066cc",
+      "comment": "Network Sniffing \u2014 network-attacker, traffic-analyzer, wireless-pentester",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "network-attacker, traffic-analyzer, wireless-pentester"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1041",
+      "tactic": "TA0010",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Exfiltration Over C2 Channel \u2014 data-exfiltrator, hunt-llm-ai",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "data-exfiltrator, hunt-llm-ai"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1046",
+      "tactic": "TA0007",
+      "score": 4,
+      "color": "#0066cc",
+      "comment": "Network Service Discovery \u2014 hunt-grpc, hunt-ntlm-info, recon-advisor, vuln-scanner",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-grpc, hunt-ntlm-info, recon-advisor, vuln-scanner"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1048",
+      "tactic": "TA0010",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Exfiltration Over Alternative Protocol \u2014 data-exfiltrator",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "data-exfiltrator"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1053",
+      "tactic": "TA0003",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Scheduled Task/Job \u2014 persistence-planner",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "persistence-planner"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1055",
+      "tactic": "TA0005",
+      "score": 3,
+      "color": "#0066cc",
+      "comment": "Process Injection \u2014 evasion-specialist, hunt-nodejs, malware-analyst",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "evasion-specialist, hunt-nodejs, malware-analyst"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1059",
+      "tactic": "TA0002",
+      "score": 13,
+      "color": "#0066cc",
+      "comment": "Command and Scripting Interpreter \u2014 ctf-solver, hunt-aspnet, hunt-deserialization, hunt-file-upload, hunt-injection, hunt-laravel, hunt-nodejs, hunt-rce, hunt-ssti, payload-crafter, sast-rce, sast-ssti, svc-database",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ctf-solver, hunt-aspnet, hunt-deserialization, hunt-file-upload, hunt-injection, hunt-laravel, hunt-nodejs, hunt-rce, hunt-ssti, payload-crafter, sast-rce, sast-ssti, svc-database"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1059.007",
+      "tactic": "TA0002",
+      "score": 5,
+      "color": "#0066cc",
+      "comment": "JavaScript \u2014 hunt-client-side, hunt-dom, hunt-nextjs, hunt-xss, sast-xss",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-client-side, hunt-dom, hunt-nextjs, hunt-xss, sast-xss"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1068",
+      "tactic": "TA0004",
+      "score": 4,
+      "color": "#0066cc",
+      "comment": "Exploitation for Privilege Escalation \u2014 ctf-solver, exploit-chainer, exploit-guide, privesc-advisor",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ctf-solver, exploit-chainer, exploit-guide, privesc-advisor"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1071",
+      "tactic": "TA0011",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Application Layer Protocol \u2014 c2-operator",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "c2-operator"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1071.004",
+      "tactic": "TA0011",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "DNS \u2014 data-exfiltrator",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "data-exfiltrator"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1078",
+      "tactic": "TA0001",
+      "score": 26,
+      "color": "#0066cc",
+      "comment": "Valid Accounts \u2014 ad-attacker, api-security, hunt-access-control, hunt-api-misconfig, hunt-ato, hunt-auth-bypass, hunt-auth-session, hunt-brute-force, hunt-captcha-bypass, hunt-csrf, hunt-fintech-graphql, hunt-forgot-password, hunt-idor, hunt-jwt-crypto, hunt-mfa-bypass, hunt-nosqli, hunt-oauth, hunt-saml, hunt-session, m365-entra-attack, okta-attack, privesc-advisor, sast-graphql, sast-idor, sast-missingauth, sast-sqli",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ad-attacker, api-security, hunt-access-control, hunt-api-misconfig, hunt-ato, hunt-auth-bypass, hunt-auth-session, hunt-brute-force, hunt-captcha-bypass, hunt-csrf, hunt-fintech-graphql, hunt-forgot-password, hunt-idor, hunt-jwt-crypto, hunt-mfa-bypass, hunt-nosqli, hunt-oauth, hunt-saml, hunt-session, m365-entra-attack, okta-attack, privesc-advisor, sast-graphql, sast-idor, sast-missingauth, sast-sqli"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1078.004",
+      "tactic": "TA0001",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Cloud Accounts \u2014 cloud-iam-deep, hunt-cloud-misconfig",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "cloud-iam-deep, hunt-cloud-misconfig"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1083",
+      "tactic": "TA0007",
+      "score": 4,
+      "color": "#0066cc",
+      "comment": "File and Directory Discovery \u2014 hunt-lfi, hunt-xxe, sast-pathtraversal, svc-web-server",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-lfi, hunt-xxe, sast-pathtraversal, svc-web-server"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1087.002",
+      "tactic": "TA0007",
+      "score": 3,
+      "color": "#0066cc",
+      "comment": "Domain Account \u2014 ad-attacker, hunt-ldap, hunt-ntlm-info",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ad-attacker, hunt-ldap, hunt-ntlm-info"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1090",
+      "tactic": "TA0011",
+      "score": 6,
+      "color": "#0066cc",
+      "comment": "Proxy \u2014 c2-operator, hunt-http-smuggling, network-attacker, opsec-anonymizer, sast-ssrf, svc-pivoting",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "c2-operator, hunt-http-smuggling, network-attacker, opsec-anonymizer, sast-ssrf, svc-pivoting"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1098",
+      "tactic": "TA0003",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Account Manipulation \u2014 cloud-iam-deep, persistence-planner",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "cloud-iam-deep, persistence-planner"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1105",
+      "tactic": "TA0011",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Ingress Tool Transfer \u2014 c2-operator, payload-crafter",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "c2-operator, payload-crafter"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1110",
+      "tactic": "TA0006",
+      "score": 9,
+      "color": "#0066cc",
+      "comment": "Brute Force \u2014 credential-tester, hunt-auth-session, hunt-brute-force, hunt-captcha-bypass, hunt-forgot-password, hunt-mfa-bypass, m365-entra-attack, okta-attack, password-auditor",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "credential-tester, hunt-auth-session, hunt-brute-force, hunt-captcha-bypass, hunt-forgot-password, hunt-mfa-bypass, m365-entra-attack, okta-attack, password-auditor"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1133",
+      "tactic": "TA0001",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "External Remote Services \u2014 enterprise-vpn-attack, vmware-vcenter-attack",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "enterprise-vpn-attack, vmware-vcenter-attack"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1136",
+      "tactic": "TA0003",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Create Account \u2014 persistence-planner",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "persistence-planner"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1140",
+      "tactic": "TA0005",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Deobfuscate/Decode Files or Information \u2014 malware-analyst, reverse-engineer",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "malware-analyst, reverse-engineer"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1189",
+      "tactic": "TA0001",
+      "score": 11,
+      "color": "#0066cc",
+      "comment": "Drive-by Compromise \u2014 hunt-cache-poison, hunt-clickjacking, hunt-client-side, hunt-dom, hunt-host-header, hunt-html-injection, hunt-open-redirect, hunt-xss, sast-xss, web-hunter, webvuln",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-cache-poison, hunt-clickjacking, hunt-client-side, hunt-dom, hunt-host-header, hunt-html-injection, hunt-open-redirect, hunt-xss, sast-xss, web-hunter, webvuln"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1190",
+      "tactic": "TA0001",
+      "score": 71,
+      "color": "#0066cc",
+      "comment": "Exploit Public-Facing Application \u2014 api-security, bb-methodology, bizlogic-hunter, bug-bounty, code-auditor, ctf-solver, database-attacker, enterprise-vpn-attack, exploit-guide, hunt-api-misconfig, hunt-aspnet, hunt-business-logic, hunt-cache-poison, hunt-clickjacking, hunt-client-side, hunt-csrf, hunt-deserialization, hunt-exceptional-conditions, hunt-file-upload, hunt-fintech-graphql, hunt-graphql, hunt-grpc, hunt-host-header, hunt-html-injection, hunt-http-smuggling, hunt-injection, hunt-laravel, hunt-ldap, hunt-lfi, hunt-llm-ai, hunt-misc, hunt-nextjs, hunt-nodejs, hunt-nosqli, hunt-race-condition, hunt-rag-vector, hunt-rce, hunt-shadow-api, hunt-sharepoint, hunt-spa-api, hunt-sqli, hunt-ssrf, hunt-ssrf-xxe, hunt-ssti, hunt-subdomain, hunt-websocket, hunt-xxe, llm-redteam, meme-coin-audit, mobile-pentester, opp-pentest, poc-validator, sast-analysis, sast-businesslogic, sast-fileupload, sast-graphql, sast-missingauth, sast-pathtraversal, sast-rce, sast-sqli, sast-ssrf, sast-ssti, sast-xxe, security-arsenal, supabase, svc-database, svc-web-server, vmware-vcenter-attack, web-hunter, web3-audit, webvuln",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "api-security, bb-methodology, bizlogic-hunter, bug-bounty, code-auditor, ctf-solver, database-attacker, enterprise-vpn-attack, exploit-guide, hunt-api-misconfig, hunt-aspnet, hunt-business-logic, hunt-cache-poison, hunt-clickjacking, hunt-client-side, hunt-csrf, hunt-deserialization, hunt-exceptional-conditions, hunt-file-upload, hunt-fintech-graphql, hunt-graphql, hunt-grpc, hunt-host-header, hunt-html-injection, hunt-http-smuggling, hunt-injection, hunt-laravel, hunt-ldap, hunt-lfi, hunt-llm-ai, hunt-misc, hunt-nextjs, hunt-nodejs, hunt-nosqli, hunt-race-condition, hunt-rag-vector, hunt-rce, hunt-shadow-api, hunt-sharepoint, hunt-spa-api, hunt-sqli, hunt-ssrf, hunt-ssrf-xxe, hunt-ssti, hunt-subdomain, hunt-websocket, hunt-xxe, llm-redteam, meme-coin-audit, mobile-pentester, opp-pentest, poc-validator, sast-analysis, sast-businesslogic, sast-fileupload, sast-graphql, sast-missingauth, sast-pathtraversal, sast-rce, sast-sqli, sast-ssrf, sast-ssti, sast-xxe, security-arsenal, supabase, svc-database, svc-web-server, vmware-vcenter-attack, web-hunter, web3-audit, webvuln"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1195",
+      "tactic": "TA0001",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Supply Chain Compromise \u2014 supply-chain-attack-recon",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "supply-chain-attack-recon"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1195.001",
+      "tactic": "TA0001",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Compromise Software Dependencies and Development Tools \u2014 supply-chain-attack-recon, supply-chain-auditor",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "supply-chain-attack-recon, supply-chain-auditor"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1195.002",
+      "tactic": "TA0001",
+      "score": 3,
+      "color": "#0066cc",
+      "comment": "Compromise Software Supply Chain \u2014 hunt-cicd, supply-chain-attack-recon, supply-chain-auditor",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-cicd, supply-chain-attack-recon, supply-chain-auditor"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1210",
+      "tactic": "TA0008",
+      "score": 7,
+      "color": "#0066cc",
+      "comment": "Exploitation of Remote Services \u2014 ad-attacker, attack-planner, container-breakout, exploit-chainer, lateral-movement, network-attacker, swarm-orchestrator",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ad-attacker, attack-planner, container-breakout, exploit-chainer, lateral-movement, network-attacker, swarm-orchestrator"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1505",
+      "tactic": "TA0003",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Server Software Component \u2014 persistence-planner",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "persistence-planner"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1505.003",
+      "tactic": "TA0003",
+      "score": 7,
+      "color": "#0066cc",
+      "comment": "Web Shell \u2014 code-auditor, hunt-aspnet, hunt-file-upload, hunt-laravel, hunt-rce, hunt-sharepoint, sast-fileupload",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "code-auditor, hunt-aspnet, hunt-file-upload, hunt-laravel, hunt-rce, hunt-sharepoint, sast-fileupload"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1528",
+      "tactic": "TA0006",
+      "score": 6,
+      "color": "#0066cc",
+      "comment": "Steal Application Access Token \u2014 apk-redteam-pipeline, hunt-ato, hunt-oauth, ios-redteam-pipeline, sast-hardcodedsecrets, sast-jwt",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "apk-redteam-pipeline, hunt-ato, hunt-oauth, ios-redteam-pipeline, sast-hardcodedsecrets, sast-jwt"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1530",
+      "tactic": "TA0009",
+      "score": 7,
+      "color": "#0066cc",
+      "comment": "Data from Cloud Storage \u2014 hunt-access-control, hunt-cloud-misconfig, hunt-graphql, hunt-idor, hunt-rag-vector, sast-idor, supabase",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-access-control, hunt-cloud-misconfig, hunt-graphql, hunt-idor, hunt-rag-vector, sast-idor, supabase"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1539",
+      "tactic": "TA0006",
+      "score": 6,
+      "color": "#0066cc",
+      "comment": "Steal Web Session Cookie \u2014 hunt-ato, hunt-auth-session, hunt-client-side, hunt-session, hunt-websocket, hunt-xss",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-ato, hunt-auth-session, hunt-client-side, hunt-session, hunt-websocket, hunt-xss"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1543",
+      "tactic": "TA0003",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Create or Modify System Process \u2014 persistence-planner",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "persistence-planner"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1547",
+      "tactic": "TA0003",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Boot or Logon Autostart Execution \u2014 persistence-planner",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "persistence-planner"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1548",
+      "tactic": "TA0004",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Abuse Elevation Control Mechanism \u2014 exploit-chainer, privesc-advisor",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "exploit-chainer, privesc-advisor"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1550",
+      "tactic": "TA0006",
+      "score": 6,
+      "color": "#0066cc",
+      "comment": "Use Alternate Authentication Material \u2014 ad-attacker, hunt-auth-bypass, hunt-oauth, hunt-saml, hunt-session, lateral-movement",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ad-attacker, hunt-auth-bypass, hunt-oauth, hunt-saml, hunt-session, lateral-movement"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1550.001",
+      "tactic": "TA0006",
+      "score": 4,
+      "color": "#0066cc",
+      "comment": "Application Access Token \u2014 api-security, crypto-analyzer, hunt-jwt-crypto, sast-jwt",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "api-security, crypto-analyzer, hunt-jwt-crypto, sast-jwt"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1552",
+      "tactic": "TA0006",
+      "score": 18,
+      "color": "#0066cc",
+      "comment": "Unsecured Credentials \u2014 apk-redteam-pipeline, cloud-iam-deep, code-auditor, credential-tester, crypto-analyzer, hunt-cicd, hunt-cloud-misconfig, hunt-source-leak, hunt-ssrf, hunt-ssrf-xxe, ios-redteam-pipeline, llm-redteam, mobile-pentester, password-auditor, sast-hardcodedsecrets, supply-chain-auditor, svc-mobile-android, traffic-analyzer",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "apk-redteam-pipeline, cloud-iam-deep, code-auditor, credential-tester, crypto-analyzer, hunt-cicd, hunt-cloud-misconfig, hunt-source-leak, hunt-ssrf, hunt-ssrf-xxe, ios-redteam-pipeline, llm-redteam, mobile-pentester, password-auditor, sast-hardcodedsecrets, supply-chain-auditor, svc-mobile-android, traffic-analyzer"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1552.007",
+      "tactic": "TA0006",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Container API \u2014 container-breakout, hunt-k8s",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "container-breakout, hunt-k8s"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1556",
+      "tactic": "TA0006",
+      "score": 8,
+      "color": "#0066cc",
+      "comment": "Modify Authentication Process \u2014 hunt-ato, hunt-auth-bypass, hunt-auth-session, hunt-forgot-password, hunt-jwt-crypto, hunt-saml, m365-entra-attack, okta-attack",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-ato, hunt-auth-bypass, hunt-auth-session, hunt-forgot-password, hunt-jwt-crypto, hunt-saml, m365-entra-attack, okta-attack"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1556.006",
+      "tactic": "TA0006",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Multi-Factor Authentication \u2014 hunt-mfa-bypass",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-mfa-bypass"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1557",
+      "tactic": "TA0006",
+      "score": 4,
+      "color": "#0066cc",
+      "comment": "Adversary-in-the-Middle \u2014 network-attacker, phishing-operator, traffic-analyzer, wireless-pentester",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "network-attacker, phishing-operator, traffic-analyzer, wireless-pentester"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1558",
+      "tactic": "TA0006",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Steal or Forge Kerberos Tickets \u2014 ad-attacker",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ad-attacker"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1562.001",
+      "tactic": "TA0005",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Disable or Modify Tools \u2014 evasion-specialist",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "evasion-specialist"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1565",
+      "tactic": "TA0040",
+      "score": 8,
+      "color": "#0066cc",
+      "comment": "Data Manipulation \u2014 bizlogic-hunter, hunt-business-logic, hunt-fintech-graphql, hunt-llm-ai, hunt-rag-vector, meme-coin-audit, sast-businesslogic, web3-audit",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "bizlogic-hunter, hunt-business-logic, hunt-fintech-graphql, hunt-llm-ai, hunt-rag-vector, meme-coin-audit, sast-businesslogic, web3-audit"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1566",
+      "tactic": "TA0001",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Phishing \u2014 phishing-operator, social-engineer",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "phishing-operator, social-engineer"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1566.002",
+      "tactic": "TA0001",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Spearphishing Link \u2014 hunt-open-redirect, phishing-operator",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-open-redirect, phishing-operator"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1567",
+      "tactic": "TA0010",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Exfiltration Over Web Service \u2014 data-exfiltrator",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "data-exfiltrator"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1570",
+      "tactic": "TA0008",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Lateral Tool Transfer \u2014 lateral-movement",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "lateral-movement"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1572",
+      "tactic": "TA0011",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Protocol Tunneling \u2014 c2-operator, svc-pivoting",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "c2-operator, svc-pivoting"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1583",
+      "tactic": "TA0042",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Acquire Infrastructure \u2014 opsec-anonymizer",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "opsec-anonymizer"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1583.001",
+      "tactic": "TA0042",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Domains \u2014 hunt-subdomain, phishing-operator",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "hunt-subdomain, phishing-operator"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1585",
+      "tactic": "TA0042",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Establish Accounts \u2014 opsec-anonymizer, social-engineer",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "opsec-anonymizer, social-engineer"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1585.001",
+      "tactic": "TA0042",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Social Media Accounts \u2014 phishing-operator",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "phishing-operator"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1587.001",
+      "tactic": "TA0042",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Malware \u2014 payload-crafter",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "payload-crafter"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1588.002",
+      "tactic": "TA0042",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Tool \u2014 security-arsenal",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "security-arsenal"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1589",
+      "tactic": "TA0043",
+      "score": 3,
+      "color": "#0066cc",
+      "comment": "Gather Victim Identity Information \u2014 offensive-osint, osint-collector, osint-methodology",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "offensive-osint, osint-collector, osint-methodology"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1590",
+      "tactic": "TA0043",
+      "score": 6,
+      "color": "#0066cc",
+      "comment": "Gather Victim Network Information \u2014 ai-recon, hunt-tls-network, offensive-osint, osint-methodology, recon, web2-recon",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ai-recon, hunt-tls-network, offensive-osint, osint-methodology, recon, web2-recon"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1591",
+      "tactic": "TA0043",
+      "score": 5,
+      "color": "#0066cc",
+      "comment": "Gather Victim Org Information \u2014 engagement-planner, offensive-osint, osint-methodology, recon-scope-triage, threat-modeler",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "engagement-planner, offensive-osint, osint-methodology, recon-scope-triage, threat-modeler"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1592",
+      "tactic": "TA0043",
+      "score": 15,
+      "color": "#0066cc",
+      "comment": "Gather Victim Host Information \u2014 ai-recon, apk-redteam-pipeline, bug-bounty, hunt-exceptional-conditions, hunt-ntlm-info, hunt-source-leak, hunt-tls-network, ios-redteam-pipeline, offensive-osint, osint-methodology, recon, recon-advisor, svc-mobile-android, threat-modeler, web2-recon",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ai-recon, apk-redteam-pipeline, bug-bounty, hunt-exceptional-conditions, hunt-ntlm-info, hunt-source-leak, hunt-tls-network, ios-redteam-pipeline, offensive-osint, osint-methodology, recon, recon-advisor, svc-mobile-android, threat-modeler, web2-recon"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1593",
+      "tactic": "TA0043",
+      "score": 4,
+      "color": "#0066cc",
+      "comment": "Search Open Websites/Domains \u2014 offensive-osint, osint-collector, osint-methodology, recon-scope-triage",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "offensive-osint, osint-collector, osint-methodology, recon-scope-triage"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1595",
+      "tactic": "TA0043",
+      "score": 14,
+      "color": "#0066cc",
+      "comment": "Active Scanning \u2014 ai-recon, attack-planner, bb-methodology, bug-bounty, engagement-planner, hunt-shadow-api, hunt-spa-api, offensive-osint, opp-pentest, recon, recon-advisor, swarm-orchestrator, vuln-scanner, web2-recon",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "ai-recon, attack-planner, bb-methodology, bug-bounty, engagement-planner, hunt-shadow-api, hunt-spa-api, offensive-osint, opp-pentest, recon, recon-advisor, swarm-orchestrator, vuln-scanner, web2-recon"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1595.001",
+      "tactic": "TA0043",
+      "score": 3,
+      "color": "#0066cc",
+      "comment": "Scanning IP Blocks \u2014 recon, recon-advisor, web2-recon",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "recon, recon-advisor, web2-recon"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1595.002",
+      "tactic": "TA0043",
+      "score": 4,
+      "color": "#0066cc",
+      "comment": "Vulnerability Scanning \u2014 poc-validator, svc-web-server, vuln-scanner, web-hunter",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "poc-validator, svc-web-server, vuln-scanner, web-hunter"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": true
+    },
+    {
+      "techniqueID": "T1596",
+      "tactic": "TA0043",
+      "score": 5,
+      "color": "#0066cc",
+      "comment": "Search Open Technical Databases \u2014 offensive-osint, osint-collector, osint-methodology, recon-scope-triage, supply-chain-attack-recon",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "offensive-osint, osint-collector, osint-methodology, recon-scope-triage, supply-chain-attack-recon"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1597",
+      "tactic": "TA0043",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Search Closed Sources \u2014 offensive-osint",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "offensive-osint"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1598",
+      "tactic": "TA0043",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Phishing for Information \u2014 social-engineer",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "social-engineer"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1600",
+      "tactic": "TA0005",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Weaken Encryption \u2014 crypto-analyzer, hunt-tls-network",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "crypto-analyzer, hunt-tls-network"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1610",
+      "tactic": "TA0002",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Deploy Container \u2014 container-breakout, hunt-k8s",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "container-breakout, hunt-k8s"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1611",
+      "tactic": "TA0004",
+      "score": 2,
+      "color": "#0066cc",
+      "comment": "Escape to Host \u2014 container-breakout, hunt-k8s",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "container-breakout, hunt-k8s"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    },
+    {
+      "techniqueID": "T1620",
+      "tactic": "TA0005",
+      "score": 1,
+      "color": "#66b3ff",
+      "comment": "Reflective Code Loading \u2014 evasion-specialist",
+      "metadata": [
+        {
+          "name": "skills",
+          "value": "evasion-specialist"
+        }
+      ],
+      "enabled": true,
+      "showSubtechniques": false
+    }
+  ],
+  "gradient": {
+    "colors": [
+      "#ffffff",
+      "#66b3ff"
+    ],
+    "minValue": 0,
+    "maxValue": 6
+  },
+  "legendItems": [
+    {
+      "label": "Covered by 1 skill",
+      "color": "#66b3ff"
+    },
+    {
+      "label": "Covered by 2+ skills",
+      "color": "#0066cc"
+    }
+  ],
+  "metadata": [
+    {
+      "name": "source",
+      "value": "AgentX skills registry"
+    }
+  ],
+  "links": [],
+  "showTacticRowBackground": false,
+  "tacticRowBackground": "#dddddd",
+  "selectTechniquesAcrossTactics": true,
+  "selectSubtechniquesWithParent": false
+}

@@ -1,0 +1,352 @@
+[
+ {
+  "name": "ad-attacker",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user wants to perform Active Directory attacks, run BloodHound analysis, use Impacket tools, execute Kerberos attacks, perform AD enumeration with CrackMapExec or NetExec, test AD delegation abuse, or conduct lateral movement through Active Directory environments dur"
+ },
+ {
+  "name": "ai-recon",
+  "category": "recon",
+  "desc": "Delegates to this agent when the user wants to map the AI attack surface of an authorized web application before validation — discovering AI/LLM API endpoints (including OpenAI-compatible APIs), enumerating A2A agent cards, fingerprinting the deployed model, identifying MCP exposure, and characteriz"
+ },
+ {
+  "name": "attack-planner",
+  "category": "methodology",
+  "desc": "Delegates to this agent when the user wants to correlate findings from multiple tools or agents, build multi-step attack chains, identify the optimal exploitation path through a network, prioritize attack vectors across an engagement, or plan lateral movement strategies for authorized penetration te"
+ },
+ {
+  "name": "bb-methodology",
+  "category": "",
+  "desc": "Use at the START of any bug bounty hunting session, when switching targets, or when feeling lost about what to do next. Master orchestrator that combines the 5-phase non-linear hunting workflow with the critical thinking framework (developer psychology, anomaly detection, What-If experiments). Route"
+ },
+ {
+  "name": "bug-bounty",
+  "category": "",
+  "desc": "Complete bug bounty workflow — recon (subdomain enumeration, asset discovery, fingerprinting, HackerOne scope, source code audit), pre-hunt learning (disclosed reports, tech stack research, mind maps, threat modeling), vulnerability hunting (IDOR, SSRF, XSS, auth bypass, CSRF, race conditions, SQLi,"
+ },
+ {
+  "name": "c2-operator",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user asks about command-and-control framework operations, Sliver/Mythic/Havoc/Cobalt Strike configuration, listener and beacon tuning, malleable C2 profiles, sleep and jitter strategy, redirector and CDN fronting infrastructure, or operating an established foothold d"
+ },
+ {
+  "name": "code-auditor",
+  "category": "hunting",
+  "desc": "Delegates to this agent when the user wants a secure-code review of application source — static analysis for injection, auth, secrets, deserialization, and OWASP issues; SAST tooling guidance (Semgrep, CodeQL); or triage of scanner output. Reviews source at rest; it does not test running systems (us"
+ },
+ {
+  "name": "container-breakout",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user asks about container escape, Docker breakout, Kubernetes pod escape, runc/containerd CVE exploitation, capability abuse, privileged container hunting, kubelet API attacks, service account token abuse, or any technique that pivots from inside a container to the h"
+ },
+ {
+  "name": "credential-tester",
+  "category": "hunting",
+  "desc": "Delegates to this agent when the user asks about password attacks, credential testing, hash cracking, brute force methodology, default credential checks, password spraying, or needs help with tools like hydra, john, hashcat, medusa, or CrackMapExec for authorized penetration testing engagements."
+ },
+ {
+  "name": "crypto-analyzer",
+  "category": "hunting",
+  "desc": "Delegates to this agent when the user wants to analyze cryptographic usage — weak algorithms or modes, key and IV/nonce management, TLS/certificate configuration, randomness quality, password hashing, or JWT/JWE/token issues. Advisory analysis of crypto design and misuse; hands active exploitation ("
+ },
+ {
+  "name": "ctf-solver",
+  "category": "methodology",
+  "desc": "Delegates to this agent when the user is working on CTF challenges, capture the flag competitions, HackTheBox machines, TryHackMe rooms, or needs help with CTF methodology including web exploitation, binary exploitation, cryptography, forensics, reverse engineering, or privilege escalation challenge"
+ },
+ {
+  "name": "data-exfiltrator",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user wants to test exfiltration and DLP/egress controls during an authorized engagement — DNS tunneling, HTTPS/cloud-storage exfil, ICMP, protocol abuse, and staging — using synthetic/canary data to validate detection. Every technique ships with the egress detection "
+ },
+ {
+  "name": "database-attacker",
+  "category": "hunting",
+  "desc": "Delegates to this agent when the user wants database-specific offensive testing on an authorized target — SQL and NoSQL injection depth, authenticated database enumeration, DBMS privilege escalation, and safe data-extraction validation across MySQL, PostgreSQL, MSSQL, Oracle, MongoDB, and Redis. Exe"
+ },
+ {
+  "name": "detection-engineer",
+  "category": "methodology",
+  "desc": "Delegates to this agent when the user asks about detection rules, SIEM queries, threat hunting, indicator analysis, log analysis, blue team detection for specific attack techniques, or creating detection engineering content."
+ },
+ {
+  "name": "engagement-planner",
+  "category": "methodology",
+  "desc": "Delegates to this agent when the user needs to plan a penetration test, define attack methodology, scope an engagement, map techniques to MITRE ATT&CK, or create a rules of engagement template."
+ },
+ {
+  "name": "evasion-specialist",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user wants to test defensive evasion during an authorized red team or EDR-validation engagement — AV/EDR evasion, AMSI and ETW bypass, payload obfuscation, in-memory execution, and unhooking. Every technique ships with the detection it exercises. For artifact generat"
+ },
+ {
+  "name": "evidence-hygiene",
+  "category": "",
+  "desc": "Evidence-capture and PoC-redaction discipline for bug-bounty submissions: cookie redaction protocol (which fields to mask, Preview annotation / Burp panel hiding / DevTools workflow), PII black-bar discipline (what to mask in other-user data — names, emails, phones, faces — vs what is safe to leave "
+ },
+ {
+  "name": "exploit-chainer",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user wants to automatically chain isolated vulnerabilities into multi-step attack paths, pivot through a system from a low-severity finding to full compromise, execute exploit chains step-by-step with approval at each stage, or demonstrate real-world attack escalatio"
+ },
+ {
+  "name": "exploit-guide",
+  "category": "methodology",
+  "desc": "Delegates to this agent when the user asks about exploitation techniques, attack methodologies, tool configurations for authorized testing, post-exploitation activities, or specific vulnerability exploitation paths."
+ },
+ {
+  "name": "fix-verifier",
+  "category": "validation",
+  "desc": "Delegates to this agent when the user wants to retest a vulnerability after a fix has been deployed, prove that a remediation actually closed the issue, verify a patch before closing a finding or a bug bounty report, check whether a fix broke working functionality, or confirm that a security regress"
+ },
+ {
+  "name": "hunt-access-control",
+  "category": "",
+  "desc": "Hunt for broken access control — IDOR/BOLA, horizontal & vertical privilege escalation, missing function-level authz, forced browsing. Built from personal BAC + PrivEsc + IDOR notes. Use when testing multi-user apps, object references (ids), role-gated features, or admin endpoints."
+ },
+ {
+  "name": "hunt-api-misconfig",
+  "category": "",
+  "desc": "Hunt API security misconfiguration — mass assignment, prototype pollution, HTTP verb tampering. Mass assignment: send {is_admin:true, role:admin, verified:true} on profile/account/reset endpoints — server blindly applies. JWT signature/crypto forging (alg:none, key confusion, kid/jku) is owned by hu"
+ },
+ {
+  "name": "hunt-auth-bypass",
+  "category": "",
+  "desc": "Hunting skill for auth bypass vulnerabilities. Built from 12 public bug bounty reports across SAML XSW / parser-differential (GitHub Enterprise CVE-2025-25291/25292), SAML signature stripping (Uber, Rocket.Chat, CVE-2025-47949), SAML domain-enforcement bypass via control characters, cross-IdP assert"
+ },
+ {
+  "name": "hunt-auth-session",
+  "category": "",
+  "desc": "Hunt for auth & session flaws — password reset abuse (token leaks, host header injection, OTP brute), MFA/2FA bypass (cross-account OTP, OAuth path, force browse), broken session management (fixation, invalidation gaps), rate-limit bypass, JWT attacks (alg confusion, kid/jku/jwk injection, weak secr"
+ },
+ {
+  "name": "hunt-business-logic",
+  "category": "",
+  "desc": "Hunting skill for business logic vulnerabilities. Built from 12 public bug bounty reports. Covers coupon-race-stacking (Instacart, Stripe, Reverb), negative-quantity-in-cart price tampering (Upserve, Eternal/Zomato), decimal/fraction price-field overflow (Shipt), client-side checkout amount trust on"
+ },
+ {
+  "name": "hunt-cicd",
+  "category": "",
+  "desc": "Hunt CI/CD pipeline vulnerabilities — GitHub Actions workflow injection (pull_request_target Pwnrequest + ${{ }}-into-shell), self-hosted runner poisoning, OIDC trust-policy abuse, Jenkins script-console RCE and CVE-2024-23897 file read, GitLab CI runner-token registration, Terraform state file leak"
+ },
+ {
+  "name": "hunt-client-side",
+  "category": "",
+  "desc": "Hunt for client-side vulnerabilities — XSS (all contexts + filter bypasses), CSP bypass, CSRF, CORS misconfig, DOM-based attacks incl. clobbering. Built from personal notes. Use when input reflects into pages, CSP blocks payloads, state-changing endpoints lack tokens, or cross-origin data flows exis"
+ },
+ {
+  "name": "hunt-cloud-misconfig",
+  "category": "",
+  "desc": "Hunt cloud / infrastructure misconfigurations. AWS: public S3 buckets (s3:GetObject anonymous), permissive bucket policies (PutObjectAcl public-write), exposed CloudFront origin, public Lambda function URL, public RDS snapshot, IAM credentials in JS bundles, AWS metadata accessible via SSRF. GCP: pu"
+ },
+ {
+  "name": "hunt-file-handling",
+  "category": "",
+  "desc": "Hunt for path traversal, LFI, RFI — read arbitrary files, leak source via php://filter, escalate to RCE via log/session poisoning and wrappers. Built from personal PT/LFI/RFI notes. Use on file= path= page= template= download= parameters, upload features, or any path-building code."
+ },
+ {
+  "name": "hunt-graphql",
+  "category": "",
+  "desc": "Hunting skill for graphql vulnerabilities. Built from 12 public bug bounty reports across IDOR via node() / GID, mutation IDOR including AI/LLM features, cross-tenant IDOR, SSRF via argument, batching-DoS, query-cost-bypass, SQLi via argument, broken-object-level-authz, auth-bypass via unscoped muta"
+ },
+ {
+  "name": "hunt-idor",
+  "category": "",
+  "desc": "Hunt Insecure Direct Object References (IDOR/BOLA) — sequential and UUID identifiers, nested-object and batch endpoints, cross-tenant access, and write-side object swaps. Use when an endpoint takes a user-controlled object id. Do not use for SQL injection, SSRF, or generic RCE (see hunt-sqli, hunt-s"
+ },
+ {
+  "name": "hunt-injection",
+  "category": "",
+  "desc": "Hunt for server-side input injection — SQLi, NoSQLi, Command Injection, SSTI, XPath, LDAP, CRLF. Built from personal notes for all seven types with DBMS-specific payloads, WAF bypass ladders, and tool commands (sqlmap/ghauri/nosqli/commix/tplmap). Use when any parameter reaches a database, shell, te"
+ },
+ {
+  "name": "hunt-jwt-crypto",
+  "category": "",
+  "desc": "Hunt JWT cryptographic failures — alg:none signature-stripping and RS256→HS256 key-confusion that let an attacker forge a token for any identity (e.g. an admin) without knowing a secret. Use when the app authenticates with a JSON Web Token (an `eyJ...` Bearer token in the Authorization header, a coo"
+ },
+ {
+  "name": "hunt-mfa-bypass",
+  "category": "",
+  "desc": "Hunt MFA / 2FA bypass — 7 distinct patterns. (1) MFA not enforced on sensitive endpoints (password change, email change accept without MFA challenge), (2) MFA-step skip via direct navigation to post-login URL, (3) MFA-token replay (same code accepted twice), (4) brute-force the 6-digit OTP without r"
+ },
+ {
+  "name": "hunt-oauth",
+  "category": "",
+  "desc": "Hunt OAuth 2.0 / OIDC flaws — redirect_uri bypass, missing state (CSRF), authorization-code interception, scope escalation, implicit-flow token leakage, and account-linking takeover. Use when the target delegates login to an OAuth or OIDC provider. Do not use for SAML or JWT forgery (see hunt-saml, "
+ },
+ {
+  "name": "hunt-race-condition",
+  "category": "",
+  "desc": "Hunting skill for race condition vulnerabilities. Built from 12 public bug bounty reports including modern HTTP/2 single-packet attack cases (James Kettle DEF CON 2023 \"Smashing the State Machine\"; RyotaK / Flatt Security 10,000-request first-sequence-sync expansion 2024). Covers coupon double-redem"
+ },
+ {
+  "name": "hunt-rce",
+  "category": "",
+  "desc": "Hunt remote code execution — command injection, template injection, unsafe deserialization, file-upload webshells, and dependency CVEs that reach an execution sink. Use when input reaches a shell, template engine, deserializer, or file processor. Do not use for SQL injection or XSS payloads (see hun"
+ },
+ {
+  "name": "hunt-session",
+  "category": "",
+  "desc": "Hunt Session Management vulnerabilities — session fixation (no regeneration on login), insufficient invalidation on logout / password-change / email-change, predictable or low-entropy session IDs, JWT-as-session with no exp/revocation, refresh-token rotation/reuse-detection gaps, OAuth/SSO session l"
+ },
+ {
+  "name": "hunt-shadow-api",
+  "category": "",
+  "desc": "Hunt shadow / zombie / undocumented API surface (OWASP API9 Improper Inventory Management) — enumerate the full API version history (v1/v2/beta/legacy paths, header- and subdomain-based versioning), pull and diff every reachable OpenAPI/Swagger spec (including ones only findable via the Wayback Mach"
+ },
+ {
+  "name": "hunt-source-leak",
+  "category": "",
+  "desc": "Hunt source code and build artifact leakage — JavaScript source maps (.js.map) reconstructing TypeScript/ES6 source, Swagger/OpenAPI JSON endpoint discovery, .env/.git exposure, webpack chunks with hardcoded secrets, robots.txt/security.txt recon, build-info files, asset-manifest.json API route disc"
+ },
+ {
+  "name": "hunt-spa-api",
+  "category": "",
+  "desc": "Discover a single-page-app's hidden backend API from its public JS bundle, then test that API for broken access control / missing authentication. One of the highest-yield web plays in modern recon — SPAs ship their entire backend route map to the browser, and the API behind them is frequently missin"
+ },
+ {
+  "name": "hunt-sqli",
+  "category": "",
+  "desc": "Hunting skill for sqli vulnerabilities. Built from 12 public bug bounty reports including modern NoSQL injection (Rocket.Chat CVE-2021-22911 MongoDB $regex, Mongoose ORM CVE-2024-53900 $where bypass), modern ORM raw-fragment SQLi (Django CVE-2024-42005, Sequelize GHSA-wrh9-cjv3-2hpw), second-order S"
+ },
+ {
+  "name": "hunt-ssrf",
+  "category": "",
+  "desc": "Hunting skill for ssrf vulnerabilities. Built from 15 public bug bounty reports including AWS metadata SSRF (HackerOne $25k Analytics PDF, Shopify Exchange $25k, Capital One 106M-record breach, Dropbox/HelloSign $4,913), GCP metadata SSRF (Snapchat $4k), Azure IMDS SSRF (Azure DevOps $15k chain, Cha"
+ },
+ {
+  "name": "hunt-ssrf-xxe",
+  "category": "",
+  "desc": "Hunt for SSRF and XXE — internal network reach, cloud metadata theft, blind OOB confirmation, gopher/phar-style protocol abuse, file-read via XXE, error-based exfil. Built from personal notes. Use when apps fetch URLs, parse XML, accept file uploads with XML formats, or sit behind proxies/CDNs."
+ },
+ {
+  "name": "hunt-websocket",
+  "category": "",
+  "desc": "Hunt WebSocket vulnerabilities — Cross-Site WebSocket Hijacking (CSWSH), missing/weak Origin validation on the WS handshake, no per-message authentication, message tampering, socket.io namespace/room authorization bypass, and handshake-layer Upgrade smuggling. Use when target has WebSocket endpoints"
+ },
+ {
+  "name": "hunt-xss",
+  "category": "",
+  "desc": "Hunting skill for xss vulnerabilities. Built from 174 public bug bounty reports. Use when hunting xss on any target. For markup injection that reflects raw HTML but does NOT execute JavaScript (no `<script>`/event-handler execution), see hunt-html-injection — escalate here once script execution is p"
+ },
+ {
+  "name": "lateral-movement",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user wants post-foothold lateral-movement strategy on an authorized engagement — pass-the-hash/ticket, remote execution (PsExec/WMI/WinRM/DCOM/SSH), token manipulation, RDP, and pivot planning across a compromised network. Distinct from ad-attacker (AD protocol attac"
+ },
+ {
+  "name": "llm-redteam",
+  "category": "hunting",
+  "desc": "Delegates to this agent when the user asks about LLM and AI system red teaming, prompt injection (direct and indirect), jailbreak techniques, RAG poisoning, model exfiltration, training data extraction, agent and tool-use abuse, MCP server exploitation, AI guardrail bypass, or red teaming a deployed"
+ },
+ {
+  "name": "mobile-pentester",
+  "category": "infrastructure",
+  "desc": "Delegates to this agent when the user asks about mobile application security testing, Android pentesting, iOS pentesting, APK analysis, IPA analysis, mobile API testing, certificate pinning bypass, or mobile reverse engineering"
+ },
+ {
+  "name": "network-attacker",
+  "category": "infrastructure",
+  "desc": "Delegates to this agent when the user wants layer-2/layer-3 offensive testing on an authorized internal network — LLMNR/NBT-NS/mDNS poisoning, ARP spoofing and MITM, NTLM relay, IPv6/mitm6 takeover, VLAN hopping, and pivoting. Executes with per-command approval and scope validation. Distinct from re"
+ },
+ {
+  "name": "offensive-osint",
+  "category": "",
+  "desc": "Operational arsenal for authorized external red-team and bug-bounty recon. Concrete probes, wordlists, regexes, dorks, curl one-liners for: subdomain enum, GraphQL/Swagger/REST discovery, identity fabric (Entra/Okta/ADFS/Google/SAML/M365 deep — Teams/SharePoint/OneDrive), cloud bucket enum (S3/GCS/A"
+ },
+ {
+  "name": "opsec-anonymizer",
+  "category": "methodology",
+  "desc": "Delegates to this agent when the user asks about operator-side identity hygiene, source IP separation, traffic anonymization for authorized red team work, Tor and proxy chains, burner infrastructure provisioning, attribution avoidance, or pre-engagement opsec posture before tools are run against sco"
+ },
+ {
+  "name": "password-auditor",
+  "category": "validation",
+  "desc": "Delegates to this agent when the user wants to audit password posture — policy review against NIST 800-63B, password-storage/hashing review, breach-exposure checks, and lockout-safe password-spray planning. Advisory and planning only; hands active cracking and live spraying to credential-tester."
+ },
+ {
+  "name": "payload-crafter",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user asks about generating offensive payloads, building shellcode, working with msfvenom, packing or encoding payloads, building reverse shells, creating EDR-test binaries, or producing initial-access artifacts during authorized red team engagements."
+ },
+ {
+  "name": "persistence-planner",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user wants to plan and document persistence during an authorized red team engagement — host persistence (Windows/Linux), Active Directory persistence (golden/silver tickets, DCShadow, AdminSDHolder, GPO), and cloud persistence — with mandatory cleanup tracking and de"
+ },
+ {
+  "name": "phishing-operator",
+  "category": "infrastructure",
+  "desc": "Delegates to this agent when the user asks about setting up phishing infrastructure, configuring Evilginx3 or GoPhish, adversary-in-the-middle credential capture, MFA token relay, domain lookalike detection with dnstwist, or building phishing landing pages for authorized red team engagements."
+ },
+ {
+  "name": "poc-validator",
+  "category": "validation",
+  "desc": "Delegates to this agent when the user wants to validate a vulnerability finding with a safe Proof of Concept, eliminate false positives from scan results, automatically generate and execute PoC scripts for confirmed vulnerabilities, or verify that a reported bug is real before including it in a pent"
+ },
+ {
+  "name": "privesc-advisor",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user asks about privilege escalation techniques, local enumeration, Linux or Windows privilege escalation, container escape, or needs help escalating access on a compromised system during authorized testing."
+ },
+ {
+  "name": "report-generator",
+  "category": "reporting",
+  "desc": "Delegates to this agent when the user needs to write a penetration test report, compile findings into a document, create an executive summary, format technical findings, or produce any security assessment documentation."
+ },
+ {
+  "name": "reverse-engineer",
+  "category": "post-exploitation",
+  "desc": "Delegates to this agent when the user asks about static reverse engineering, working with Ghidra, Radare2, IDA, JadX, decompiling Android APKs, analyzing firmware with Binwalk, reading disassembly, or understanding the structure of a binary without running it."
+ },
+ {
+  "name": "security-arsenal",
+  "category": "",
+  "desc": "Security payloads, bypass tables, wordlists, gf pattern names, always-rejected bug list, and conditionally-valid-with-chain table. Use when you need specific payloads for XSS/SSRF/SQLi/XXE/NoSQLi/command injection/SSTI/IDOR/path-traversal/HTTP smuggling/WebSocket/MFA bypass, or bypass techniques. Su"
+ },
+ {
+  "name": "social-engineer",
+  "category": "infrastructure",
+  "desc": "Delegates to this agent when the user asks about social engineering, phishing campaigns, pretexting, vishing, physical social engineering, security awareness testing, or human-factor security assessments"
+ },
+ {
+  "name": "supply-chain-auditor",
+  "category": "hunting",
+  "desc": "Delegates to this agent when the user wants to audit software supply chain risk, generate or review an SBOM, hunt for dependency confusion and typosquatting exposure, inspect lockfile and package integrity, review install-time scripts in third-party packages, assess build and artifact provenance, or"
+ },
+ {
+  "name": "swarm-orchestrator",
+  "category": "methodology",
+  "desc": "Delegates to this agent when the user wants to coordinate multiple pentest agents as a team, run a full automated red team engagement, orchestrate parallel reconnaissance and exploitation workflows, manage agent-to-agent handoffs, or execute a complete pentest lifecycle from planning through reporti"
+ },
+ {
+  "name": "threat-modeler",
+  "category": "methodology",
+  "desc": "Delegates to this agent when the user asks about threat modeling, attack surface analysis, STRIDE, DREAD, attack trees, data flow diagrams, trust boundaries, or security architecture review"
+ },
+ {
+  "name": "traffic-analyzer",
+  "category": "infrastructure",
+  "desc": "Delegates to this agent when the user wants offline analysis of captured network traffic — dissecting pcaps, extracting credentials and artifacts, reconstructing sessions, identifying protocols and anomalies, and turning a capture into findings. Analyzes captures the user provides; active intercepti"
+ },
+ {
+  "name": "triage-validation",
+  "category": "",
+  "desc": "Finding validation before writing any report — 7-Question Gate (all 7 questions), 4 pre-submission gates, always-rejected list, conditionally valid with chain table, CVSS 3.1 quick reference, severity decision guide, report title formula, 60-second pre-submit checklist. Use BEFORE writing any report"
+ },
+ {
+  "name": "vuln-scanner",
+  "category": "recon",
+  "desc": "Delegates to this agent when the user wants to run vulnerability scans, identify CVEs in target systems, use tools like nuclei, nikto, or OpenVAS, parse vulnerability scan results, or prioritize vulnerabilities for exploitation during authorized penetration testing."
+ },
+ {
+  "name": "web2-recon",
+  "category": "",
+  "desc": "Web2 recon pipeline — subdomain enumeration (subfinder, Chaos API, assetfinder), live host discovery (dnsx, httpx), URL crawling (katana, waybackurls, gau), directory fuzzing (ffuf), JS analysis (LinkFinder, SecretFinder), continuous monitoring (new subdomain alerts, JS change detection, GitHub comm"
+ },
+ {
+  "name": "wireless-pentester",
+  "category": "infrastructure",
+  "desc": "Delegates to this agent when the user asks about wireless security testing, WiFi pentesting, WPA/WPA2/WPA3 attacks, Bluetooth security, wireless reconnaissance, rogue access points, evil twin attacks, or RF security"
+ }
+]

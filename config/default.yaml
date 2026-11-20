@@ -1,0 +1,345 @@
+# AgentX Default Configuration
+# Copy to config.yaml and customize
+
+debug: false
+log_level: "INFO"
+data_dir: "data"
+skills_dir: "skills"
+scripts_dir: "scripts"
+
+# AI Providers - Configure at least one, then set enabled: true
+ai_providers:
+  - name: "openai"
+    type: "openai"
+    api_key: "${OPENAI_API_KEY}"
+    base_url: "https://api.openai.com/v1"
+    model: "gpt-4o"
+    temperature: 0.1
+    max_tokens: 4096
+    enabled: false
+
+  - name: "anthropic"
+    type: "anthropic"
+    api_key: "${ANTHROPIC_API_KEY}"
+    base_url: "https://api.anthropic.com"
+    model: "claude-3-5-sonnet-20241022"
+    temperature: 0.1
+    max_tokens: 4096
+    enabled: false
+
+  - name: "ollama"
+    type: "ollama"
+    base_url: "http://localhost:11434"
+    model: "llama3.1:8b"
+    temperature: 0.1
+    max_tokens: 4096
+    enabled: false
+
+  - name: "lmstudio"
+    type: "lmstudio"
+    base_url: "http://localhost:1234/v1"
+    model: "local-model"
+    temperature: 0.1
+    max_tokens: 4096
+    enabled: false
+
+# Model routing
+orchestrator_model: "claude-3-5-sonnet-20241022"
+skill_model: "claude-3-haiku-20240307"
+local_model: "llama3.1:8b"
+
+# Skills - Core bug bounty skills (enabled by default)
+skills:
+  - name: "web2-recon"
+    enabled: true
+    priority: 1
+  - name: "offensive-osint"
+    enabled: true
+    priority: 1
+  - name: "hunt-source-leak"
+    enabled: true
+    priority: 2
+  - name: "hunt-spa-api"
+    enabled: true
+    priority: 2
+  - name: "hunt-shadow-api"
+    enabled: true
+    priority: 2
+  - name: "hunt-xss"
+    enabled: true
+    priority: 3
+  - name: "hunt-sqli"
+    enabled: true
+    priority: 3
+  - name: "hunt-ssrf"
+    enabled: true
+    priority: 3
+  - name: "hunt-idor"
+    enabled: true
+    priority: 3
+  - name: "hunt-rce"
+    enabled: true
+    priority: 3
+  - name: "hunt-auth-bypass"
+    enabled: true
+    priority: 4
+  - name: "hunt-jwt-crypto"
+    enabled: true
+    priority: 4
+  - name: "hunt-mfa-bypass"
+    enabled: true
+    priority: 4
+  - name: "hunt-session"
+    enabled: true
+    priority: 4
+  - name: "hunt-oauth"
+    enabled: true
+    priority: 4
+  - name: "hunt-graphql"
+    enabled: true
+    priority: 5
+  - name: "hunt-api-misconfig"
+    enabled: true
+    priority: 5
+  - name: "hunt-websocket"
+    enabled: true
+    priority: 5
+  - name: "hunt-business-logic"
+    enabled: true
+    priority: 5
+  - name: "hunt-race-condition"
+    enabled: true
+    priority: 5
+  - name: "hunt-cloud-misconfig"
+    enabled: true
+    priority: 6
+  - name: "hunt-cicd"
+    enabled: true
+    priority: 6
+  - name: "triage-validation"
+    enabled: true
+    priority: 1
+  - name: "security-arsenal"
+    enabled: true
+    priority: 1
+  - name: "evidence-hygiene"
+    enabled: true
+    priority: 1
+  - name: "bb-methodology"
+    enabled: true
+    priority: 1
+  - name: "bug-bounty"
+    enabled: true
+    priority: 1
+
+  # Imported from pentest-ai-agents (MIT)
+  - name: "llm-redteam"
+    enabled: true
+    priority: 5
+  - name: "ai-recon"
+    enabled: true
+    priority: 1
+  - name: "poc-validator"
+    enabled: true
+    priority: 8
+  - name: "fix-verifier"
+    enabled: true
+    priority: 8
+  - name: "report-generator"
+    enabled: true
+    priority: 9
+  - name: "exploit-chainer"
+    enabled: true
+    priority: 7
+  - name: "attack-planner"
+    enabled: true
+    priority: 2
+  - name: "code-auditor"
+    enabled: true
+    priority: 5
+  - name: "vuln-scanner"
+    enabled: true
+    priority: 1
+  - name: "database-attacker"
+    enabled: true
+    priority: 5
+  - name: "credential-tester"
+    enabled: true
+    priority: 5
+  - name: "crypto-analyzer"
+    enabled: true
+    priority: 5
+  - name: "supply-chain-auditor"
+    enabled: true
+    priority: 5
+  - name: "ctf-solver"
+    enabled: true
+    priority: 2
+  - name: "password-auditor"
+    enabled: true
+    priority: 8
+  - name: "ad-attacker"
+    enabled: true
+    priority: 7
+  - name: "privesc-advisor"
+    enabled: true
+    priority: 7
+  - name: "lateral-movement"
+    enabled: true
+    priority: 7
+  - name: "c2-operator"
+    enabled: true
+    priority: 7
+  - name: "container-breakout"
+    enabled: true
+    priority: 7
+  - name: "persistence-planner"
+    enabled: true
+    priority: 7
+  - name: "evasion-specialist"
+    enabled: true
+    priority: 7
+  - name: "data-exfiltrator"
+    enabled: true
+    priority: 7
+  - name: "payload-crafter"
+    enabled: true
+    priority: 7
+  - name: "reverse-engineer"
+    enabled: true
+    priority: 7
+  - name: "network-attacker"
+    enabled: true
+    priority: 7
+  - name: "wireless-pentester"
+    enabled: true
+    priority: 7
+  - name: "mobile-pentester"
+    enabled: true
+    priority: 7
+  - name: "traffic-analyzer"
+    enabled: true
+    priority: 7
+  - name: "social-engineer"
+    enabled: true
+    priority: 7
+  - name: "phishing-operator"
+    enabled: true
+    priority: 7
+  - name: "threat-modeler"
+    enabled: true
+    priority: 2
+  - name: "engagement-planner"
+    enabled: true
+    priority: 2
+  - name: "opsec-anonymizer"
+    enabled: true
+    priority: 2
+  - name: "swarm-orchestrator"
+    enabled: true
+    priority: 2
+  - name: "exploit-guide"
+    enabled: true
+    priority: 2
+  - name: "detection-engineer"
+    enabled: true
+    priority: 2
+
+# External tools configuration
+tools:
+  - name: "subfinder"
+    auto_install: true
+  - name: "httpx"
+    auto_install: true
+  - name: "nuclei"
+    auto_install: true
+  - name: "katana"
+    auto_install: true
+  - name: "ffuf"
+    auto_install: true
+  - name: "gau"
+    auto_install: true
+  - name: "waybackurls"
+    auto_install: true
+  - name: "dalfox"
+    auto_install: true
+  - name: "gf"
+    auto_install: true
+  - name: "interactsh-client"
+    auto_install: true
+  - name: "sqlmap"
+    auto_install: true
+  - name: "ghauri"
+    auto_install: true
+  - name: "nosqli"
+    auto_install: true
+  - name: "commix"
+    auto_install: true
+  - name: "tplmap"
+    auto_install: true
+  - name: "arjun"
+    auto_install: true
+  - name: "paramspider"
+    auto_install: true
+  - name: "kiterunner"
+    auto_install: true
+  - name: "trufflehog"
+    auto_install: true
+  - name: "secretfinder"
+    auto_install: true
+  - name: "jsluice"
+    auto_install: true
+  - name: "naabu"
+    auto_install: true
+  - name: "sisakulint"
+    auto_install: true
+
+wordlists_dir: "data/wordlists"
+payloads_dir: "data/payloads"
+
+# Database
+database:
+  type: "sqlite"
+  path: "data/agentx.db"
+
+# Burp Suite integration
+burp:
+  enabled: false
+  host: "127.0.0.1"
+  port: 1337
+  use_https: false
+
+# MCP (Model Context Protocol) servers - the AI agent calls these as tools.
+# 1) Burp: install the "MCP Server" BApp in Burp Suite (Extensions tab), open
+#    the MCP server tab, click "Start server" -> SSE endpoint at http://127.0.0.1:9876
+# 2) Browser: Playwright MCP (downloads on first run via npx; needs Node.js >= 20)
+mcp_servers:
+  - name: "burp"
+    transport: "sse"
+    url: "http://127.0.0.1:9876"
+    auto_approve: false
+    enabled: false
+
+  - name: "browser"
+    transport: "stdio"
+    command: "npx"
+    args: ["-y", "@playwright/mcp@latest", "--headless"]
+    env:
+      PLAYWRIGHT_DRIVER_UPDATE: "false"
+    auto_approve: false
+    enabled: false
+
+# Permission gate: ask = approve sensitive MCP tools inline, auto = never ask,
+# yolo = never ask AND run state-changing tools without review (dangerous)
+permission_mode: "ask"
+
+# Max plan->act->observe steps in one agent loop turn
+max_agent_steps: 20
+
+# Reporting
+report_templates_dir: "agentx/reporting/templates"
+default_report_format: "markdown"
+
+# Session
+session_timeout: 3600
+max_concurrent_tasks: 5

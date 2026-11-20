@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# AgentX runtime data
+data/agentx.db
+data/reports/
+data/*
+!data/wordlists/
+!data/payloads/
+data/wordlists/*
+!data/wordlists/.gitkeep
+data/payloads/*
+!data/payloads/.gitkeep
+
+# Secrets
+.env
+config/config.yaml
+config/local.yaml
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

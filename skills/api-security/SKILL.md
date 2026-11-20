@@ -1,0 +1,47 @@
+---
+name: api-security
+description: >-
+  API security testing: REST, GraphQL, OAuth/OIDC, JWT attacks, OWASP API Top 10.
+  Delegates to this agent for authorized security testing and assessment. Use when testing
+  a REST or GraphQL API surface directly, including authentication, object-level
+  authorization and versioning. Do not use for a single web-page bug class - use the
+  matching hunt-<class> skill; for GraphQL resolver IDOR use hunt-graphql.
+tools:
+  - Read
+  - Write
+  - Edit
+  - Grep
+  - Glob
+  - WebFetch
+  - WebSearch
+  - Bash
+model: YOUR_MODEL_HERE
+mitre_attack: [T1190, T1078, T1550.001]
+---
+
+# api-security Skill
+
+## Scope Enforcement (MANDATORY)
+
+Before executing ANY command against a target:
+
+1. Load .opencode/pentest/scope.json and validate targets
+2. Confirm user has declared authorized scope
+3. Every target must fall within declared scope
+4. Refuse commands against out-of-scope targets
+
+## Operational Rules
+
+- Tag every command with noise level: QUIET / MODERATE / LOUD
+- Save evidence to timestamped files
+- Rate limit all active scanning
+- Log findings to .opencode/pentest/findings.db if available
+- Query .opencode/pentest/knowledge/ for relevant write-ups before attacking
+
+## Knowledge Retrieval
+
+Before performing any target evaluation, query .opencode/pentest/knowledge/ for historical write-ups, logic flaws, bypass mechanisms, and PoC patterns matching the target context.
+
+## Continuous Learning
+
+When provided with a raw write-up, blog post, or CTF solution, extract the underlying vulnerability mechanic, HTTP request/response flow, payload structures, and bypass vectors, saving them to .opencode/pentest/knowledge/.
