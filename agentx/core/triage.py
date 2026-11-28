@@ -11,6 +11,7 @@ from __future__ import annotations
 from typing import Any
 
 from agentx.core.memory import memory
+from agentx.core.proof import ProofGate
 
 REQUIRED_FIELDS = ("title", "severity", "endpoint", "impact", "steps_to_reproduce")
 
@@ -45,6 +46,10 @@ def triage_finding(finding: Any) -> tuple[bool, str]:
     for phrase in THEORETICAL_PHRASES:
         if phrase in text:
             return False, f"Theoretical language detected: '{phrase}'"
+
+    proof = ProofGate().evaluate(finding)
+    if not proof.accepted:
+        return False, proof.reason
 
     return True, "Passed automated triage gate."
 

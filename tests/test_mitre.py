@@ -492,7 +492,7 @@ class TestSurfacing:
             description="d",
             impact="i",
             steps_to_reproduce=["step"],
-            evidence={"ok": True},
+            evidence={"http_response": 'HTTP/1.1 200 OK\\n{"alg":"none"}'},
         )
 
     def test_markdown_report_has_attack_links(self):

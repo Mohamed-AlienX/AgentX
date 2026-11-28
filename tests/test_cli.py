@@ -232,7 +232,9 @@ def test_report_no_findings() -> None:
 
 def test_report_with_findings_writes_file(tmp_path) -> None:
     session = session_manager.create_session("example.com")
-    session_manager.add_finding(_finding(session.id))
+    f = _finding(session.id)
+    f.evidence = {"http_response": "HTTP/1.1 200 OK"}
+    session_manager.add_finding(f)
     out = tmp_path / "report.md"
     result = _run("report", "-f", "markdown", "-o", str(out))
     assert result.exit_code == 0
@@ -554,7 +556,9 @@ async def test_handle_slash_basic() -> None:
 async def test_handle_slash_target_and_status(monkeypatch) -> None:
     session_manager.create_session("example.com")
     session = session_manager.get_session()
-    session_manager.add_finding(_finding(session.id))
+    f = _finding(session.id)
+    f.evidence = {"http_response": "HTTP/1.1 200 OK"}
+    session_manager.add_finding(f)
     await cli._handle_slash("/target", True)
     await cli._handle_slash("/target evil.example.com", True)
     assert session.target == "evil.example.com"
@@ -658,7 +662,9 @@ async def test_handle_slash_findings_report_validate(monkeypatch, tmp_path) -> N
 
 async def test_handle_slash_report_error(monkeypatch) -> None:
     session = session_manager.create_session("example.com")
-    session_manager.add_finding(_finding(session.id))
+    f = _finding(session.id)
+    f.evidence = {"http_response": "HTTP/1.1 200 OK"}
+    session_manager.add_finding(f)
 
     def boom(*a, **k):
         raise RuntimeError("disk full")

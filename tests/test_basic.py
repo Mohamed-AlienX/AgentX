@@ -88,7 +88,7 @@ def test_report_generation(tmp_path: Path) -> None:
         description="desc",
         impact="impact",
         steps_to_reproduce=["open", "inject"],
-        evidence={},
+        evidence={"http_response": "HTTP/1.1 200 OK\n<script>alert(1)</script>"},
     )
     md = gen.generate([finding], target="example.com", session_id="s1", fmt="markdown")
     assert "Reflected XSS" in md

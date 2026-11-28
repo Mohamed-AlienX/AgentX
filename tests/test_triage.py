@@ -17,7 +17,7 @@ def _finding(**overrides) -> Finding:
         "description": "user input is reflected unescaped",
         "impact": "session theft",
         "steps_to_reproduce": ["open URL", "inject payload"],
-        "evidence": {"status": 200},
+        "evidence": {"http_response": "HTTP/1.1 200 OK"},
     }
     data.update(overrides)
     return Finding(**data)

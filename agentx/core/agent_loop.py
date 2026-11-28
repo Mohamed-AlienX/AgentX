@@ -18,16 +18,17 @@ from agentx.core.session import HuntSession, session_manager
 from agentx.mcp import mcp_manager, permission_gate
 
 TOOL_GUIDE = """
-\n\n[MCP TOOLS]
-You have real tools attached to this conversation (declared as functions). Use
-them to inspect the target instead of guessing. Guidelines:
-- Browser tools: open pages, load and read JS, inspect rendered output, take
-  snapshots/screenshots to observe the app.
-- Burp tools: send raw HTTP requests, create Repeater tabs, queue Intruder
-  attacks, and query proxy history to discover endpoints.
-Drive one tool at a time and use the returned output to decide the next call.
+\n\n[MCP TOOLS - COMMAND FIRST]
+You have real tools attached to this conversation (declared as functions). Prefer
+command-first, evidence-producing tool calls over speculative narration.
+- Before acting, state the shortest command/tool intent and expected signal.
+- Browser tools: open pages, read rendered/JS state, take snapshots/screenshots.
+- Burp/tools: send raw requests, inspect responses/history, and capture evidence.
+- Run one tool at a time; use returned output to decide the next command.
+- Do not claim a vulnerability without reproducible evidence (command output,
+  HTTP request/response pair, screenshot path, or shell proof).
 When you have enough evidence (or the target/flow is fully inspected), stop
-calling tools and write your final answer, including any findings with evidence.
+calling tools and write your final answer with evidence-backed findings only.
 """
 
 

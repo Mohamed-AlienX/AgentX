@@ -9,6 +9,7 @@ from typing import Any
 
 from agentx.config import settings
 from agentx.core.memory import Finding
+from agentx.core.proof import ProofGate
 from agentx.mitre import technique_url
 from agentx.mitre_mapping import get_mitre_for_skill
 
@@ -39,12 +40,13 @@ class ReportGenerator:
     ) -> str:
         """Generate a report in the requested format."""
         fmt = fmt.lower()
+        proven_findings = self._proven_findings(findings)
         if fmt == "json":
-            return self._to_json(findings, target, session_id)
+            return self._to_json(proven_findings, target, session_id)
         elif fmt == "html":
-            return self._to_html(findings, target, session_id, title)
+            return self._to_html(proven_findings, target, session_id, title)
         else:
-            return self._to_markdown(findings, target, session_id, title)
+            return self._to_markdown(proven_findings, target, session_id, title)
 
     def save(
         self,
@@ -68,6 +70,11 @@ class ReportGenerator:
         output_path.write_text(content, encoding="utf-8")
         return output_path
 
+    @staticmethod
+    def _proven_findings(findings: list[Finding]) -> list[Finding]:
+        gate = ProofGate()
+        return [finding for finding in findings if gate.accept(finding)]
+
     def _sorted(self, findings: list[Finding]) -> list[Finding]:
         def key(f: Finding) -> int:
             try:
@@ -84,6 +91,7 @@ class ReportGenerator:
             "generated_at": datetime.now().isoformat(),
             "summary": self._summary(findings),
             "findings": [self._finding_to_dict(f) for f in self._sorted(findings)],
+            "methodology_human_attestation": self._attestation_payload(),
         }
         return json.dumps(data, indent=2, default=str)
 
@@ -152,6 +160,7 @@ class ReportGenerator:
                 lines.append("```")
                 lines.append("")
 
+        lines.extend(self._attestation_markdown())
         return "\n".join(lines)
 
     def _to_html(
@@ -175,22 +184,33 @@ class ReportGenerator:
             attack_line = (
                 f"<p><strong>ATT&amp;CK:</strong> {', '.join(techniques)}</p>" if techniques else ""
             )
+            evidence_block = ""
+            if f.evidence:
+                evidence = json.dumps(f.evidence, indent=2, default=str)[:4000]
+                evidence_block = (
+                    f"<h4>Evidence</h4><pre><code>{self._escape_html(evidence)}</code></pre>"
+                )
             finding_blocks.append(f"""
             <div class="finding">
-              <h3>{i}. <span class="sev-{f.severity.lower()}">{f.severity}</span> {f.title}</h3>
-              <p><strong>Endpoint:</strong> <code>{f.endpoint}</code></p>
-              <p><strong>Skill:</strong> {f.skill_name}</p>
+              <h3>{i}. <span class="sev-{f.severity.lower()}">{f.severity}</span> {self._escape_html(f.title)}</h3>
+              <p><strong>Endpoint:</strong> <code>{self._escape_html(f.endpoint)}</code></p>
+              <p><strong>Skill:</strong> {self._escape_html(f.skill_name)}</p>
               {attack_line}
-              <h4>Description</h4><p>{f.description}</p>
-              <h4>Impact</h4><p>{f.impact}</p>
+              <h4>Description</h4><p>{self._escape_html(f.description)}</p>
+              <h4>Impact</h4><p>{self._escape_html(f.impact)}</p>
               <h4>Steps to Reproduce</h4><ol>{steps}</ol>
+              {evidence_block}
             </div>""")
 
+        attestation = self._attestation_payload()
+        attestation_html = "".join(
+            f"<li>{self._escape_html(item)}</li>" for item in attestation["items"]
+        )
         return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>{title}</title>
+<title>{self._escape_html(title)}</title>
 <style>
   body {{ font-family: -apple-system, Segoe UI, Roboto, sans-serif; margin: 40px; color: #1a1a1a; }}
   h1 {{ border-bottom: 2px solid #333; padding-bottom: 8px; }}
@@ -203,19 +223,56 @@ class ReportGenerator:
   .sev-low {{ color: #2e7d32; font-weight: bold; }}
   .sev-info {{ color: #555; font-weight: bold; }}
   code {{ background: #f4f4f4; padding: 2px 4px; border-radius: 3px; }}
+  pre {{ background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }}
 </style>
 </head>
 <body>
-<h1>{title}</h1>
-<p><strong>Target:</strong> {target or "N/A"}<br>
-<strong>Session:</strong> {session_id or "N/A"}<br>
+<h1>{self._escape_html(title)}</h1>
+<p><strong>Target:</strong> {self._escape_html(target or "N/A")}<br>
+<strong>Session:</strong> {self._escape_html(session_id or "N/A")}<br>
 <strong>Generated:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
 <h2>Summary</h2>
 <table><tr><th>Severity</th><th>Count</th></tr>{rows}</table>
 <h2>Findings</h2>
 {"".join(finding_blocks) if finding_blocks else "<p>No findings.</p>"}
+<h2>Methodology &amp; Human Attestation</h2>
+<p>{self._escape_html(attestation["statement"])}</p>
+<ul>{attestation_html}</ul>
 </body>
 </html>"""
+
+    @staticmethod
+    def _escape_html(value: str) -> str:
+        return (
+            str(value)
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace('"', "&quot;")
+            .replace("'", "&#39;")
+        )
+
+    @staticmethod
+    def _attestation_payload() -> dict[str, Any]:
+        return {
+            "statement": (
+                "Automated evidence was collected by AgentX tooling, but a human operator "
+                "must review scope, reproduce key findings, and approve external disclosure."
+            ),
+            "items": [
+                "Scope and authorization were reviewed by a human operator.",
+                "Evidence was validated as reproducible before disclosure decisions.",
+                "Automated findings require human attestation before final delivery.",
+            ],
+        }
+
+    def _attestation_markdown(self) -> list[str]:
+        payload = self._attestation_payload()
+        lines = ["## Methodology & Human Attestation", "", payload["statement"], ""]
+        for item in payload["items"]:
+            lines.append(f"- {item}")
+        lines.append("")
+        return lines
 
     def _summary(self, findings: list[Finding]) -> dict[str, int]:
         summary: dict[str, int] = {}

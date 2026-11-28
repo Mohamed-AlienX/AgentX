@@ -1,0 +1,150 @@
+{
+  "phase": "executor-handoff",
+  "scanId": "hybrid-1767007979956-8h3wsf",
+  "target": "10.10.10.3",
+  "attackerPort": 4444,
+  "brainIntelligence": {
+    "targetProfile": {
+      "targetType": "network",
+      "operatingSystem": "Debian Linux",
+      "securityPosture": "strong",
+      "recommendedApproach": "Brute Force Attack",
+      "assessmentConfidence": 70
+    },
+    "targetIntelligence": {
+      "profile": {
+        "type": "network",
+        "services": [
+          {"port": 21, "service": "ftp", "version": "2.3.4", "banner": "vsftpd 2.3.4"},
+          {"port": 22, "service": "ssh", "version": "4.7p1", "banner": "OpenSSH 4.7p1 Debian"},
+          {"port": 139, "service": "netbios-ssn", "version": "3.0.20", "banner": "Samba smbd 3.0.20-Debian"},
+          {"port": 445, "service": "netbios-ssn", "version": "3.0.20", "banner": "Samba smbd 3.0.20-Debian"}
+        ],
+        "openPorts": [21, 22, 139, 445],
+        "riskLevel": "medium"
+      },
+      "techStack": {"operatingSystem": "Debian Linux"},
+      "confidence": 70
+    },
+    "toolStrategy": {
+      "primaryTools": [{"toolName": "nmap_port_scan", "priority": 100}],
+      "executionOrder": ["nmap_port_scan"]
+    },
+    "discoveredServices": [
+      {"port": 21, "service": "ftp", "priority": 110, "software": "vsftpd", "version": "2.3.4"},
+      {"port": 22, "service": "ssh", "priority": 80, "software": "OpenSSH", "version": "4.7p1"},
+      {"port": 139, "service": "netbios-ssn", "priority": 110, "software": "Samba", "version": "3.0.20"},
+      {"port": 445, "service": "netbios-ssn", "priority": 110, "software": "Samba", "version": "3.0.20"}
+    ],
+    "vulnerabilities": [
+      {
+        "cveId": "CVE-2011-2523",
+        "severity": "critical",
+        "exploitType": "RCE",
+        "availableExploits": [
+          {
+            "id": "e1",
+            "type": "metasploit",
+            "module": "exploit/unix/ftp/vsftpd_234_backdoor",
+            "scriptPath": "/opt/exploitdb/exploits/unix/remote/17491.rb",
+            "reliability": "great",
+            "expectedOutcome": "shell"
+          }
+        ]
+      },
+      {
+        "cveId": "CVE-2007-2447",
+        "name": "Samba 3.0.20 < 3.0.25rc3 - Username map script Command Execution",
+        "severity": "critical",
+        "exploitType": "RCE",
+        "availableExploits": [
+          {
+            "id": "e2",
+            "type": "metasploit",
+            "module": "exploit/multi/samba/usermap_script",
+            "scriptPath": "/opt/exploitdb/exploits/unix/remote/16320.rb",
+            "reliability": "great",
+            "expectedOutcome": "shell"
+          },
+          {
+            "id": "e2",
+            "type": "metasploit",
+            "module": "exploit/multi/samba/usermap_script",
+            "scriptPath": "/opt/exploitdb/exploits/unix/remote/16320.rb",
+            "reliability": "great",
+            "expectedOutcome": "shell"
+          }
+        ]
+      },
+      {
+        "cveId": "EDB-7701",
+        "name": "Samba < 3.0.20 - Remote Heap Overflow",
+        "versionRange": "< 3.0.20",
+        "severity": "critical",
+        "exploitType": "RCE",
+        "availableExploits": [
+          {
+            "id": "e3",
+            "type": "script",
+            "scriptPath": "/opt/exploitdb/exploits/linux/remote/7701.txt",
+            "reliability": "normal",
+            "expectedOutcome": "shell"
+          }
+        ]
+      },
+      {
+        "cveId": "CVE-2018-15473",
+        "name": "OpenSSH 2.3 < 7.7 - Username Enumeration (PoC)",
+        "severity": "critical",
+        "exploitType": "RCE",
+        "availableExploits": [
+          {
+            "id": "e4",
+            "type": "script",
+            "scriptPath": "/opt/exploitdb/exploits/linux/remote/45210.py",
+            "reliability": "normal",
+            "expectedOutcome": "shell"
+          }
+        ]
+      },
+      {
+        "cveId": "CVE-2016-10010",
+        "name": "OpenSSH < 7.4 local privilege escalation",
+        "severity": "medium",
+        "exploitType": "RCE",
+        "availableExploits": [
+          {
+            "id": "e5",
+            "type": "script",
+            "scriptPath": "/opt/exploitdb/exploits/linux/local/40962.txt",
+            "reliability": "normal",
+            "expectedOutcome": "shell"
+          }
+        ]
+      }
+    ],
+    "attackVectors": [
+      {
+        "id": "av-1",
+        "name": "CVE-2011-2523 via ftp",
+        "targetService": {"port": 21, "service": "ftp", "priority": 110},
+        "priority": 100,
+        "successProbability": 0.75
+      },
+      {
+        "id": "av-3",
+        "name": "CVE-2007-2447 via netbios-ssn",
+        "targetService": {"port": 139, "service": "netbios-ssn", "priority": 110},
+        "priority": 100,
+        "successProbability": 0.75
+      }
+    ],
+    "confidence": 55,
+    "metrics": {"researchQueries": 0, "reconToolsUsed": 17}
+  },
+  "executorInput": {
+    "target": "10.10.10.3",
+    "attackerPort": 4444,
+    "scanId": "hybrid-1767007979956-8h3wsf"
+  }
+}

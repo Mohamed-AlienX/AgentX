@@ -151,8 +151,8 @@ Create an execution plan following the output format specified in your instructi
                     # Parse skill list
                     for line in content.split("\n"):
                         line = line.strip()
-                        if line.startswith("-") or line.startswith("•"):
-                            skill_part = line[1:].strip()
+                        if line[:1] in "-*?" or line.startswith("???"):
+                            skill_part = re.sub(r"^[\-\*\?\s\u2022\ufeff]+", "", line).strip()
                             if ":" in skill_part:
                                 skill_name = skill_part.split(":")[0].strip()
                                 plan.selected_skills.append(skill_name)
@@ -174,8 +174,10 @@ Create an execution plan following the output format specified in your instructi
                 elif key == "questions":
                     for line in content.split("\n"):
                         line = line.strip()
-                        if line.startswith("-") or line.startswith("•"):
-                            plan.questions.append(line[1:].strip())
+                        if line[:1] in "-*?" or line.startswith("???"):
+                            plan.questions.append(
+                                re.sub(r"^[\-\*\?\s\u2022\ufeff]+", "", line).strip()
+                            )
                 elif key == "estimated_time":
                     plan.estimated_time = content
 

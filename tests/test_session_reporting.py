@@ -29,7 +29,10 @@ def _finding(**overrides: Any) -> Finding:
         "description": "user input is reflected unescaped",
         "impact": "session token theft",
         "steps_to_reproduce": ["open URL", "inject payload"],
-        "evidence": {"status": 200},
+        "evidence": {
+            "http_request": "GET /search?q=<script>alert(1)</script> HTTP/1.1",
+            "http_response": "HTTP/1.1 200 OK\n...<script>alert(1)</script>...",
+        },
     }
     data.update(overrides)
     return Finding(**data)
@@ -43,7 +46,7 @@ def _rich_finding() -> Finding:
         description="unrestricted file upload",
         impact="full server compromise",
         steps_to_reproduce=["upload shell", "browse to shell"],
-        evidence={"payload": "<?php system($_GET['c']); ?>"},
+        evidence={"command_output": "uid=0(root) gid=0(root)"},
         cvss_score=9.8,
     )
 
@@ -56,7 +59,7 @@ def _sparse_finding() -> Finding:
         description="",
         impact="",
         steps_to_reproduce=[],
-        evidence={},
+        evidence={"http_response": "HTTP/1.1 200 OK\nX-Test: missing"},
         cvss_score=None,
     )
 
@@ -283,12 +286,14 @@ def test_markdown_report_sections_order_and_details() -> None:
     assert "- **CVSS:** 9.8" in md
     assert "- **Validated:** No" in md
     assert "**Evidence**" in md
-    assert '"payload"' in md
+    assert '"command_output"' in md
     assert "1. upload shell" in md
     # sparse finding fallbacks
     assert "_No description provided._" in md
     assert "_No impact provided._" in md
     assert "_None provided._" in md
+    assert "## Methodology & Human Attestation" in md
+    assert "human operator must review scope" in md
 
 
 def test_markdown_empty_session_report() -> None:
@@ -341,6 +346,8 @@ def test_html_report_with_findings() -> None:
     assert "RCE via upload" in html
     assert "<code>/search?q=</code>" in html
     assert "<li>upload shell</li>" in html
+    assert "Methodology &amp; Human Attestation" in html
+    assert "human operator must review scope" in html
 
 
 def test_html_empty_findings_branch() -> None:
@@ -392,6 +399,7 @@ def test_triage_finding_accepts_plain_dict() -> None:
             "impact": "full DB read",
             "steps_to_reproduce": ["send payload"],
             "description": "blind sqli confirmed",
+            "evidence": {"http_response": "HTTP/1.1 200 OK\nid=1"},
         }
     )
     assert ok
@@ -400,6 +408,19 @@ def test_triage_finding_accepts_plain_dict() -> None:
     bad_ok, bad_notes = triage_finding({"title": "only"})
     assert not bad_ok
     assert "severity" in bad_notes
+
+    no_proof_ok, no_proof_notes = triage_finding(
+        {
+            "title": "SQLi",
+            "severity": "HIGH",
+            "endpoint": "/api",
+            "impact": "full DB read",
+            "steps_to_reproduce": ["send payload"],
+            "description": "blind sqli confirmed",
+        }
+    )
+    assert not no_proof_ok
+    assert "proof missing" in no_proof_notes.lower()
 
 
 def test_triage_findings_persists_validated_flag(
@@ -436,6 +457,7 @@ def test_triage_findings_dict_paths_and_skips() -> None:
         "impact": "full DB read",
         "steps_to_reproduce": ["send payload"],
         "description": "blind sqli confirmed",
+        "evidence": {"http_response": "HTTP/1.1 200 OK"},
     }
     done = {**good, "validation_notes": "already done"}
     passed, total = triage_findings([good, done], persist=True)

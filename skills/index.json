@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T12:03:47+00:00",
+  "generated_at": "2026-11-28T09:22:02+00:00",
   "schema_version": 1,
   "total_skills": 153,
   "skills": [
@@ -209,7 +209,7 @@
       "description": "CTF challenge solving: web, pwn, rev, crypto, forensics, stego. Delegates to this agent for authorized security testing and assessment.",
       "category": null,
       "path": "skills/ctf-solver",
-      "body_lines": 27,
+      "body_lines": 31,
       "sources": "pentest-ai-agents/0xSteph (MIT)",
       "mitre_attack": [
         "T1190",

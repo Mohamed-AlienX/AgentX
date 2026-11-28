@@ -1,4 +1,4 @@
-"""Cross-session handoff report generator.
+"""Cross-session handoff report generator and executor fallback records.
 
 Generates a markdown handoff so a new session can resume an engagement
 without re-reading raw history. Adapted from pentest-ai-agents `handoff.sh` (MIT).
@@ -6,6 +6,7 @@ without re-reading raw history. Adapted from pentest-ai-agents `handoff.sh` (MIT
 
 from __future__ import annotations
 
+from dataclasses import asdict, dataclass
 from datetime import datetime
 from typing import TYPE_CHECKING, Any
 
@@ -15,6 +16,22 @@ if TYPE_CHECKING:
     from agentx.core.session import HuntSession
 
 _SEVERITY_ORDER = ("critical", "high", "medium", "low", "info")
+
+
+@dataclass
+class FallbackHandoff:
+    """Deterministic record for advancing past a failed vector."""
+
+    attempted_vector_id: str
+    attempted_cve: str | None
+    failure_reason: str
+    service: str
+    port: int | None
+    duration_seconds: float
+    next_vector_id: str | None
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
 
 
 def _mask_secret(secret: str) -> str:
@@ -96,4 +113,4 @@ def generate_handoff(session: HuntSession) -> str:
     return "\n".join(lines)
 
 
-__all__ = ["generate_handoff"]
+__all__ = ["FallbackHandoff", "generate_handoff"]

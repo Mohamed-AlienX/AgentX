@@ -6,7 +6,13 @@ import json
 
 from agentx.ai.providers import CompletionResponse
 from agentx.ai.router import router
-from agentx.core.agent_loop import ToolTrace, _ToolOutcome, run_agent_loop
+from agentx.core.agent_loop import (
+    TOOL_GUIDE,
+    ToolTrace,
+    _ToolOutcome,
+    build_system_prompt,
+    run_agent_loop,
+)
 from agentx.core.memory import memory
 from agentx.core.orchestrator import Orchestrator
 from agentx.core.session import session_manager
@@ -139,3 +145,10 @@ async def test_orchestrator_routes_to_agent_loop_when_connected(monkeypatch) -> 
     assert resp.text == "from loop"
     assert len(resp.tool_traces) == 1
     assert resp.tool_traces[0].server == "s"
+
+
+async def test_agent_loop_tool_guide_is_command_first() -> None:
+    assert "COMMAND FIRST" in TOOL_GUIDE
+    prompt = build_system_prompt()
+    assert "command-first" in prompt.lower()
+    assert "reproducible evidence" in prompt.lower()

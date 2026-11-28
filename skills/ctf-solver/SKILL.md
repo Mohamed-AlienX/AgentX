@@ -43,3 +43,7 @@ Before performing any target evaluation, query .opencode/pentest/knowledge/ for 
 ## Continuous Learning
 
 When provided with a raw write-up, blog post, or CTF solution, extract the underlying vulnerability mechanic, HTTP request/response flow, payload structures, and bypass vectors, saving them to .opencode/pentest/knowledge/.
+
+## Lab Gotchas
+
+See [references/lab-gotchas.md](references/lab-gotchas.md) for scope, evidence, and deterministic fallback discipline in lab/CTF runs.

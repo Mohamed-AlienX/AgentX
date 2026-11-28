@@ -190,7 +190,19 @@ async def test_executor_execute_plan_runs_steps_success(monkeypatch):
 
     async def fake_exec_step(step, ctx):
         return SkillResult(
-            skill_name=step.skill, success=True, findings=[{"title": "t", "severity": "HIGH"}]
+            skill_name=step.skill,
+            success=True,
+            findings=[
+                {
+                    "title": "t",
+                    "severity": "HIGH",
+                    "endpoint": "/",
+                    "description": "d",
+                    "impact": "i",
+                    "steps_to_reproduce": ["s"],
+                    "evidence": {"command_output": "id"},
+                }
+            ],
         )
 
     monkeypatch.setattr(ex, "_execute_step", fake_exec_step)
@@ -307,8 +319,8 @@ async def test_executor_post_triage_runs_when_enabled(monkeypatch):
             endpoint="/x",
             description="",
             impact="",
-            steps_to_reproduce=[],
-            evidence={},
+            steps_to_reproduce=["step"],
+            evidence={"http_response": "HTTP/1.1 200 OK"},
         )
     )
     monkeypatch.setattr(session_manager, "get_session", lambda: sess)
@@ -545,7 +557,7 @@ def test_parse_plan_with_bullets_and_no_numbers(monkeypatch):
 A
 
 ## Selected Skills
-• skill1: desc1
+? skill1: desc1
 - skill2: desc2
 
 ## Execution Plan
@@ -553,7 +565,7 @@ A
 1. [skill2] step2
 
 ## Questions for User
-• q1
+? q1
 - q2
 
 ## Estimated Time

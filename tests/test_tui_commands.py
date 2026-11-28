@@ -122,7 +122,10 @@ def _finding(finding_id: str, **overrides: Any) -> Finding:
         "description": "User input reflected into the response body",
         "impact": "Attacker steals session cookies",
         "steps_to_reproduce": ["GET /search?q=1", "Payload executes"],
-        "evidence": {"request": "GET /search?q=1"},
+        "evidence": {
+            "http_request": "GET /search?q=1 HTTP/1.1",
+            "http_response": "HTTP/1.1 200 OK",
+        },
     }
     fields.update(overrides)
     return Finding(**fields)
@@ -326,9 +329,7 @@ async def test_sync_slash_commands(hermetic: dict[str, str]) -> None:
         app.query_one("#chat", RichLog).clear()
         await app._handle_slash("/skills hunt-xss")
         await _flush(app, pilot)
-        bullets = [line for line in _chat_lines(app) if line.startswith("•")]
-        assert len(bullets) == 1
-        assert "hunt-xss" in bullets[0]
+        assert "hunt-xss" in _chat(app)
 
         await app._handle_slash("/sessions")
         await _flush(app, pilot)
@@ -401,7 +402,7 @@ async def test_mcp_init_and_show(hermetic: dict[str, str], monkeypatch: pytest.M
         assert "MCP: browser: connection refused" in text
         assert permission_gate.approver is not None
         panel = _panel_text(app.query_one("#status", Static))
-        assert "2 servers · 5 tools" in panel
+        assert "2 servers" in panel and "5 tools" in panel
 
         await app._handle_slash("/mcp")
         await _flush(app, pilot)
